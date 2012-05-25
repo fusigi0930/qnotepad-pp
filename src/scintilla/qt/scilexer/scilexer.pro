@@ -10,7 +10,8 @@ TARGET = SciLexer
 TEMPLATE = lib
 CONFIG+=dll
 
-DEFINES += SCINTILLA_LIBRARY
+DEFINES += SCINTILLA_LIBRARY \
+        SCI_LEXER
 
 LIBS += ../libLexers.a
 
@@ -20,8 +21,8 @@ QMAKE_LFLAGS += -Wl,--add-stdcall-alias -shared
 
 INCLUDEPATH += \
         ../../src \
-	../../include \
-	../../lexlib
+        ../../include \
+        ../../lexlib
 	
 
 SOURCES += \
@@ -110,10 +111,64 @@ SOURCES += \
     ../../lexers/LexAbaqus.cxx \
     ../../lexers/LexA68k.cxx \
     ../ScintillaQt.cxx \
-    ../PlatQt.cxx
+    ../PlatQt.cxx \
+    ../../src/XPM.cxx \
+    ../../src/ViewStyle.cxx \
+    ../../src/UniConversion.cxx \
+    ../../src/Style.cxx \
+    ../../src/Selection.cxx \
+    ../../src/ScintillaBase.cxx \
+    ../../src/RunStyles.cxx \
+    ../../src/RESearch.cxx \
+    ../../src/PositionCache.cxx \
+    ../../src/PerLine.cxx \
+    ../../src/LineMarker.cxx \
+    ../../src/KeyMap.cxx \
+    ../../src/Indicator.cxx \
+    ../../src/ExternalLexer.cxx \
+    ../../src/Editor.cxx \
+    ../../src/Document.cxx \
+    ../../src/Decoration.cxx \
+    ../../src/ContractionState.cxx \
+    ../../src/CharClassify.cxx \
+    ../../src/CellBuffer.cxx \
+    ../../src/Catalogue.cxx \
+    ../../src/CallTip.cxx \
+    ../../src/AutoComplete.cxx
 
 HEADERS +=\
         ../scintilla_global.h \
+    ../../src/XPM.h \
+    ../../src/ViewStyle.h \
+    ../../src/UniConversion.h \
+    ../../src/SVector.h \
+    ../../src/Style.h \
+    ../../src/SplitVector.h \
+    ../../src/Selection.h \
+    ../../src/ScintillaBase.h \
+    ../../src/RunStyles.h \
+    ../../src/RESearch.h \
+    ../../src/PositionCache.h \
+    ../../src/PerLine.h \
+    ../../src/Partitioning.h \
+    ../../src/LineMarker.h \
+    ../../src/KeyMap.h \
+    ../../src/Indicator.h \
+    ../../src/FontQuality.h \
+    ../../src/ExternalLexer.h \
+    ../../src/Editor.h \
+    ../../src/Document.h \
+    ../../src/Decoration.h \
+    ../../src/ContractionState.h \
+    ../../src/CharClassify.h \
+    ../../src/CellBuffer.h \
+    ../../src/Catalogue.h \
+    ../../src/CallTip.h \
+    ../../src/AutoComplete.h
+
+OTHER_FILES += \
+    ../../src/SciTE.properties \
+    ../../src/LexGen.py
 
 
 
