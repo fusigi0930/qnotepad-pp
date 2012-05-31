@@ -1,6 +1,9 @@
-CONFIG       += release
+QT      += gui
+CONFIG       += statics release
 HEADERS       = mainwindow.h
 SOURCES       = main.cpp \
                 mainwindow.cpp
 RESOURCES     = application.qrc
-LIBS         += -lqscintilla2
+LIBS         += ../../../bin/libqscintilla2.a
+
+INCLUDEPATH += ../Qt4

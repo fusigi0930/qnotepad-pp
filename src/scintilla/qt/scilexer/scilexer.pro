@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT      += gui
 
 TARGET = SciLexer
 TEMPLATE = lib
@@ -164,7 +164,8 @@ HEADERS +=\
     ../../src/CellBuffer.h \
     ../../src/Catalogue.h \
     ../../src/CallTip.h \
-    ../../src/AutoComplete.h
+    ../../src/AutoComplete.h \
+    ../scintilla_qt.h
 
 OTHER_FILES += \
     ../../src/SciTE.properties \

@@ -1,5 +1,5 @@
 // Scintilla source code edit control
-/** @file ScintillaWin.cxx
+/** @file ScintillaQt.cxx
  ** Windows specific subclass of ScintillaBase.
  **/
 // Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
@@ -15,14 +15,16 @@
 
 #include <string>
 #include <vector>
-
-#undef _WIN32_WINNT
-#define _WIN32_WINNT  0x0500
-#include <windows.h>
-#include <commctrl.h>
-#include <richedit.h>
-#include <windowsx.h>
-
+#include "scintilla_qt.h"
+#ifdef _QT_PORTING
+#else
+#   undef _WIN32_WINNT
+#   define _WIN32_WINNT  0x0500
+#   include <windows.h>
+#   include <commctrl.h>
+#   include <richedit.h>
+#   include <windowsx.h>
+#endif
 #include "Platform.h"
 
 #include "ILexer.h"
@@ -62,23 +64,26 @@
 #define SPI_GETWHEELSCROLLLINES   104
 #endif
 
-#ifndef WM_UNICHAR
-#define WM_UNICHAR                      0x0109
-#endif
+#ifdef _QT_PORTING
+#else
+#   ifndef WM_UNICHAR
+#       define WM_UNICHAR                      0x0109
+#   endif
 
-#ifndef UNICODE_NOCHAR
-#define UNICODE_NOCHAR                  0xFFFF
-#endif
+#   ifndef UNICODE_NOCHAR
+#       define UNICODE_NOCHAR                  0xFFFF
+#   endif
 
-#ifndef WM_IME_STARTCOMPOSITION
-#include <imm.h>
-#endif
+#   ifndef WM_IME_STARTCOMPOSITION
+#       include <imm.h>
+#   endif
 
-#include <commctrl.h>
-#ifndef __DMC__
-#include <zmouse.h>
+#   include <commctrl.h>
+#   ifndef __DMC__
+#     include <zmouse.h>
+#   endif
+#   include <ole2.h>
 #endif
-#include <ole2.h>
 
 #ifndef MK_ALT
 #define MK_ALT 32
@@ -91,17 +96,21 @@ extern bool IsNT();
 extern void Platform_Initialise(void *hInstance);
 extern void Platform_Finalise();
 
+#ifdef _QT_PORTING
+#else
 typedef BOOL (WINAPI *TrackMouseEventSig)(LPTRACKMOUSEEVENT);
-
+#endif
 // GCC has trouble with the standard COM ABI so do it the old C way with explicit vtables.
 
-const TCHAR scintillaClassName[] = TEXT("Scintilla");
-const TCHAR callClassName[] = TEXT("CallTip");
+const QString scintillaClassName = "Scintilla";
+const QString callClassName = "CallTip";
 
 #ifdef SCI_NAMESPACE
 using namespace Scintilla;
 #endif
 
+#ifdef _QT_PORTING
+#else
 // Take care of 32/64 bit pointers
 #ifdef GetWindowLongPtr
 static void *PointerFromWindow(HWND hWnd) {
@@ -124,8 +133,9 @@ static void SetWindowID(HWND hWnd, int identifier) {
 	::SetWindowLong(hWnd, GWL_ID, identifier);
 }
 #endif
+#endif
 
-class ScintillaWin; 	// Forward declaration for COM interface subobjects
+class ScintillaQt; 	// Forward declaration for COM interface subobjects
 
 typedef void VFunction(void);
 
@@ -136,9 +146,9 @@ public:
 	VFunction **vtbl;
 	int ref;
 	int pos;
-	CLIPFORMAT formats[2];
+    QClipboard formats[2];
 	int formatsLen;
-	FormatEnumerator(int pos_, CLIPFORMAT formats_[], int formatsLen_);
+    FormatEnumerator(int pos_, QClipboard formats_[], int formatsLen_);
 };
 
 /**
@@ -146,7 +156,7 @@ public:
 class DropSource {
 public:
 	VFunction **vtbl;
-	ScintillaWin *sci;
+    ScintillaQt *sci;
 	DropSource();
 };
 
@@ -155,7 +165,7 @@ public:
 class DataObject {
 public:
 	VFunction **vtbl;
-	ScintillaWin *sci;
+    ScintillaQt *sci;
 	DataObject();
 };
 
@@ -164,59 +174,58 @@ public:
 class DropTarget {
 public:
 	VFunction **vtbl;
-	ScintillaWin *sci;
+    ScintillaQt *sci;
 	DropTarget();
 };
 
 /**
  */
-class ScintillaWin :
-	public ScintillaBase {
-
+class ScintillaQt : public ScintillaBase {
+    // key event
 	bool lastKeyDownConsumed;
-
+    // mouse event
 	bool capturedMouse;
 	bool trackedMouseLeave;
-	TrackMouseEventSig TrackMouseEventFn;
+    //TrackMouseEventSig TrackMouseEventFn;
 
 	unsigned int linesPerScroll;	///< Intellimouse support
 	int wheelDelta; ///< Wheel delta from roll
 
-	HRGN hRgnUpdate;
+    QRegion *hRgnUpdate;
 
 	bool hasOKText;
 
-	CLIPFORMAT cfColumnSelect;
-	CLIPFORMAT cfLineSelect;
+    QClipboard *cfColumnSelect;
+    QClipboard *cfLineSelect;
 
-	HRESULT hrOle;
+    int hrOle;
 	DropSource ds;
 	DataObject dob;
 	DropTarget dt;
 
-	static HINSTANCE hInstance;
+    static QApplication *hInstance;
 
-	ScintillaWin(HWND hwnd);
-	ScintillaWin(const ScintillaWin &);
-	virtual ~ScintillaWin();
-	ScintillaWin &operator=(const ScintillaWin &);
+    ScintillaQt(QWidget *hwnd);
+    ScintillaQt(const ScintillaQt &);
+    virtual ~ScintillaQt();
+    ScintillaQt &operator=(const ScintillaQt &);
 
 	virtual void Initialise();
 	virtual void Finalise();
-	HWND MainHWND();
+    QWidget* MainHWND();
 
 	static sptr_t DirectFunction(
-		    ScintillaWin *sci, UINT iMessage, uptr_t wParam, sptr_t lParam);
-	static sptr_t PASCAL SWndProc(
-		    HWND hWnd, UINT iMessage, WPARAM wParam, sptr_t lParam);
-	static sptr_t PASCAL CTWndProc(
-		    HWND hWnd, UINT iMessage, WPARAM wParam, sptr_t lParam);
+            ScintillaQt *sci, UINT iMessage, uptr_t wParam, sptr_t lParam);
+    static sptr_t SWndProc(
+            QWidget* hWnd, UINT iMessage, uptr_t wParam, sptr_t lParam);
+    static sptr_t CTWndProc(
+            QWidget* hWnd, UINT iMessage, uptr_t wParam, sptr_t lParam);
 
 	enum { invalidTimerID, standardTimerID, idleTimerID };
 
 	virtual bool DragThreshold(Point ptStart, Point ptNow);
 	virtual void StartDrag();
-	sptr_t WndPaint(uptr_t wParam);
+    sptr_t WndPaint(uptr_t wParam);
 	sptr_t HandleComposition(uptr_t wParam, sptr_t lParam);
 	UINT CodePageOfDocument();
 	virtual bool ValidCodePage(int codePage) const;
@@ -256,16 +265,16 @@ class ScintillaWin :
 
 	void GetIntelliMouseParameters();
 	virtual void CopyToClipboard(const SelectionText &selectedText);
-	void ScrollMessage(WPARAM wParam);
-	void HorizontalScrollMessage(WPARAM wParam);
+    void ScrollMessage(uptr_t wParam);
+    void HorizontalScrollMessage(uptr_t wParam);
 	void RealizeWindowPalette(bool inBackGround);
 	void FullPaint();
-	void FullPaintDC(HDC dc);
-	bool IsCompatibleDC(HDC dc);
+    void FullPaintDC(QPaintDevice* dc);
+    bool IsCompatibleDC(QPaintDevice* dc);
 	DWORD EffectFromState(DWORD grfKeyState);
 
-	virtual int SetScrollInfo(int nBar, LPCSCROLLINFO lpsi, BOOL bRedraw);
-	virtual bool GetScrollInfo(int nBar, LPSCROLLINFO lpsi);
+    virtual int SetScrollInfo(int nBar, QScrollBar* lpsi, BOOL bRedraw);
+    virtual bool GetScrollInfo(int nBar, QScrollBar* lpsi);
 	void ChangeScrollPos(int barType, int pos);
 
 	void InsertPasteText(const char *text, int len, SelectionPosition selStart, bool isRectangular, bool isLine);
@@ -275,6 +284,7 @@ public:
 	virtual sptr_t WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
 
 	/// Implement IUnknown
+#if 0
 	STDMETHODIMP QueryInterface(REFIID riid, PVOID *ppv);
 	STDMETHODIMP_(ULONG)AddRef();
 	STDMETHODIMP_(ULONG)Release();
@@ -289,14 +299,15 @@ public:
 
 	/// Implement important part of IDataObject
 	STDMETHODIMP GetData(FORMATETC *pFEIn, STGMEDIUM *pSTM);
+#endif
 
-	static bool Register(HINSTANCE hInstance_);
+    static bool Register(QApplication* hInstance_);
 	static bool Unregister();
 
 	friend class DropSource;
 	friend class DataObject;
 	friend class DropTarget;
-	bool DragIsRectangularOK(CLIPFORMAT fmt) {
+    bool DragIsRectangularOK(QClipboard* fmt) {
 		return drag.rectangular && (fmt == cfColumnSelect);
 	}
 
@@ -305,15 +316,15 @@ private:
 	bool HasCaretSizeChanged();
 	BOOL CreateSystemCaret();
 	BOOL DestroySystemCaret();
-	HBITMAP sysCaretBitmap;
+    QBitmap* sysCaretBitmap;
 	int sysCaretWidth;
 	int sysCaretHeight;
 	bool keysAlwaysUnicode;
 };
 
-HINSTANCE ScintillaWin::hInstance = 0;
+QApplication* ScintillaQt::hInstance = NULL;
 
-ScintillaWin::ScintillaWin(HWND hwnd) {
+ScintillaQt::ScintillaQt(QWidget* hwnd) {
 
 	lastKeyDownConsumed = false;
 
@@ -324,7 +335,7 @@ ScintillaWin::ScintillaWin(HWND hwnd) {
 	linesPerScroll = 0;
 	wheelDelta = 0;   // Wheel delta from roll
 
-	hRgnUpdate = 0;
+    hRgnUpdate = NULL;
 
 	hasOKText = false;
 
@@ -358,28 +369,14 @@ ScintillaWin::ScintillaWin(HWND hwnd) {
 	Initialise();
 }
 
-ScintillaWin::~ScintillaWin() {}
+ScintillaQt::~ScintillaQt() {}
 
-void ScintillaWin::Initialise() {
-	// Initialize COM.  If the app has already done this it will have
-	// no effect.  If the app hasnt, we really shouldnt ask them to call
-	// it just so this internal feature works.
-	hrOle = ::OleInitialize(NULL);
-
-	// Find TrackMouseEvent which is available on Windows > 95
-	HMODULE user32 = ::GetModuleHandle(TEXT("user32.dll"));
-	TrackMouseEventFn = (TrackMouseEventSig)::GetProcAddress(user32, "TrackMouseEvent");
-	if (TrackMouseEventFn == NULL) {
-		// Windows 95 has an emulation in comctl32.dll:_TrackMouseEvent
-		HMODULE commctrl32 = ::LoadLibrary(TEXT("comctl32.dll"));
-		if (commctrl32 != NULL) {
-			TrackMouseEventFn = (TrackMouseEventSig)
-				::GetProcAddress(commctrl32, "_TrackMouseEvent");
-		}
-	}
+void ScintillaQt::Initialise() {
+    // initial TrackMouseEvent
+    this->wMain->
 }
 
-void ScintillaWin::Finalise() {
+void ScintillaQt::Finalise() {
 	ScintillaBase::Finalise();
 	SetTicking(false);
 	SetIdle(false);
@@ -389,18 +386,18 @@ void ScintillaWin::Finalise() {
 	}
 }
 
-HWND ScintillaWin::MainHWND() {
+HWND ScintillaQt::MainHWND() {
 	return reinterpret_cast<HWND>(wMain.GetID());
 }
 
-bool ScintillaWin::DragThreshold(Point ptStart, Point ptNow) {
+bool ScintillaQt::DragThreshold(Point ptStart, Point ptNow) {
 	int xMove = abs(ptStart.x - ptNow.x);
 	int yMove = abs(ptStart.y - ptNow.y);
 	return (xMove > ::GetSystemMetrics(SM_CXDRAG)) ||
 		(yMove > ::GetSystemMetrics(SM_CYDRAG));
 }
 
-void ScintillaWin::StartDrag() {
+void ScintillaQt::StartDrag() {
 	inDragDrop = ddDragging;
 	DWORD dwEffect = 0;
 	dropWentOutside = true;
@@ -483,7 +480,7 @@ static int KeyTranslate(int keyIn) {
 	}
 }
 
-LRESULT ScintillaWin::WndPaint(uptr_t wParam) {
+LRESULT ScintillaQt::WndPaint(uptr_t wParam) {
 	//ElapsedTime et;
 
 	// Redirect assertions to debug output and save current state
@@ -537,7 +534,7 @@ LRESULT ScintillaWin::WndPaint(uptr_t wParam) {
 	return 0l;
 }
 
-sptr_t ScintillaWin::HandleComposition(uptr_t wParam, sptr_t lParam) {
+sptr_t ScintillaQt::HandleComposition(uptr_t wParam, sptr_t lParam) {
 #ifdef __DMC__
 	// Digital Mars compiler does not include Imm library
 	return 0;
@@ -631,11 +628,11 @@ static UINT CodePageFromCharSet(DWORD characterSet, UINT documentCodePage) {
 	return cp;
 }
 
-UINT ScintillaWin::CodePageOfDocument() {
+UINT ScintillaQt::CodePageOfDocument() {
 	return CodePageFromCharSet(vs.styles[STYLE_DEFAULT].characterSet, pdoc->dbcsCodePage);
 }
 
-sptr_t ScintillaWin::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
+sptr_t ScintillaQt::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
 	try {
 		//Platform::DebugPrintf("S M:%x WP:%x L:%x\n", iMessage, wParam, lParam);
 		iMessage = SciMessageFromEM(iMessage);
@@ -1099,17 +1096,17 @@ sptr_t ScintillaWin::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam
 	return 0l;
 }
 
-bool ScintillaWin::ValidCodePage(int codePage) const {
+bool ScintillaQt::ValidCodePage(int codePage) const {
 	return codePage == 0 || codePage == SC_CP_UTF8 ||
 	       codePage == 932 || codePage == 936 || codePage == 949 ||
 	       codePage == 950 || codePage == 1361;
 }
 
-sptr_t ScintillaWin::DefWndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
+sptr_t ScintillaQt::DefWndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
 	return ::DefWindowProc(MainHWND(), iMessage, wParam, lParam);
 }
 
-void ScintillaWin::SetTicking(bool on) {
+void ScintillaQt::SetTicking(bool on) {
 	if (timer.ticking != on) {
 		timer.ticking = on;
 		if (timer.ticking) {
@@ -1123,7 +1120,7 @@ void ScintillaWin::SetTicking(bool on) {
 	timer.ticksToWait = caret.period;
 }
 
-bool ScintillaWin::SetIdle(bool on) {
+bool ScintillaQt::SetIdle(bool on) {
 	// On Win32 the Idler is implemented as a Timer on the Scintilla window.  This
 	// takes advantage of the fact that WM_TIMER messages are very low priority,
 	// and are only posted when the message queue is empty, i.e. during idle time.
@@ -1140,7 +1137,7 @@ bool ScintillaWin::SetIdle(bool on) {
 	return idler.state;
 }
 
-void ScintillaWin::SetMouseCapture(bool on) {
+void ScintillaQt::SetMouseCapture(bool on) {
 	if (mouseDownCaptures) {
 		if (on) {
 			::SetCapture(MainHWND());
@@ -1151,13 +1148,13 @@ void ScintillaWin::SetMouseCapture(bool on) {
 	capturedMouse = on;
 }
 
-bool ScintillaWin::HaveMouseCapture() {
+bool ScintillaQt::HaveMouseCapture() {
 	// Cannot just see if GetCapture is this window as the scroll bar also sets capture for the window
 	return capturedMouse;
 	//return capturedMouse && (::GetCapture() == MainHWND());
 }
 
-void ScintillaWin::SetTrackMouseLeaveEvent(bool on) {
+void ScintillaQt::SetTrackMouseLeaveEvent(bool on) {
 	if (on && TrackMouseEventFn && !trackedMouseLeave) {
 		TRACKMOUSEEVENT tme;
 		tme.cbSize = sizeof(tme);
@@ -1168,7 +1165,7 @@ void ScintillaWin::SetTrackMouseLeaveEvent(bool on) {
 	trackedMouseLeave = on;
 }
 
-bool ScintillaWin::PaintContains(PRectangle rc) {
+bool ScintillaQt::PaintContains(PRectangle rc) {
 	bool contains = true;
 	if ((paintState == painting) && (!rc.Empty())) {
 		if (!rcPaint.Contains(rc)) {
@@ -1192,14 +1189,14 @@ bool ScintillaWin::PaintContains(PRectangle rc) {
 	return contains;
 }
 
-void ScintillaWin::ScrollText(int linesToMove) {
-	//Platform::DebugPrintf("ScintillaWin::ScrollText %d\n", linesToMove);
+void ScintillaQt::ScrollText(int linesToMove) {
+    //Platform::DebugPrintf("ScintillaQt::ScrollText %d\n", linesToMove);
 	::ScrollWindow(MainHWND(), 0,
 		vs.lineHeight * linesToMove, 0, 0);
 	::UpdateWindow(MainHWND());
 }
 
-void ScintillaWin::UpdateSystemCaret() {
+void ScintillaQt::UpdateSystemCaret() {
 	if (hasFocus) {
 		if (HasCaretSizeChanged()) {
 			DestroySystemCaret();
@@ -1210,16 +1207,16 @@ void ScintillaWin::UpdateSystemCaret() {
 	}
 }
 
-int ScintillaWin::SetScrollInfo(int nBar, LPCSCROLLINFO lpsi, BOOL bRedraw) {
+int ScintillaQt::SetScrollInfo(int nBar, LPCSCROLLINFO lpsi, BOOL bRedraw) {
 	return ::SetScrollInfo(MainHWND(), nBar, lpsi, bRedraw);
 }
 
-bool ScintillaWin::GetScrollInfo(int nBar, LPSCROLLINFO lpsi) {
+bool ScintillaQt::GetScrollInfo(int nBar, LPSCROLLINFO lpsi) {
 	return ::GetScrollInfo(MainHWND(), nBar, lpsi) ? true : false;
 }
 
 // Change the scroll position but avoid repaint if changing to same value
-void ScintillaWin::ChangeScrollPos(int barType, int pos) {
+void ScintillaQt::ChangeScrollPos(int barType, int pos) {
 	SCROLLINFO sci = {
 		sizeof(sci), 0, 0, 0, 0, 0, 0
 	};
@@ -1232,15 +1229,15 @@ void ScintillaWin::ChangeScrollPos(int barType, int pos) {
 	}
 }
 
-void ScintillaWin::SetVerticalScrollPos() {
+void ScintillaQt::SetVerticalScrollPos() {
 	ChangeScrollPos(SB_VERT, topLine);
 }
 
-void ScintillaWin::SetHorizontalScrollPos() {
+void ScintillaQt::SetHorizontalScrollPos() {
 	ChangeScrollPos(SB_HORZ, xOffset);
 }
 
-bool ScintillaWin::ModifyScrollBars(int nMax, int nPage) {
+bool ScintillaQt::ModifyScrollBars(int nMax, int nPage) {
 	bool modified = false;
 	SCROLLINFO sci = {
 		sizeof(sci), 0, 0, 0, 0, 0, 0
@@ -1294,35 +1291,35 @@ bool ScintillaWin::ModifyScrollBars(int nMax, int nPage) {
 	return modified;
 }
 
-void ScintillaWin::NotifyChange() {
+void ScintillaQt::NotifyChange() {
 	::SendMessage(::GetParent(MainHWND()), WM_COMMAND,
 	        MAKELONG(GetCtrlID(), SCEN_CHANGE),
 		reinterpret_cast<LPARAM>(MainHWND()));
 }
 
-void ScintillaWin::NotifyFocus(bool focus) {
+void ScintillaQt::NotifyFocus(bool focus) {
 	::SendMessage(::GetParent(MainHWND()), WM_COMMAND,
 	        MAKELONG(GetCtrlID(), focus ? SCEN_SETFOCUS : SCEN_KILLFOCUS),
 		reinterpret_cast<LPARAM>(MainHWND()));
 }
 
-void ScintillaWin::SetCtrlID(int identifier) {
+void ScintillaQt::SetCtrlID(int identifier) {
 	::SetWindowID(reinterpret_cast<HWND>(wMain.GetID()), identifier);
 }
 
-int ScintillaWin::GetCtrlID() {
+int ScintillaQt::GetCtrlID() {
 	return ::GetDlgCtrlID(reinterpret_cast<HWND>(wMain.GetID()));
 }
 
-void ScintillaWin::NotifyParent(SCNotification scn) {
+void ScintillaQt::NotifyParent(SCNotification scn) {
 	scn.nmhdr.hwndFrom = MainHWND();
 	scn.nmhdr.idFrom = GetCtrlID();
 	::SendMessage(::GetParent(MainHWND()), WM_NOTIFY,
 	              GetCtrlID(), reinterpret_cast<LPARAM>(&scn));
 }
 
-void ScintillaWin::NotifyDoubleClick(Point pt, bool shift, bool ctrl, bool alt) {
-	//Platform::DebugPrintf("ScintillaWin Double click 0\n");
+void ScintillaQt::NotifyDoubleClick(Point pt, bool shift, bool ctrl, bool alt) {
+    //Platform::DebugPrintf("ScintillaQt Double click 0\n");
 	ScintillaBase::NotifyDoubleClick(pt, shift, ctrl, alt);
 	// Send myself a WM_LBUTTONDBLCLK, so the container can handle it too.
 	::SendMessage(MainHWND(),
@@ -1425,7 +1422,7 @@ public:
 	}
 };
 
-CaseFolder *ScintillaWin::CaseFolderForEncoding() {
+CaseFolder *ScintillaQt::CaseFolderForEncoding() {
 	UINT cpDest = CodePageOfDocument();
 	if (cpDest == SC_CP_UTF8) {
 		return new CaseFolderUTF8();
@@ -1462,7 +1459,7 @@ CaseFolder *ScintillaWin::CaseFolderForEncoding() {
 	}
 }
 
-std::string ScintillaWin::CaseMapString(const std::string &s, int caseMapping) {
+std::string ScintillaQt::CaseMapString(const std::string &s, int caseMapping) {
 	if (s.size() == 0)
 		return std::string();
 
@@ -1536,7 +1533,7 @@ std::string ScintillaWin::CaseMapString(const std::string &s, int caseMapping) {
 	}
 }
 
-void ScintillaWin::Copy() {
+void ScintillaQt::Copy() {
 	//Platform::DebugPrintf("Copy\n");
 	if (!sel.Empty()) {
 		SelectionText selectedText;
@@ -1545,13 +1542,13 @@ void ScintillaWin::Copy() {
 	}
 }
 
-void ScintillaWin::CopyAllowLine() {
+void ScintillaQt::CopyAllowLine() {
 	SelectionText selectedText;
 	CopySelectionRange(&selectedText, true);
 	CopyToClipboard(selectedText);
 }
 
-bool ScintillaWin::CanPaste() {
+bool ScintillaQt::CanPaste() {
 	if (!Editor::CanPaste())
 		return false;
 	if (::IsClipboardFormatAvailable(CF_TEXT))
@@ -1600,7 +1597,7 @@ public:
 	}
 };
 
-void ScintillaWin::InsertPasteText(const char *text, int len, SelectionPosition selStart, bool isRectangular, bool isLine) {
+void ScintillaQt::InsertPasteText(const char *text, int len, SelectionPosition selStart, bool isRectangular, bool isLine) {
 	if (isRectangular) {
 		PasteRectangular(selStart, text, len);
 	} else {
@@ -1629,7 +1626,7 @@ void ScintillaWin::InsertPasteText(const char *text, int len, SelectionPosition 
 	}
 }
 
-void ScintillaWin::Paste() {
+void ScintillaQt::Paste() {
 	if (!::OpenClipboard(MainHWND()))
 		return;
 	UndoGroup ug(pdoc);
@@ -1712,7 +1709,7 @@ void ScintillaWin::Paste() {
 	Redraw();
 }
 
-void ScintillaWin::CreateCallTipWindow(PRectangle) {
+void ScintillaQt::CreateCallTipWindow(PRectangle) {
 	if (!ct.wCallTip.Created()) {
 		ct.wCallTip = ::CreateWindow(callClassName, TEXT("ACallTip"),
 					     WS_POPUP, 100, 100, 150, 20,
@@ -1723,7 +1720,7 @@ void ScintillaWin::CreateCallTipWindow(PRectangle) {
 	}
 }
 
-void ScintillaWin::AddToPopUp(const char *label, int cmd, bool enabled) {
+void ScintillaQt::AddToPopUp(const char *label, int cmd, bool enabled) {
 	HMENU hmenuPopup = reinterpret_cast<HMENU>(popup.GetID());
 	if (!label[0])
 		::AppendMenuA(hmenuPopup, MF_SEPARATOR, 0, "");
@@ -1733,7 +1730,7 @@ void ScintillaWin::AddToPopUp(const char *label, int cmd, bool enabled) {
 		::AppendMenuA(hmenuPopup, MF_STRING | MF_DISABLED | MF_GRAYED, cmd, label);
 }
 
-void ScintillaWin::ClaimSelection() {
+void ScintillaQt::ClaimSelection() {
 	// Windows does not have a primary selection
 }
 
@@ -2049,7 +2046,7 @@ DropTarget::DropTarget() {
  * DBCS: support Input Method Editor (IME).
  * Called when IME Window opened.
  */
-void ScintillaWin::ImeStartComposition() {
+void ScintillaQt::ImeStartComposition() {
 #ifndef __DMC__
 	// Digital Mars compiler does not include Imm library
 	if (caret.active) {
@@ -2096,11 +2093,11 @@ void ScintillaWin::ImeStartComposition() {
 }
 
 /** Called when IME Window closed. */
-void ScintillaWin::ImeEndComposition() {
+void ScintillaQt::ImeEndComposition() {
 	ShowCaretAtCurrentPosition();
 }
 
-void ScintillaWin::AddCharBytes(char b0, char b1) {
+void ScintillaQt::AddCharBytes(char b0, char b1) {
 
 	int inputCodePage = InputCodePage();
 	if (inputCodePage && IsUnicodeMode()) {
@@ -2132,12 +2129,12 @@ void ScintillaWin::AddCharBytes(char b0, char b1) {
 	}
 }
 
-void ScintillaWin::GetIntelliMouseParameters() {
+void ScintillaQt::GetIntelliMouseParameters() {
 	// This retrieves the number of lines per scroll as configured inthe Mouse Properties sheet in Control Panel
 	::SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, &linesPerScroll, 0);
 }
 
-void ScintillaWin::CopyToClipboard(const SelectionText &selectedText) {
+void ScintillaQt::CopyToClipboard(const SelectionText &selectedText) {
 	if (!::OpenClipboard(MainHWND()))
 		return;
 	::EmptyClipboard();
@@ -2200,7 +2197,7 @@ void ScintillaWin::CopyToClipboard(const SelectionText &selectedText) {
 	::CloseClipboard();
 }
 
-void ScintillaWin::ScrollMessage(WPARAM wParam) {
+void ScintillaQt::ScrollMessage(WPARAM wParam) {
 	//DWORD dwStart = timeGetTime();
 	//Platform::DebugPrintf("Scroll %x %d\n", wParam, lParam);
 
@@ -2233,7 +2230,7 @@ void ScintillaWin::ScrollMessage(WPARAM wParam) {
 	ScrollTo(topLineNew);
 }
 
-void ScintillaWin::HorizontalScrollMessage(WPARAM wParam) {
+void ScintillaQt::HorizontalScrollMessage(WPARAM wParam) {
 	int xPos = xOffset;
 	PRectangle rcText = GetTextRectangle();
 	int pageWidth = rcText.Width() * 2 / 3;
@@ -2274,7 +2271,7 @@ void ScintillaWin::HorizontalScrollMessage(WPARAM wParam) {
 	HorizontalScrollTo(xPos);
 }
 
-void ScintillaWin::RealizeWindowPalette(bool inBackGround) {
+void ScintillaQt::RealizeWindowPalette(bool inBackGround) {
 	RefreshStyleData();
 	HDC hdc = ::GetDC(MainHWND());
 	// Select a stock font to prevent warnings from BoundsChecker
@@ -2293,7 +2290,7 @@ void ScintillaWin::RealizeWindowPalette(bool inBackGround) {
  * Redraw all of text area.
  * This paint will not be abandoned.
  */
-void ScintillaWin::FullPaint() {
+void ScintillaQt::FullPaint() {
 	HDC hdc = ::GetDC(MainHWND());
 	FullPaintDC(hdc);
 	::ReleaseDC(MainHWND(), hdc);
@@ -2303,7 +2300,7 @@ void ScintillaWin::FullPaint() {
  * Redraw all of text area on the specified DC.
  * This paint will not be abandoned.
  */
-void ScintillaWin::FullPaintDC(HDC hdc) {
+void ScintillaQt::FullPaintDC(HDC hdc) {
 	paintState = painting;
 	rcPaint = GetClientRectangle();
 	paintingAllText = true;
@@ -2319,7 +2316,7 @@ static bool CompareDevCap(HDC hdc, HDC hOtherDC, int nIndex) {
 	return ::GetDeviceCaps(hdc, nIndex) == ::GetDeviceCaps(hOtherDC, nIndex);
 }
 
-bool ScintillaWin::IsCompatibleDC(HDC hOtherDC) {
+bool ScintillaQt::IsCompatibleDC(HDC hOtherDC) {
 	HDC hdc = ::GetDC(MainHWND());
 	bool isCompatible =
 		CompareDevCap(hdc, hOtherDC, TECHNOLOGY) &&
@@ -2331,7 +2328,7 @@ bool ScintillaWin::IsCompatibleDC(HDC hOtherDC) {
 	return isCompatible;
 }
 
-DWORD ScintillaWin::EffectFromState(DWORD grfKeyState) {
+DWORD ScintillaQt::EffectFromState(DWORD grfKeyState) {
 	// These are the Wordpad semantics.
 	DWORD dwEffect;
 	if (inDragDrop == ddDragging)	// Internal defaults to move
@@ -2346,7 +2343,7 @@ DWORD ScintillaWin::EffectFromState(DWORD grfKeyState) {
 }
 
 /// Implement IUnknown
-STDMETHODIMP ScintillaWin::QueryInterface(REFIID riid, PVOID *ppv) {
+STDMETHODIMP ScintillaQt::QueryInterface(REFIID riid, PVOID *ppv) {
 	*ppv = NULL;
 	if (riid == IID_IUnknown)
 		*ppv = reinterpret_cast<IDropTarget *>(&dt);
@@ -2361,16 +2358,16 @@ STDMETHODIMP ScintillaWin::QueryInterface(REFIID riid, PVOID *ppv) {
 	return S_OK;
 }
 
-STDMETHODIMP_(ULONG) ScintillaWin::AddRef() {
+STDMETHODIMP_(ULONG) ScintillaQt::AddRef() {
 	return 1;
 }
 
-STDMETHODIMP_(ULONG) ScintillaWin::Release() {
+STDMETHODIMP_(ULONG) ScintillaQt::Release() {
 	return 1;
 }
 
 /// Implement IDropTarget
-STDMETHODIMP ScintillaWin::DragEnter(LPDATAOBJECT pIDataSource, DWORD grfKeyState,
+STDMETHODIMP ScintillaQt::DragEnter(LPDATAOBJECT pIDataSource, DWORD grfKeyState,
                                      POINTL, PDWORD pdwEffect) {
 	if (pIDataSource == NULL)
 		return E_POINTER;
@@ -2391,7 +2388,7 @@ STDMETHODIMP ScintillaWin::DragEnter(LPDATAOBJECT pIDataSource, DWORD grfKeyStat
 	return S_OK;
 }
 
-STDMETHODIMP ScintillaWin::DragOver(DWORD grfKeyState, POINTL pt, PDWORD pdwEffect) {
+STDMETHODIMP ScintillaQt::DragOver(DWORD grfKeyState, POINTL pt, PDWORD pdwEffect) {
 	try {
 		if (!hasOKText || pdoc->IsReadOnly()) {
 			*pdwEffect = DROPEFFECT_NONE;
@@ -2412,7 +2409,7 @@ STDMETHODIMP ScintillaWin::DragOver(DWORD grfKeyState, POINTL pt, PDWORD pdwEffe
 	return E_FAIL;
 }
 
-STDMETHODIMP ScintillaWin::DragLeave() {
+STDMETHODIMP ScintillaQt::DragLeave() {
 	try {
 		SetDragPosition(SelectionPosition(invalidPosition));
 		return S_OK;
@@ -2422,7 +2419,7 @@ STDMETHODIMP ScintillaWin::DragLeave() {
 	return E_FAIL;
 }
 
-STDMETHODIMP ScintillaWin::Drop(LPDATAOBJECT pIDataSource, DWORD grfKeyState,
+STDMETHODIMP ScintillaQt::Drop(LPDATAOBJECT pIDataSource, DWORD grfKeyState,
                                 POINTL pt, PDWORD pdwEffect) {
 	try {
 		*pdwEffect = EffectFromState(grfKeyState);
@@ -2516,7 +2513,7 @@ STDMETHODIMP ScintillaWin::Drop(LPDATAOBJECT pIDataSource, DWORD grfKeyState,
 }
 
 /// Implement important part of IDataObject
-STDMETHODIMP ScintillaWin::GetData(FORMATETC *pFEIn, STGMEDIUM *pSTM) {
+STDMETHODIMP ScintillaQt::GetData(FORMATETC *pFEIn, STGMEDIUM *pSTM) {
 	bool formatOK = (pFEIn->cfFormat == CF_TEXT) ||
 		((pFEIn->cfFormat == CF_UNICODETEXT) && IsUnicodeMode());
 	if (!formatOK ||
@@ -2549,7 +2546,7 @@ STDMETHODIMP ScintillaWin::GetData(FORMATETC *pFEIn, STGMEDIUM *pSTM) {
 	return S_OK;
 }
 
-bool ScintillaWin::Register(HINSTANCE hInstance_) {
+bool ScintillaQt::Register(HINSTANCE hInstance_) {
 
 	hInstance = hInstance_;
 	bool result;
@@ -2561,9 +2558,9 @@ bool ScintillaWin::Register(HINSTANCE hInstance_) {
 		WNDCLASSEXW wndclass;
 		wndclass.cbSize = sizeof(wndclass);
 		wndclass.style = CS_GLOBALCLASS | CS_HREDRAW | CS_VREDRAW;
-		wndclass.lpfnWndProc = ScintillaWin::SWndProc;
+        wndclass.lpfnWndProc = ScintillaQt::SWndProc;
 		wndclass.cbClsExtra = 0;
-		wndclass.cbWndExtra = sizeof(ScintillaWin *);
+        wndclass.cbWndExtra = sizeof(ScintillaQt *);
 		wndclass.hInstance = hInstance;
 		wndclass.hIcon = NULL;
 		wndclass.hCursor = NULL;
@@ -2578,9 +2575,9 @@ bool ScintillaWin::Register(HINSTANCE hInstance_) {
 		WNDCLASSEX wndclass;
 		wndclass.cbSize = sizeof(wndclass);
 		wndclass.style = CS_GLOBALCLASS | CS_HREDRAW | CS_VREDRAW;
-		wndclass.lpfnWndProc = ScintillaWin::SWndProc;
+        wndclass.lpfnWndProc = ScintillaQt::SWndProc;
 		wndclass.cbClsExtra = 0;
-		wndclass.cbWndExtra = sizeof(ScintillaWin *);
+        wndclass.cbWndExtra = sizeof(ScintillaQt *);
 		wndclass.hInstance = hInstance;
 		wndclass.hIcon = NULL;
 		wndclass.hCursor = NULL;
@@ -2597,12 +2594,12 @@ bool ScintillaWin::Register(HINSTANCE hInstance_) {
 		wndclassc.cbSize = sizeof(wndclassc);
 		wndclassc.style = CS_GLOBALCLASS | CS_HREDRAW | CS_VREDRAW;
 		wndclassc.cbClsExtra = 0;
-		wndclassc.cbWndExtra = sizeof(ScintillaWin *);
+        wndclassc.cbWndExtra = sizeof(ScintillaQt *);
 		wndclassc.hInstance = hInstance;
 		wndclassc.hIcon = NULL;
 		wndclassc.hbrBackground = NULL;
 		wndclassc.lpszMenuName = NULL;
-		wndclassc.lpfnWndProc = ScintillaWin::CTWndProc;
+        wndclassc.lpfnWndProc = ScintillaQt::CTWndProc;
 		wndclassc.hCursor = ::LoadCursor(NULL, IDC_ARROW);
 		wndclassc.lpszClassName = callClassName;
 		wndclassc.hIconSm = 0;
@@ -2613,14 +2610,14 @@ bool ScintillaWin::Register(HINSTANCE hInstance_) {
 	return result;
 }
 
-bool ScintillaWin::Unregister() {
+bool ScintillaQt::Unregister() {
 	bool result = ::UnregisterClass(scintillaClassName, hInstance) != 0;
 	if (::UnregisterClass(callClassName, hInstance) == 0)
 		result = false;
 	return result;
 }
 
-bool ScintillaWin::HasCaretSizeChanged() {
+bool ScintillaQt::HasCaretSizeChanged() {
 	if (
 		( (0 != vs.caretWidth) && (sysCaretWidth != vs.caretWidth) )
 		|| ((0 != vs.lineHeight) && (sysCaretHeight != vs.lineHeight))
@@ -2630,7 +2627,7 @@ bool ScintillaWin::HasCaretSizeChanged() {
 	return false;
 }
 
-BOOL ScintillaWin::CreateSystemCaret() {
+BOOL ScintillaQt::CreateSystemCaret() {
 	sysCaretWidth = vs.caretWidth;
 	if (0 == sysCaretWidth) {
 		sysCaretWidth = 1;
@@ -2650,7 +2647,7 @@ BOOL ScintillaWin::CreateSystemCaret() {
 	return retval;
 }
 
-BOOL ScintillaWin::DestroySystemCaret() {
+BOOL ScintillaQt::DestroySystemCaret() {
 	::HideCaret(MainHWND());
 	BOOL retval = ::DestroyCaret();
 	if (sysCaretBitmap) {
@@ -2660,10 +2657,10 @@ BOOL ScintillaWin::DestroySystemCaret() {
 	return retval;
 }
 
-sptr_t PASCAL ScintillaWin::CTWndProc(
+sptr_t PASCAL ScintillaQt::CTWndProc(
     HWND hWnd, UINT iMessage, WPARAM wParam, sptr_t lParam) {
 	// Find C++ object associated with window.
-	ScintillaWin *sciThis = reinterpret_cast<ScintillaWin *>(PointerFromWindow(hWnd));
+    ScintillaQt *sciThis = reinterpret_cast<ScintillaQt *>(PointerFromWindow(hWnd));
 	try {
 		// ctp will be zero if WM_CREATE not seen yet
 		if (sciThis == 0) {
@@ -2721,8 +2718,8 @@ sptr_t PASCAL ScintillaWin::CTWndProc(
 	return ::DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
 
-sptr_t ScintillaWin::DirectFunction(
-    ScintillaWin *sci, UINT iMessage, uptr_t wParam, sptr_t lParam) {
+sptr_t ScintillaQt::DirectFunction(
+    ScintillaQt *sci, UINT iMessage, uptr_t wParam, sptr_t lParam) {
 	PLATFORM_ASSERT(::GetCurrentThreadId() == ::GetWindowThreadProcessId(sci->MainHWND(), NULL));
 	return sci->WndProc(iMessage, wParam, lParam);
 }
@@ -2732,22 +2729,22 @@ extern "C"
 __declspec(dllexport)
 #endif
 sptr_t __stdcall Scintilla_DirectFunction(
-    ScintillaWin *sci, UINT iMessage, uptr_t wParam, sptr_t lParam) {
+    ScintillaQt *sci, UINT iMessage, uptr_t wParam, sptr_t lParam) {
 	return sci->WndProc(iMessage, wParam, lParam);
 }
 
-sptr_t PASCAL ScintillaWin::SWndProc(
+sptr_t PASCAL ScintillaQt::SWndProc(
     HWND hWnd, UINT iMessage, WPARAM wParam, sptr_t lParam) {
 	//Platform::DebugPrintf("S W:%x M:%x WP:%x L:%x\n", hWnd, iMessage, wParam, lParam);
 
 	// Find C++ object associated with window.
-	ScintillaWin *sci = reinterpret_cast<ScintillaWin *>(PointerFromWindow(hWnd));
+    ScintillaQt *sci = reinterpret_cast<ScintillaQt *>(PointerFromWindow(hWnd));
 	// sci will be zero if WM_CREATE not seen yet
 	if (sci == 0) {
 		try {
 			if (iMessage == WM_CREATE) {
 				// Create C++ object associated with window
-				sci = new ScintillaWin(hWnd);
+                sci = new ScintillaQt(hWnd);
 				SetWindowPointer(hWnd, sci);
 				return sci->WndProc(iMessage, wParam, lParam);
 			}
@@ -2773,7 +2770,7 @@ sptr_t PASCAL ScintillaWin::SWndProc(
 // Must be called once only.
 int Scintilla_RegisterClasses(void *hInstance) {
 	Platform_Initialise(hInstance);
-	bool result = ScintillaWin::Register(reinterpret_cast<HINSTANCE>(hInstance));
+    bool result = ScintillaQt::Register(reinterpret_cast<HINSTANCE>(hInstance));
 #ifdef SCI_LEXER
 	Scintilla_LinkLexers();
 #endif
@@ -2782,7 +2779,7 @@ int Scintilla_RegisterClasses(void *hInstance) {
 
 // This function is externally visible so it can be called from container when building statically.
 int Scintilla_ReleaseResources() {
-	bool result = ScintillaWin::Unregister();
+    bool result = ScintillaQt::Unregister();
 	Platform_Finalise();
 	return result;
 }
