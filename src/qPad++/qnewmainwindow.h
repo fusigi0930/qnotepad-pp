@@ -22,6 +22,9 @@ public:
 
 protected slots:
     virtual void slotCreate();
+
+public slots:
+    void slotAppCmd(QString qstr);
     
 private:
     Ui::QNewMainWindow *ui;

@@ -18,10 +18,16 @@ QNewMainWindow::~QNewMainWindow()
 }
 
 void QNewMainWindow::slotCreate() {
-    BaseMainWindow::slotCreate();
     _DEBUG_MSG("%s", __PRETTY_FUNCTION__);
     ui->setupUi(this);
 
     this->resize(QApplication::desktop()->width()/5*4, QApplication::desktop()->height()/5*4);
+    BaseMainWindow::slotCreate();
     this->show();
+}
+
+void QNewMainWindow::slotAppCmd(QString qstr) {
+    _DEBUG_MSG("%s", qstr.toAscii().data());
+    this->showMinimized();
+    this->activateWindow();
 }

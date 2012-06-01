@@ -38,3 +38,13 @@ INCLUDEPATH += \
 OTHER_FILES +=
 
 DESTDIR = ../../bin
+
+release {
+    DEFINES -= \
+        _DEBUG_MODE
+}
+
+declarative_debug {
+    DEFINES += \
+        _DEBUG_MODE
+}
