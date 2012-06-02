@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/lang">
+        <file>strings_en.qm</file>
+    </qresource>
+</RCC>

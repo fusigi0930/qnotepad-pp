@@ -17,9 +17,21 @@ QNewMainWindow::~QNewMainWindow()
     _DEL_MEM(ui);
 }
 
+void QNewMainWindow::changeEvent(QEvent * event) {
+    BaseMainWindow::changeEvent(event);
+    switch(event->type()) {
+        default:
+            break;
+        case QEvent::LanguageChange:
+            ui->retranslateUi(this);
+            break;
+    }
+}
+
 void QNewMainWindow::slotCreate() {
     _DEBUG_MSG("%s", __PRETTY_FUNCTION__);
     ui->setupUi(this);
+    ui->retranslateUi(this);
 
     this->resize(QApplication::desktop()->width()/5*4, QApplication::desktop()->height()/5*4);
     BaseMainWindow::slotCreate();

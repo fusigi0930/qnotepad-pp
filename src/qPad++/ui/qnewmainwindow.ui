@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>1107</width>
+    <height>423</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,704 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>1107</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMENU_FILE">
+    <property name="title">
+     <string>MENU_FILE</string>
+    </property>
+    <addaction name="actionFILE_NEW"/>
+    <addaction name="actionFILE_OPEN"/>
+    <addaction name="actionFILE_RELOAD"/>
+    <addaction name="actionFILE_SAVE"/>
+    <addaction name="actionFILE_SAVEAS"/>
+    <addaction name="actionFILE_SAVE_COPY"/>
+    <addaction name="actionFILE_SAVE_ALL"/>
+    <addaction name="actionFILE_RENAME"/>
+    <addaction name="actionFILE_CLOSE"/>
+    <addaction name="actionFILE_CLOSE_ALL"/>
+    <addaction name="actionFILE_CLOSE_EXCEPT_CUR"/>
+    <addaction name="actionFILE_DEL"/>
+    <addaction name="separator"/>
+    <addaction name="actionFILE_LOAD_SESSION"/>
+    <addaction name="actionFILE_SAVE_SESSION"/>
+    <addaction name="separator"/>
+    <addaction name="actionFILE_PRINT"/>
+    <addaction name="actionFILE_PRINT_NOW"/>
+    <addaction name="separator"/>
+    <addaction name="actionFILE_EXIT"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_EDIT">
+    <property name="title">
+     <string>MENU_EDIT</string>
+    </property>
+    <widget class="QMenu" name="menuEDIT_COPY_CLIP">
+     <property name="title">
+      <string>EDIT_COPY_CLIP</string>
+     </property>
+     <addaction name="actionEDIT_COPY_CLIP_FULLPATH"/>
+     <addaction name="actionEDIT_COPY_CLIP_FILENAME"/>
+     <addaction name="actionEDIT_COPY_CLIP_DIRPATH"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_INDENT">
+     <property name="title">
+      <string>EDIT_INDENT</string>
+     </property>
+     <addaction name="actionEDIT_INDENT_INC"/>
+     <addaction name="actionEDIT_INDENT_DEC"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_CONVERT_CASE">
+     <property name="title">
+      <string>EDIT_CONVERT_CASE</string>
+     </property>
+     <addaction name="actionEDIT_CONVERT_CASE_UP"/>
+     <addaction name="actionEDIT_CONVERT_CASE_LOW"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_LINE">
+     <property name="title">
+      <string>EDIT_LINE</string>
+     </property>
+     <addaction name="actionEDIT_LINE_DUP"/>
+     <addaction name="actionEDIT_LINE_SPLIT"/>
+     <addaction name="actionEDIT_LINE_JOIN"/>
+     <addaction name="actionEDIT_LINE_UP"/>
+     <addaction name="actionEDIT_LINE_DOWN"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_COMMENT">
+     <property name="title">
+      <string>EDIT_COMMENT</string>
+     </property>
+     <addaction name="actionEDIT_COMMENT_TOGGLE_BLOCK"/>
+     <addaction name="actionEDIT_COMMENT_COMMENT"/>
+     <addaction name="actionEDIT_COMMENT_UNCOMMENT"/>
+     <addaction name="actionEDIT_COMMENT_STREAM"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_AUTO_COMPLETE">
+     <property name="title">
+      <string>EDIT_AUTO_COMPLETE</string>
+     </property>
+     <addaction name="actionEDIT_AUTO_COMPLETE_FUNC"/>
+     <addaction name="actionEDIT_AUTO_COMPLETE_WORD"/>
+     <addaction name="actionEDIT_AUTO_COMPLETE_PARAM"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_EOL">
+     <property name="title">
+      <string>EDIT_EOL</string>
+     </property>
+     <addaction name="actionEDIT_EOL_WINDOW"/>
+     <addaction name="actionEDIT_EOL_UNIX"/>
+     <addaction name="actionEDIT_EOL_MAC"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_BLANK">
+     <property name="title">
+      <string>EDIT_BLANK</string>
+     </property>
+     <addaction name="actionEDIT_BLANK_TRIM_TIAL"/>
+     <addaction name="actionEDIT_BLANK_TRIM_LEAD"/>
+     <addaction name="actionEDIT_BLANK_TRIM_BOTH"/>
+     <addaction name="actionEDIT_BLANK_EOL_SPACE"/>
+     <addaction name="actionEDIT_BLANK_TRIM_ALL"/>
+     <addaction name="separator"/>
+     <addaction name="actionEDIT_BLANK_TAP2SPACE"/>
+     <addaction name="actionEDIT_BLANK_SPACE2TAP"/>
+    </widget>
+    <widget class="QMenu" name="menuEDIT_PASTE_SPECIAL">
+     <property name="title">
+      <string>EDIT_PASTE_SPECIAL</string>
+     </property>
+     <addaction name="actionEDIT_PASTE_HTML"/>
+     <addaction name="actionEDIT_PASTE_RTF"/>
+     <addaction name="separator"/>
+     <addaction name="actionEDIT_COPY_BINARY"/>
+     <addaction name="actionEDIT_CUT_BINARY"/>
+     <addaction name="actionEDIT_PASTE_BINARY"/>
+    </widget>
+    <addaction name="actionEDIT_UNDO"/>
+    <addaction name="actionEDIT_REDO"/>
+    <addaction name="separator"/>
+    <addaction name="actionEDIT_CUT"/>
+    <addaction name="actionEDIT_COPY"/>
+    <addaction name="actionEDIT_PASTE"/>
+    <addaction name="actionEDIT_DEL"/>
+    <addaction name="actionEDIT_SELECT_ALL"/>
+    <addaction name="separator"/>
+    <addaction name="menuEDIT_COPY_CLIP"/>
+    <addaction name="menuEDIT_INDENT"/>
+    <addaction name="menuEDIT_CONVERT_CASE"/>
+    <addaction name="menuEDIT_LINE"/>
+    <addaction name="menuEDIT_COMMENT"/>
+    <addaction name="menuEDIT_AUTO_COMPLETE"/>
+    <addaction name="menuEDIT_EOL"/>
+    <addaction name="menuEDIT_BLANK"/>
+    <addaction name="menuEDIT_PASTE_SPECIAL"/>
+    <addaction name="separator"/>
+    <addaction name="actionEDIT_COLUMN_MODE"/>
+    <addaction name="actionEDIT_COLUMN_EDITOR"/>
+    <addaction name="actionEDIT_CHAR_PANEL"/>
+    <addaction name="actionEDIT_CLIP_HISTORY"/>
+    <addaction name="separator"/>
+    <addaction name="actionEDIT_READ_ONLY"/>
+    <addaction name="actionEDIT_UNREAD_ONLY"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_SEARCH">
+    <property name="title">
+     <string>MENU_SEARCH</string>
+    </property>
+    <widget class="QMenu" name="menuSEARCH_MARKALL">
+     <property name="title">
+      <string>SEARCH_MARKALL</string>
+     </property>
+     <addaction name="actionSEARCH_MARKALL_1"/>
+     <addaction name="actionSEARCH_MARKALL_2"/>
+     <addaction name="actionSEARCH_MARKALL_3"/>
+     <addaction name="actionSEARCH_MARKALL_4"/>
+     <addaction name="actionSEARCH_MARK_ALL_5"/>
+    </widget>
+    <widget class="QMenu" name="menuSEARCH_UNMARKALL">
+     <property name="title">
+      <string>SEARCH_UNMARKALL</string>
+     </property>
+     <addaction name="actionSEARCH_UNMARKALL_1"/>
+     <addaction name="actionSEARCH_UNMARKALL_2"/>
+     <addaction name="actionSEARCH_UNMARKALL_3"/>
+     <addaction name="actionSEARCH_UNMARKALL_4"/>
+     <addaction name="actionSEARCH_UNMARKALL_5"/>
+     <addaction name="actionSEARCH_UNMARKALL_ALL"/>
+    </widget>
+    <widget class="QMenu" name="menuSEARCH_JUMP">
+     <property name="title">
+      <string>SEARCH_JUMP_PREV</string>
+     </property>
+     <addaction name="actionSEARCH_JUMP_PREV_1"/>
+     <addaction name="actionSEARCH_JUMP_PREV_2"/>
+     <addaction name="actionSEARCH_JUMP_PREV_3"/>
+     <addaction name="actionSEARCH_JUMP_PREV_4"/>
+     <addaction name="actionSEARCH_JUMP_PREV_5"/>
+     <addaction name="actionSEARCH_JUMP_PREV_DEF"/>
+    </widget>
+    <widget class="QMenu" name="menuSEARCH_JUMP_NEXT">
+     <property name="title">
+      <string>SEARCH_JUMP_NEXT</string>
+     </property>
+     <addaction name="actionSEARCH_JUMP_NEXT_1"/>
+     <addaction name="actionSEARCH_JUMP_NEXT_2"/>
+     <addaction name="actionSEARCH_JUMP_NEXT_3"/>
+     <addaction name="actionSEARCH_JUMP_NEXT_4"/>
+     <addaction name="actionSEARCH_JUMP_NEXT_5"/>
+     <addaction name="actionSEARCH_JUMP_NEXT_DEF"/>
+    </widget>
+    <widget class="QMenu" name="menuSEARCH_BOOKMARK">
+     <property name="title">
+      <string>SEARCH_BOOKMARK</string>
+     </property>
+     <addaction name="actionSEARCH_BOOKMARK_TOGGLE"/>
+     <addaction name="actionSEARCH_BOOKMARK_NEXT"/>
+     <addaction name="actionSEARCH_BOOKMARK_PREV"/>
+     <addaction name="actionSEARCH_BOOKMARK_CLEAR"/>
+     <addaction name="actionSEARCH_BOOKMARK_CUT_LINE"/>
+     <addaction name="actionSEARCH_BOOKMARK_COPY_LINE"/>
+     <addaction name="actionSEARCH_BOOKMARK_PASTE_LINE"/>
+     <addaction name="actionSEARCH_BOOKMARK_DEL_LINE"/>
+     <addaction name="actionSEARCH_BOOKMARK_DEL_UNMARK_LINE"/>
+     <addaction name="actionSEARCH_BOOKMARK_INVERSE_BOOKMARK"/>
+    </widget>
+    <addaction name="actionSEARCH_FIND"/>
+    <addaction name="actionSEARCH_FINDINFILES"/>
+    <addaction name="actionSEARCH_FIND_NEXT"/>
+    <addaction name="actionSEARCH_FIND_PREV"/>
+    <addaction name="actionSEARCH_FIND_SET_NEXt"/>
+    <addaction name="actionSEARCH_FIND_SET_PREV"/>
+    <addaction name="actionSEARCH_FIND_VOLITALE_NEXT"/>
+    <addaction name="actionSEARCH_FIND_VOLITALE_PREV"/>
+    <addaction name="actionSEARCH_REPLACE"/>
+    <addaction name="actionSEARCH_FIND_INC"/>
+    <addaction name="actionSEARCH_FIND_RESULT"/>
+    <addaction name="actionSEARCH_GOTO_NEXT_FIND"/>
+    <addaction name="actionSEARCH_GOTO_PREV_FIND"/>
+    <addaction name="actionSEARCH_GOTO_LINE"/>
+    <addaction name="actionSEARCH_GOTO_MATCH_BRACE"/>
+    <addaction name="separator"/>
+    <addaction name="menuSEARCH_MARKALL"/>
+    <addaction name="menuSEARCH_UNMARKALL"/>
+    <addaction name="menuSEARCH_JUMP"/>
+    <addaction name="menuSEARCH_JUMP_NEXT"/>
+    <addaction name="separator"/>
+    <addaction name="menuSEARCH_BOOKMARK"/>
+    <addaction name="separator"/>
+    <addaction name="actionSEARCH_FIND_CHAR_RANGE"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_VIEW">
+    <property name="title">
+     <string>MENU_VIEW</string>
+    </property>
+    <widget class="QMenu" name="menuVIEW_SHOW_SYMBOL">
+     <property name="title">
+      <string>VIEW_SHOW_SYMBOL</string>
+     </property>
+     <addaction name="actionVIEW_SS_TAB_SPACE"/>
+     <addaction name="actionVIEW_SS_EOL"/>
+     <addaction name="actionVIEW_SS_ALL_CHARS"/>
+     <addaction name="separator"/>
+     <addaction name="actionVIEW_SS_INDENT_GUIDE"/>
+     <addaction name="actionVIEW_SS_WARP_SYMBOL"/>
+    </widget>
+    <widget class="QMenu" name="menuVIEW_ZOOM">
+     <property name="title">
+      <string>VIEW_ZOOM</string>
+     </property>
+     <addaction name="actionVIEW_ZOOM_IN"/>
+     <addaction name="actionVIEW_ZOOM_OUT"/>
+     <addaction name="actionVIEW_ZOOM_DEFAULT"/>
+    </widget>
+    <widget class="QMenu" name="menuVIEW_MOVE_DOC">
+     <property name="title">
+      <string>VIEW_MOVE_DOC</string>
+     </property>
+     <addaction name="actionVIEW_MOVE_OTHER_VIEW"/>
+     <addaction name="actionVIEW_CLONE_OTHER_VIEW"/>
+     <addaction name="actionVIEW_MOVE_NEW_INSTANCE"/>
+     <addaction name="actionVIEW_OPEN_NEW_INSTANCE"/>
+    </widget>
+    <widget class="QMenu" name="menuVIEW_COLLAPSE">
+     <property name="title">
+      <string>VIEW_COLLAPSE</string>
+     </property>
+     <addaction name="actionVIEW_COLLAPSE_1"/>
+     <addaction name="actionVIEW_COLLAPSE_2"/>
+     <addaction name="actionVIEW_COLLAPSE_3"/>
+     <addaction name="actionVIEW_COLLAPSE_4"/>
+     <addaction name="actionVIEW_COLLAPSE_5"/>
+     <addaction name="actionVIEW_COLLAPSE_6"/>
+     <addaction name="actionVIEW_COLLAPSE_7"/>
+     <addaction name="actionVIEW_COLLAPSE_8"/>
+    </widget>
+    <widget class="QMenu" name="menuVIEW_UNCOLLAPSE">
+     <property name="title">
+      <string>VIEW_UNCOLLAPSE</string>
+     </property>
+     <addaction name="actionVIEW_UNCOLLAPSE_1"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_2"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_3"/>
+     <addaction name="VIEW_UNCOLLAPSE_4"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_5"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_6"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_7"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_8"/>
+    </widget>
+    <widget class="QMenu" name="menuVIEW_PROJECT">
+     <property name="title">
+      <string>VIEW_PROJECT</string>
+     </property>
+     <addaction name="actionVIEW_PROJECT_1"/>
+     <addaction name="actionVIEW_PROJECT_2"/>
+     <addaction name="actionVIEW_PROJECT_3"/>
+    </widget>
+    <addaction name="actionVIEW_ALWAYS_ON_TOP"/>
+    <addaction name="actionVIEW_FULL_SCREEN"/>
+    <addaction name="actionVIEW_POST_IT"/>
+    <addaction name="separator"/>
+    <addaction name="menuVIEW_SHOW_SYMBOL"/>
+    <addaction name="menuVIEW_ZOOM"/>
+    <addaction name="menuVIEW_MOVE_DOC"/>
+    <addaction name="actionVIEW_WARP"/>
+    <addaction name="actionVIEW_SWITCH_OTHER_VIEW"/>
+    <addaction name="actionVIEW_USER_DIALOG"/>
+    <addaction name="separator"/>
+    <addaction name="actionVIEW_FOLD_ALL"/>
+    <addaction name="actionVIEW_UNFOLD_ALL"/>
+    <addaction name="actionVIEW_FOLD_CURRENT"/>
+    <addaction name="actionVIEW_UNFOLD_CURRENT"/>
+    <addaction name="menuVIEW_COLLAPSE"/>
+    <addaction name="menuVIEW_UNCOLLAPSE"/>
+    <addaction name="separator"/>
+    <addaction name="actionVIEW_SUMMARY"/>
+    <addaction name="separator"/>
+    <addaction name="menuVIEW_PROJECT"/>
+    <addaction name="separator"/>
+    <addaction name="actionVIEW_SYNC_VERT_SCROLL"/>
+    <addaction name="actionVIEW_SNYC_HORI_SCROLL"/>
+    <addaction name="separator"/>
+    <addaction name="actionVIEW_TEXT_RTL"/>
+    <addaction name="actionVIEW_TEXT_LTR"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_ENCODING">
+    <property name="title">
+     <string>MENU_ENCODING</string>
+    </property>
+    <widget class="QMenu" name="menuENCODING_CHARSET">
+     <property name="title">
+      <string>ENCODING_CHARSET</string>
+     </property>
+     <widget class="QMenu" name="menuENCODING_ARABIC">
+      <property name="title">
+       <string>ENCODING_ARABIC</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_6"/>
+      <addaction name="actionENCODING_OEM720"/>
+      <addaction name="actionENCODING_WINDOW_1256"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_BALTIC">
+      <property name="title">
+       <string>ENCODING_BALTIC</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_4"/>
+      <addaction name="actionENCODING_ISO8859_13"/>
+      <addaction name="actionENCODING_OEM775"/>
+      <addaction name="actionENCODING_WINDOW_1257"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_CELTIC">
+      <property name="title">
+       <string>ENCODING_CELTIC</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_14"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_CYRILLIC">
+      <property name="title">
+       <string>ENCODING_CYRILLIC</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_5"/>
+      <addaction name="actionENCODING_KOI8_R"/>
+      <addaction name="actionENCODING_KOI8_U"/>
+      <addaction name="actionENCODING_MACINTOSH"/>
+      <addaction name="actionENCODING_OEM_855"/>
+      <addaction name="actionENCODING_OEM_856"/>
+      <addaction name="actionENCODING_WINDOW_1251"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_CENTRAL_EUROPEAN">
+      <property name="title">
+       <string>ENCODING_CENTRAL_EUROPEAN</string>
+      </property>
+      <addaction name="actionENCODING_OEM_852"/>
+      <addaction name="actionENCODING_WINDOW_1250"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_CHINESE">
+      <property name="title">
+       <string>ENCODING_CHINESE</string>
+      </property>
+      <addaction name="actionENCODING_BIG5"/>
+      <addaction name="actionENCODING_GB2312"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_EAST_EUROPEAN">
+      <property name="title">
+       <string>ENCODING_EAST_EUROPEAN</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_2"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_GREEK">
+      <property name="title">
+       <string>ENCODING_GREEK</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_7"/>
+      <addaction name="actionENCODING_OEM_737"/>
+      <addaction name="actionENCODING_OEM_869"/>
+      <addaction name="actionENCODING_WINDOW_1253"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_HEBREW">
+      <property name="title">
+       <string>ENCODING_HEBREW</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_8"/>
+      <addaction name="actionENCODING_OEM_862"/>
+      <addaction name="actionENCODING_WINDOW_1255"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_JAPANESE">
+      <property name="title">
+       <string>ENCODING_JAPANESE</string>
+      </property>
+      <addaction name="actionENCODING_SHIFT_JIS"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_KOREAN">
+      <property name="title">
+       <string>ENCODING_KOREAN</string>
+      </property>
+      <addaction name="actionENCODING_WINDOW_949"/>
+      <addaction name="actionENCODING_EUC_KR"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_NORTH_EUROPEAN">
+      <property name="title">
+       <string>ENCODING_NORTH_EUROPEAN</string>
+      </property>
+      <addaction name="actionENCODING_OEM_861"/>
+      <addaction name="actionENCODING_OEM_865"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_THAI">
+      <property name="title">
+       <string>ENCODING_THAI</string>
+      </property>
+      <addaction name="actionENCODING_TIS_620"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_TURKISH">
+      <property name="title">
+       <string>ENCODING_TURKISH</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_3"/>
+      <addaction name="actionENCODING_ISO8859_9"/>
+      <addaction name="actionENCODING_OEM_857"/>
+      <addaction name="actionENCODING_WINDOW_1254"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_WEST_EUROPEAN">
+      <property name="title">
+       <string>ENCODING_WEST_EUROPEAN</string>
+      </property>
+      <addaction name="actionENCODING_ISO8859_1"/>
+      <addaction name="actionENCODING_ISO8859_15"/>
+      <addaction name="actionENCODING_OEM_850"/>
+      <addaction name="actionENCODING_OEM_858"/>
+      <addaction name="actionENCODING_OEM_860"/>
+      <addaction name="actionENCODING_OEM_863"/>
+      <addaction name="actionENCODING_OEM_US"/>
+      <addaction name="actionENCODING_WINDOW_1252"/>
+     </widget>
+     <widget class="QMenu" name="menuENCODING_VIETNAMESE">
+      <property name="title">
+       <string>ENCODING_VIETNAMESE</string>
+      </property>
+      <addaction name="actionENCODING_WINDOW_1258"/>
+     </widget>
+     <addaction name="menuENCODING_ARABIC"/>
+     <addaction name="menuENCODING_BALTIC"/>
+     <addaction name="menuENCODING_CELTIC"/>
+     <addaction name="menuENCODING_CYRILLIC"/>
+     <addaction name="menuENCODING_CENTRAL_EUROPEAN"/>
+     <addaction name="menuENCODING_CHINESE"/>
+     <addaction name="menuENCODING_EAST_EUROPEAN"/>
+     <addaction name="menuENCODING_GREEK"/>
+     <addaction name="menuENCODING_HEBREW"/>
+     <addaction name="menuENCODING_JAPANESE"/>
+     <addaction name="menuENCODING_KOREAN"/>
+     <addaction name="menuENCODING_NORTH_EUROPEAN"/>
+     <addaction name="menuENCODING_THAI"/>
+     <addaction name="menuENCODING_TURKISH"/>
+     <addaction name="menuENCODING_WEST_EUROPEAN"/>
+     <addaction name="menuENCODING_VIETNAMESE"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="actionENCODING_ANSI"/>
+    <addaction name="actionENCODING_UTF8_NO_BOM"/>
+    <addaction name="actionENCODING_UTF8"/>
+    <addaction name="actionENCODING_UCS2_BE"/>
+    <addaction name="actionENCODING_UCS2_LE"/>
+    <addaction name="menuENCODING_CHARSET"/>
+    <addaction name="separator"/>
+    <addaction name="actionENCODING_CONV_ANSI"/>
+    <addaction name="actionENCODING_CONV_UTF8_NO_BOM"/>
+    <addaction name="actionENCODING_CONV_UTF8"/>
+    <addaction name="actionENCODING_CONV_UCS2_BE"/>
+    <addaction name="actionENCODING_CONV_UCS2_LE"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_LANG">
+    <property name="title">
+     <string>MENU_LANG</string>
+    </property>
+    <widget class="QMenu" name="menuLANG_A">
+     <property name="title">
+      <string>LANG_A</string>
+     </property>
+     <addaction name="actionLANG_ADA"/>
+     <addaction name="actionLANG_ASP"/>
+     <addaction name="actionLANG_ASSEMBLY"/>
+     <addaction name="actionLANG_AUTO_IT"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_C">
+     <property name="title">
+      <string>LANG_C</string>
+     </property>
+     <addaction name="actionLANG_ANSI_C"/>
+     <addaction name="actionLANG_C_SHARP"/>
+     <addaction name="actionLANG_CPP"/>
+     <addaction name="actionLANG_CAML"/>
+     <addaction name="actionLANG_CMAKE"/>
+     <addaction name="actionLANG_COBOL"/>
+     <addaction name="actionLANG_CSS"/>
+     <addaction name="actionLANG_OBJECTIVE_C"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_D">
+     <property name="title">
+      <string>LANG_D</string>
+     </property>
+     <addaction name="actionLANG_ANSI_D"/>
+     <addaction name="actionLANG_DIFF"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_F">
+     <property name="title">
+      <string>LANG_F</string>
+     </property>
+     <addaction name="actionLANG_FLASH"/>
+     <addaction name="actionLANG_FORTRAN"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_H">
+     <property name="title">
+      <string>LANG_H</string>
+     </property>
+     <addaction name="actionLANG_HASKELL"/>
+     <addaction name="actionLANG_HTML"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_J">
+     <property name="title">
+      <string>LANG_J</string>
+     </property>
+     <addaction name="actionLANG_JAVA"/>
+     <addaction name="actionLANG_JAVASCRIPT"/>
+     <addaction name="actionLANG_JSP"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_L">
+     <property name="title">
+      <string>LANG_L</string>
+     </property>
+     <addaction name="actionLANG_LISP"/>
+     <addaction name="actionLANG_LUA"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_M">
+     <property name="title">
+      <string>LANG_M</string>
+     </property>
+     <addaction name="actionLANG_MAKEFILE"/>
+     <addaction name="actionLANG_MATLAB"/>
+     <addaction name="actionLANG_MS_INI"/>
+     <addaction name="actionLANG_MSDOS"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_N">
+     <property name="title">
+      <string>LANG_N</string>
+     </property>
+     <addaction name="actionLANG_NORMAL_TEXT"/>
+     <addaction name="actionLANG_NSIS"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_P">
+     <property name="title">
+      <string>LANG_P</string>
+     </property>
+     <addaction name="actionLANG_PASCAL"/>
+     <addaction name="actionLANG_PERL"/>
+     <addaction name="actionLANG_PHP"/>
+     <addaction name="actionLANG_POSTSCRIPT"/>
+     <addaction name="actionLANG_POWERSHELL"/>
+     <addaction name="actionLANG_PROPS"/>
+     <addaction name="actionLANG_PYTHON"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_R">
+     <property name="title">
+      <string>LANG_R</string>
+     </property>
+     <addaction name="actionLANG_ANSI_R"/>
+     <addaction name="actionLANG_RESOURCE_FILE"/>
+     <addaction name="actionLANG_RUBY"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_S">
+     <property name="title">
+      <string>LANG_S</string>
+     </property>
+     <addaction name="actionLANG_BASH"/>
+     <addaction name="actionLANG_SCHEME"/>
+     <addaction name="actionLANG_SMALLTALK"/>
+     <addaction name="actionLANG_SQL"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_T">
+     <property name="title">
+      <string>LANG_T</string>
+     </property>
+     <addaction name="actionLANG_TCL"/>
+     <addaction name="actionLANG_TEX"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_V">
+     <property name="title">
+      <string>LANG_V</string>
+     </property>
+     <addaction name="actionLANG_VB"/>
+     <addaction name="actionLANG_VHDL"/>
+     <addaction name="actionLANG_VERILOG"/>
+    </widget>
+    <widget class="QMenu" name="menuLANG_X">
+     <property name="title">
+      <string>LANG_X</string>
+     </property>
+     <addaction name="actionLANG_XML"/>
+     <addaction name="actionLANG_YAML"/>
+    </widget>
+    <addaction name="menuLANG_A"/>
+    <addaction name="actionLANG_BATCH"/>
+    <addaction name="menuLANG_C"/>
+    <addaction name="menuLANG_D"/>
+    <addaction name="menuLANG_F"/>
+    <addaction name="actionLANG_GUI4CLI"/>
+    <addaction name="menuLANG_H"/>
+    <addaction name="actionLANG_INNO"/>
+    <addaction name="menuLANG_J"/>
+    <addaction name="actionLANG_KIX"/>
+    <addaction name="menuLANG_L"/>
+    <addaction name="menuLANG_M"/>
+    <addaction name="menuLANG_N"/>
+    <addaction name="menuLANG_P"/>
+    <addaction name="menuLANG_R"/>
+    <addaction name="menuLANG_S"/>
+    <addaction name="menuLANG_T"/>
+    <addaction name="menuLANG_V"/>
+    <addaction name="menuLANG_X"/>
+    <addaction name="separator"/>
+    <addaction name="actionLANG_USER"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_SETTINGS">
+    <property name="title">
+     <string>MENU_SETTINGS</string>
+    </property>
+    <widget class="QMenu" name="menuSETTINGS_IMPORT">
+     <property name="title">
+      <string>SETTINGS_IMPORT</string>
+     </property>
+     <addaction name="actionSETTINGS_IMPORT_PLUGIN"/>
+     <addaction name="actionSETTINGS_IMPORT_STYLE_THEME"/>
+    </widget>
+    <addaction name="actionSETTINGS_PERFERENCES"/>
+    <addaction name="actionSETTINGS_LANG_STYLE"/>
+    <addaction name="actionSETTINGS_SHORTCUT_MAPPER"/>
+    <addaction name="separator"/>
+    <addaction name="menuSETTINGS_IMPORT"/>
+    <addaction name="separator"/>
+    <addaction name="actionSETTINGS_EDIT_CONTEXTMENU"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_MACRO">
+    <property name="title">
+     <string>MENU_MACRO</string>
+    </property>
+    <addaction name="actionMACRO_RECORD"/>
+    <addaction name="actionMACRO_STOP"/>
+    <addaction name="actionMACRO_PLAYBACK"/>
+    <addaction name="actionMACRO_SAVE"/>
+    <addaction name="actionMACRO_RUN_MULTI_MACRO"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_RUN">
+    <property name="title">
+     <string>MENU_RUN</string>
+    </property>
+    <addaction name="actionRUN_RUN"/>
+   </widget>
+   <widget class="QMenu" name="menuMENU_HELP">
+    <property name="title">
+     <string>MENU_HELP</string>
+    </property>
+    <addaction name="actionHELP_HELP"/>
+    <addaction name="separator"/>
+    <addaction name="actionHELP_HOMEPAGE"/>
+    <addaction name="actionHELP_PROJECTPAGE"/>
+    <addaction name="actionHELP_ONLINE_DOC"/>
+    <addaction name="actionHELP_FORUM"/>
+    <addaction name="actionHELP_GET_PLUGINS"/>
+    <addaction name="separator"/>
+    <addaction name="actionHELP_UPDATE_QPAD"/>
+    <addaction name="actionHELP_ABOUT"/>
+   </widget>
+   <addaction name="menuMENU_FILE"/>
+   <addaction name="menuMENU_EDIT"/>
+   <addaction name="menuMENU_SEARCH"/>
+   <addaction name="menuMENU_VIEW"/>
+   <addaction name="menuMENU_ENCODING"/>
+   <addaction name="menuMENU_LANG"/>
+   <addaction name="menuMENU_SETTINGS"/>
+   <addaction name="menuMENU_MACRO"/>
+   <addaction name="menuMENU_RUN"/>
+   <addaction name="menuMENU_HELP"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,6 +727,1501 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionFILE_NEW">
+   <property name="text">
+    <string>FILE_NEW</string>
+   </property>
+  </action>
+  <action name="actionFILE_OPEN">
+   <property name="text">
+    <string>FILE_OPEN</string>
+   </property>
+  </action>
+  <action name="actionFILE_RELOAD">
+   <property name="text">
+    <string>FILE_RELOAD</string>
+   </property>
+  </action>
+  <action name="actionFILE_SAVE">
+   <property name="text">
+    <string>FILE_SAVE</string>
+   </property>
+  </action>
+  <action name="actionFILE_SAVEAS">
+   <property name="text">
+    <string>FILE_SAVEAS</string>
+   </property>
+  </action>
+  <action name="actionFILE_SAVE_COPY">
+   <property name="text">
+    <string>FILE_SAVE_COPY</string>
+   </property>
+  </action>
+  <action name="actionFILE_SAVE_ALL">
+   <property name="text">
+    <string>FILE_SAVE_ALL</string>
+   </property>
+  </action>
+  <action name="actionFILE_RENAME">
+   <property name="text">
+    <string>FILE_RENAME</string>
+   </property>
+  </action>
+  <action name="actionFILE_CLOSE">
+   <property name="text">
+    <string>FILE_CLOSE</string>
+   </property>
+  </action>
+  <action name="actionFILE_CLOSE_ALL">
+   <property name="text">
+    <string>FILE_CLOSE_ALL</string>
+   </property>
+  </action>
+  <action name="actionFILE_CLOSE_EXCEPT_CUR">
+   <property name="text">
+    <string>FILE_CLOSE_EXCEPT_CUR</string>
+   </property>
+  </action>
+  <action name="actionFILE_DEL">
+   <property name="text">
+    <string>FILE_DEL</string>
+   </property>
+  </action>
+  <action name="actionFILE_LOAD_SESSION">
+   <property name="text">
+    <string>FILE_LOAD_SESSION</string>
+   </property>
+  </action>
+  <action name="actionFILE_SAVE_SESSION">
+   <property name="text">
+    <string>FILE_SAVE_SESSION</string>
+   </property>
+  </action>
+  <action name="actionFILE_PRINT">
+   <property name="text">
+    <string>FILE_PRINT</string>
+   </property>
+  </action>
+  <action name="actionFILE_PRINT_NOW">
+   <property name="text">
+    <string>FILE_PRINT_NOW</string>
+   </property>
+  </action>
+  <action name="actionFILE_EXIT">
+   <property name="text">
+    <string>FILE_EXIT</string>
+   </property>
+  </action>
+  <action name="actionEDIT_UNDO">
+   <property name="text">
+    <string>EDIT_UNDO</string>
+   </property>
+  </action>
+  <action name="actionEDIT_REDO">
+   <property name="text">
+    <string>EDIT_REDO</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CUT">
+   <property name="text">
+    <string>EDIT_CUT</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COPY">
+   <property name="text">
+    <string>EDIT_COPY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_PASTE">
+   <property name="text">
+    <string>EDIT_PASTE</string>
+   </property>
+  </action>
+  <action name="actionEDIT_DEL">
+   <property name="text">
+    <string>EDIT_DEL</string>
+   </property>
+  </action>
+  <action name="actionEDIT_SELECT_ALL">
+   <property name="text">
+    <string>EDIT_SELECT_ALL</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COPY_CLIP_FULLPATH">
+   <property name="text">
+    <string>EDIT_COPY_CLIP_FULLPATH</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COPY_CLIP_FILENAME">
+   <property name="text">
+    <string>EDIT_COPY_CLIP_FILENAME</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COPY_CLIP_DIRPATH">
+   <property name="text">
+    <string>EDIT_COPY_CLIP_DIRPATH</string>
+   </property>
+  </action>
+  <action name="actionEDIT_INDENT_INC">
+   <property name="text">
+    <string>EDIT_INDENT_INC</string>
+   </property>
+  </action>
+  <action name="actionEDIT_INDENT_DEC">
+   <property name="text">
+    <string>EDIT_INDENT_DEC</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CONVERT_CASE_UP">
+   <property name="text">
+    <string>EDIT_CONVERT_CASE_UP</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CONVERT_CASE_LOW">
+   <property name="text">
+    <string>EDIT_CONVERT_CASE_LOW</string>
+   </property>
+  </action>
+  <action name="actionEDIT_LINE_DUP">
+   <property name="text">
+    <string>EDIT_LINE_DUP</string>
+   </property>
+  </action>
+  <action name="actionEDIT_LINE_SPLIT">
+   <property name="text">
+    <string>EDIT_LINE_SPLIT</string>
+   </property>
+  </action>
+  <action name="actionEDIT_LINE_JOIN">
+   <property name="text">
+    <string>EDIT_LINE_JOIN</string>
+   </property>
+  </action>
+  <action name="actionEDIT_LINE_UP">
+   <property name="text">
+    <string>EDIT_LINE_UP</string>
+   </property>
+  </action>
+  <action name="actionEDIT_LINE_DOWN">
+   <property name="text">
+    <string>EDIT_LINE_DOWN</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COMMENT_TOGGLE_BLOCK">
+   <property name="text">
+    <string>EDIT_COMMENT_TOGGLE_BLOCK</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COMMENT_COMMENT">
+   <property name="text">
+    <string>EDIT_COMMENT_COMMENT</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COMMENT_UNCOMMENT">
+   <property name="text">
+    <string>EDIT_COMMENT_UNCOMMENT</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COMMENT_STREAM">
+   <property name="text">
+    <string>EDIT_COMMENT_STREAM</string>
+   </property>
+  </action>
+  <action name="actionEDIT_AUTO_COMPLETE_FUNC">
+   <property name="text">
+    <string>EDIT_AUTO_COMPLETE_FUNC</string>
+   </property>
+  </action>
+  <action name="actionEDIT_AUTO_COMPLETE_WORD">
+   <property name="text">
+    <string>EDIT_AUTO_COMPLETE_WORD</string>
+   </property>
+  </action>
+  <action name="actionEDIT_AUTO_COMPLETE_PARAM">
+   <property name="text">
+    <string>EDIT_AUTO_COMPLETE_PARAM</string>
+   </property>
+  </action>
+  <action name="actionEDIT_EOL_WINDOW">
+   <property name="text">
+    <string>EDIT_EOL_WINDOW</string>
+   </property>
+  </action>
+  <action name="actionEDIT_EOL_UNIX">
+   <property name="text">
+    <string>EDIT_EOL_UNIX</string>
+   </property>
+  </action>
+  <action name="actionEDIT_EOL_MAC">
+   <property name="text">
+    <string>EDIT_EOL_MAC</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_TRIM_TIAL">
+   <property name="text">
+    <string>EDIT_BLANK_TRIM_TIAL</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_TRIM_LEAD">
+   <property name="text">
+    <string>EDIT_BLANK_TRIM_LEAD</string>
+   </property>
+   <property name="toolTip">
+    <string>EDIT_BLANK_TRIM_LEAD</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_TRIM_BOTH">
+   <property name="text">
+    <string>EDIT_BLANK_TRIM_BOTH</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_EOL_SPACE">
+   <property name="text">
+    <string>EDIT_BLANK_EOL_SPACE</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_TRIM_ALL">
+   <property name="text">
+    <string>EDIT_BLANK_TRIM_ALL</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_TAP2SPACE">
+   <property name="text">
+    <string>EDIT_BLANK_TAP2SPACE</string>
+   </property>
+  </action>
+  <action name="actionEDIT_BLANK_SPACE2TAP">
+   <property name="text">
+    <string>EDIT_BLANK_SPACE2TAP</string>
+   </property>
+  </action>
+  <action name="actionEDIT_PASTE_HTML">
+   <property name="text">
+    <string>EDIT_PASTE_HTML</string>
+   </property>
+  </action>
+  <action name="actionEDIT_PASTE_RTF">
+   <property name="text">
+    <string>EDIT_PASTE_RTF</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COPY_BINARY">
+   <property name="text">
+    <string>EDIT_COPY_BINARY</string>
+   </property>
+   <property name="toolTip">
+    <string>EDIT_COPY_BINARY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CUT_BINARY">
+   <property name="text">
+    <string>EDIT_CUT_BINARY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_PASTE_BINARY">
+   <property name="text">
+    <string>EDIT_PASTE_BINARY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COLUMN_MODE">
+   <property name="text">
+    <string>EDIT_COLUMN_MODE</string>
+   </property>
+  </action>
+  <action name="actionEDIT_COLUMN_EDITOR">
+   <property name="text">
+    <string>EDIT_COLUMN_EDITOR</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CHAR_PANEL">
+   <property name="text">
+    <string>EDIT_CHAR_PANEL</string>
+   </property>
+  </action>
+  <action name="actionEDIT_CLIP_HISTORY">
+   <property name="text">
+    <string>EDIT_CLIP_HISTORY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_READ_ONLY">
+   <property name="text">
+    <string>EDIT_READ_ONLY</string>
+   </property>
+  </action>
+  <action name="actionEDIT_UNREAD_ONLY">
+   <property name="text">
+    <string>EDIT_UNREAD_ONLY</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND">
+   <property name="text">
+    <string>SEARCH_FIND</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FINDINFILES">
+   <property name="text">
+    <string>SEARCH_FINDINFILES</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_NEXT">
+   <property name="text">
+    <string>SEARCH_FIND_NEXT</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_PREV">
+   <property name="text">
+    <string>SEARCH_FIND_PREV</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_SET_NEXt">
+   <property name="text">
+    <string>SEARCH_FIND_SET_NEXt</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_SET_PREV">
+   <property name="text">
+    <string>SEARCH_FIND_SET_PREV</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_VOLITALE_NEXT">
+   <property name="text">
+    <string>SEARCH_FIND_VOLITALE_NEXT</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_VOLITALE_PREV">
+   <property name="text">
+    <string>SEARCH_FIND_VOLITALE_PREV</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_REPLACE">
+   <property name="text">
+    <string>SEARCH_REPLACE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_INC">
+   <property name="text">
+    <string>SEARCH_FIND_INC</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_RESULT">
+   <property name="text">
+    <string>SEARCH_FIND_RESULT</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_GOTO_NEXT_FIND">
+   <property name="text">
+    <string>SEARCH_GOTO_NEXT_FIND</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_GOTO_PREV_FIND">
+   <property name="text">
+    <string>SEARCH_GOTO_PREV_FIND</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_GOTO_LINE">
+   <property name="text">
+    <string>SEARCH_GOTO_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_GOTO_MATCH_BRACE">
+   <property name="text">
+    <string>SEARCH_GOTO_MATCH_BRACE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_MARKALL_1">
+   <property name="text">
+    <string>SEARCH_MARKALL_1</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_MARKALL_2">
+   <property name="text">
+    <string>SEARCH_MARKALL_2</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_MARKALL_3">
+   <property name="text">
+    <string>SEARCH_MARKALL_3</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_MARKALL_4">
+   <property name="text">
+    <string>SEARCH_MARKALL_4</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_MARK_ALL_5">
+   <property name="text">
+    <string>SEARCH_MARK_ALL_5</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_1">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_1</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_2">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_2</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_3">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_3</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_4">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_4</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_5">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_5</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_UNMARKALL_5</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_UNMARKALL_ALL">
+   <property name="text">
+    <string>SEARCH_UNMARKALL_ALL</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_1">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_1</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_1</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_2">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_2</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_2</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_3">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_3</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_3</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_4">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_4</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_4</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_5">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_5</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_5</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_PREV_DEF">
+   <property name="text">
+    <string>SEARCH_JUMP_PREV_DEF</string>
+   </property>
+   <property name="toolTip">
+    <string>SEARCH_JUMP_PREV_DEF</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_1">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_1</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_2">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_2</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_3">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_3</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_4">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_4</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_5">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_5</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_JUMP_NEXT_DEF">
+   <property name="text">
+    <string>SEARCH_JUMP_NEXT_DEF</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_TOGGLE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_TOGGLE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_NEXT">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_NEXT</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_PREV">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_PREV</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_CLEAR">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_CLEAR</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_CUT_LINE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_CUT_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_COPY_LINE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_COPY_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_PASTE_LINE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_PASTE_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_DEL_LINE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_DEL_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_DEL_UNMARK_LINE">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_DEL_UNMARK_LINE</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_BOOKMARK_INVERSE_BOOKMARK">
+   <property name="text">
+    <string>SEARCH_BOOKMARK_INVERSE_BOOKMARK</string>
+   </property>
+  </action>
+  <action name="actionSEARCH_FIND_CHAR_RANGE">
+   <property name="text">
+    <string>SEARCH_FIND_CHAR_RANGE</string>
+   </property>
+  </action>
+  <action name="actionVIEW_ALWAYS_ON_TOP">
+   <property name="text">
+    <string>VIEW_ALWAYS_ON_TOP</string>
+   </property>
+  </action>
+  <action name="actionVIEW_FULL_SCREEN">
+   <property name="text">
+    <string>VIEW_FULL_SCREEN</string>
+   </property>
+  </action>
+  <action name="actionVIEW_POST_IT">
+   <property name="text">
+    <string>VIEW_POST_IT</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SS_TAB_SPACE">
+   <property name="text">
+    <string>VIEW_SS_TAB_SPACE</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SS_EOL">
+   <property name="text">
+    <string>VIEW_SS_EOL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SS_ALL_CHARS">
+   <property name="text">
+    <string>VIEW_SS_ALL_CHARS</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SS_INDENT_GUIDE">
+   <property name="text">
+    <string>VIEW_SS_INDENT_GUIDE</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SS_WARP_SYMBOL">
+   <property name="text">
+    <string>VIEW_SS_WARP_SYMBOL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_ZOOM_IN">
+   <property name="text">
+    <string>VIEW_ZOOM_IN</string>
+   </property>
+  </action>
+  <action name="actionVIEW_ZOOM_OUT">
+   <property name="text">
+    <string>VIEW_ZOOM_OUT</string>
+   </property>
+  </action>
+  <action name="actionVIEW_ZOOM_DEFAULT">
+   <property name="text">
+    <string>VIEW_ZOOM_DEFAULT</string>
+   </property>
+  </action>
+  <action name="actionVIEW_MOVE_OTHER_VIEW">
+   <property name="text">
+    <string>VIEW_MOVE_OTHER_VIEW</string>
+   </property>
+  </action>
+  <action name="actionVIEW_CLONE_OTHER_VIEW">
+   <property name="text">
+    <string>VIEW_CLONE_OTHER_VIEW</string>
+   </property>
+  </action>
+  <action name="actionVIEW_MOVE_NEW_INSTANCE">
+   <property name="text">
+    <string>VIEW_MOVE_NEW_INSTANCE</string>
+   </property>
+  </action>
+  <action name="actionVIEW_OPEN_NEW_INSTANCE">
+   <property name="text">
+    <string>VIEW_OPEN_NEW_INSTANCE</string>
+   </property>
+  </action>
+  <action name="actionVIEW_WARP">
+   <property name="text">
+    <string>VIEW_WARP</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SWITCH_OTHER_VIEW">
+   <property name="text">
+    <string>VIEW_SWITCH_OTHER_VIEW</string>
+   </property>
+  </action>
+  <action name="actionVIEW_USER_DIALOG">
+   <property name="text">
+    <string>VIEW_USER_DIALOG</string>
+   </property>
+  </action>
+  <action name="actionVIEW_FOLD_ALL">
+   <property name="text">
+    <string>VIEW_FOLD_ALL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNFOLD_ALL">
+   <property name="text">
+    <string>VIEW_UNFOLD_ALL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_FOLD_CURRENT">
+   <property name="text">
+    <string>VIEW_FOLD_CURRENT</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNFOLD_CURRENT">
+   <property name="text">
+    <string>VIEW_UNFOLD_CURRENT</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_1">
+   <property name="text">
+    <string>VIEW_COLLAPSE_1</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_2">
+   <property name="text">
+    <string>VIEW_COLLAPSE_2</string>
+   </property>
+   <property name="toolTip">
+    <string>VIEW_COLLAPSE_2</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_3">
+   <property name="text">
+    <string>VIEW_COLLAPSE_3</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_4">
+   <property name="text">
+    <string>VIEW_COLLAPSE_4</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_5">
+   <property name="text">
+    <string>VIEW_COLLAPSE_5</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_6">
+   <property name="text">
+    <string>VIEW_COLLAPSE_6</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_7">
+   <property name="text">
+    <string>VIEW_COLLAPSE_7</string>
+   </property>
+  </action>
+  <action name="actionVIEW_COLLAPSE_8">
+   <property name="text">
+    <string>VIEW_COLLAPSE_8</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_1">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_1</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_2">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_2</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_3">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_3</string>
+   </property>
+  </action>
+  <action name="VIEW_UNCOLLAPSE_4">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_4</string>
+   </property>
+   <property name="toolTip">
+    <string>VIEW_UNCOLLAPSE_4</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_5">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_5</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_6">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_6</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_7">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_7</string>
+   </property>
+  </action>
+  <action name="actionVIEW_UNCOLLAPSE_8">
+   <property name="text">
+    <string>VIEW_UNCOLLAPSE_8</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SUMMARY">
+   <property name="text">
+    <string>VIEW_SUMMARY</string>
+   </property>
+  </action>
+  <action name="actionVIEW_PROJECT_1">
+   <property name="text">
+    <string>VIEW_PROJECT_1</string>
+   </property>
+  </action>
+  <action name="actionVIEW_PROJECT_2">
+   <property name="text">
+    <string>VIEW_PROJECT_2</string>
+   </property>
+  </action>
+  <action name="actionVIEW_PROJECT_3">
+   <property name="text">
+    <string>VIEW_PROJECT_3</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SYNC_VERT_SCROLL">
+   <property name="text">
+    <string>VIEW_SYNC_VERT_SCROLL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_SNYC_HORI_SCROLL">
+   <property name="text">
+    <string>VIEW_SNYC_HORI_SCROLL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_TEXT_RTL">
+   <property name="text">
+    <string>VIEW_TEXT_RTL</string>
+   </property>
+  </action>
+  <action name="actionVIEW_TEXT_LTR">
+   <property name="text">
+    <string>VIEW_TEXT_LTR</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ANSI">
+   <property name="text">
+    <string>ENCODING_ANSI</string>
+   </property>
+  </action>
+  <action name="actionENCODING_UTF8_NO_BOM">
+   <property name="text">
+    <string>ENCODING_UTF8_NO_BOM</string>
+   </property>
+  </action>
+  <action name="actionENCODING_UTF8">
+   <property name="text">
+    <string>ENCODING_UTF8</string>
+   </property>
+  </action>
+  <action name="actionENCODING_UCS2_BE">
+   <property name="text">
+    <string>ENCODING_UCS2_BE</string>
+   </property>
+  </action>
+  <action name="actionENCODING_UCS2_LE">
+   <property name="text">
+    <string>ENCODING_UCS2_LE</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_6">
+   <property name="text">
+    <string>ENCODING_ISO8859_6</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM720">
+   <property name="text">
+    <string>ENCODING_OEM720</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1256">
+   <property name="text">
+    <string>ENCODING_WINDOW_1256</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_4">
+   <property name="text">
+    <string>ENCODING_ISO8859_4</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_13">
+   <property name="text">
+    <string>ENCODING_ISO8859_13</string>
+   </property>
+   <property name="toolTip">
+    <string>ENCODING_ISO8859_13</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM775">
+   <property name="text">
+    <string>ENCODING_OEM775</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1257">
+   <property name="text">
+    <string>ENCODING_WINDOW_1257</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_14">
+   <property name="text">
+    <string>ENCODING_ISO8859_14</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_5">
+   <property name="text">
+    <string>ENCODING_ISO8859_5</string>
+   </property>
+  </action>
+  <action name="actionENCODING_KOI8_R">
+   <property name="text">
+    <string>ENCODING_KOI8_R</string>
+   </property>
+  </action>
+  <action name="actionENCODING_KOI8_U">
+   <property name="text">
+    <string>ENCODING_KOI8_U</string>
+   </property>
+  </action>
+  <action name="actionENCODING_MACINTOSH">
+   <property name="text">
+    <string>ENCODING_MACINTOSH</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_855">
+   <property name="text">
+    <string>ENCODING_OEM_855</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_856">
+   <property name="text">
+    <string>ENCODING_OEM_855</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1251">
+   <property name="text">
+    <string>ENCODING_WINDOW_1251</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_852">
+   <property name="text">
+    <string>ENCODING_OEM_852</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1250">
+   <property name="text">
+    <string>ENCODING_WINDOW_1250</string>
+   </property>
+  </action>
+  <action name="actionENCODING_BIG5">
+   <property name="text">
+    <string>ENCODING_BIG5</string>
+   </property>
+  </action>
+  <action name="actionENCODING_GB2312">
+   <property name="text">
+    <string>ENCODING_GB2312</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_2">
+   <property name="text">
+    <string>ENCODING_ISO8859_2</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_7">
+   <property name="text">
+    <string>ENCODING_ISO8859_7</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_737">
+   <property name="text">
+    <string>ENCODING_OEM_737</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_869">
+   <property name="text">
+    <string>ENCODING_OEM_869</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1253">
+   <property name="text">
+    <string>ENCODING_WINDOW_1253</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_8">
+   <property name="text">
+    <string>ENCODING_ISO8859_8</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_862">
+   <property name="text">
+    <string>ENCODING_OEM_862</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1255">
+   <property name="text">
+    <string>ENCODING_WINDOW_1255</string>
+   </property>
+  </action>
+  <action name="actionENCODING_SHIFT_JIS">
+   <property name="text">
+    <string>ENCODING_SHIFT_JIS</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_949">
+   <property name="text">
+    <string>ENCODING_WINDOW_949</string>
+   </property>
+  </action>
+  <action name="actionENCODING_EUC_KR">
+   <property name="text">
+    <string>ENCODING_EUC_KR</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_861">
+   <property name="text">
+    <string>ENCODING_OEM_861</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_865">
+   <property name="text">
+    <string>ENCODING_OEM_865</string>
+   </property>
+  </action>
+  <action name="actionENCODING_TIS_620">
+   <property name="text">
+    <string>ENCODING_TIS_620</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_3">
+   <property name="text">
+    <string>ENCODING_ISO8859_3</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_9">
+   <property name="text">
+    <string>ENCODING_ISO8859_9</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_857">
+   <property name="text">
+    <string>ENCODING_OEM_857</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1254">
+   <property name="text">
+    <string>ENCODING_WINDOW_1254</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_1">
+   <property name="text">
+    <string>ENCODING_ISO8859_1</string>
+   </property>
+  </action>
+  <action name="actionENCODING_ISO8859_15">
+   <property name="text">
+    <string>ENCODING_ISO8859_15</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_850">
+   <property name="text">
+    <string>ENCODING_OEM_850</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_858">
+   <property name="text">
+    <string>ENCODING_OEM_858</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_860">
+   <property name="text">
+    <string>ENCODING_OEM_860</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_863">
+   <property name="text">
+    <string>ENCODING_OEM_863</string>
+   </property>
+  </action>
+  <action name="actionENCODING_OEM_US">
+   <property name="text">
+    <string>ENCODING_OEM_US</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1252">
+   <property name="text">
+    <string>ENCODING_WINDOW_1252</string>
+   </property>
+  </action>
+  <action name="actionENCODING_WINDOW_1258">
+   <property name="text">
+    <string>ENCODING_WINDOW_1258</string>
+   </property>
+  </action>
+  <action name="actionENCODING_CONV_ANSI">
+   <property name="text">
+    <string>ENCODING_CONV_ANSI</string>
+   </property>
+  </action>
+  <action name="actionENCODING_CONV_UTF8_NO_BOM">
+   <property name="text">
+    <string>ENCODING_CONV_UTF8_NO_BOM</string>
+   </property>
+  </action>
+  <action name="actionENCODING_CONV_UTF8">
+   <property name="text">
+    <string>ENCODING_CONV_UTF8</string>
+   </property>
+  </action>
+  <action name="actionENCODING_CONV_UCS2_BE">
+   <property name="text">
+    <string>ENCODING_CONV_UCS2_BE</string>
+   </property>
+   <property name="toolTip">
+    <string>ENCODING_CONV_UCS2_BE</string>
+   </property>
+  </action>
+  <action name="actionENCODING_CONV_UCS2_LE">
+   <property name="text">
+    <string>ENCODING_CONV_UCS2_LE</string>
+   </property>
+   <property name="toolTip">
+    <string>ENCODING_CONV_UCS2_LE</string>
+   </property>
+  </action>
+  <action name="actionLANG_ADA">
+   <property name="text">
+    <string>LANG_ADA</string>
+   </property>
+  </action>
+  <action name="actionLANG_ASP">
+   <property name="text">
+    <string>LANG_ASP</string>
+   </property>
+  </action>
+  <action name="actionLANG_ASSEMBLY">
+   <property name="text">
+    <string>LANG_ASSEMBLY</string>
+   </property>
+  </action>
+  <action name="actionLANG_AUTO_IT">
+   <property name="text">
+    <string>LANG_AUTO_IT</string>
+   </property>
+  </action>
+  <action name="actionLANG_BATCH">
+   <property name="text">
+    <string>LANG_BATCH</string>
+   </property>
+  </action>
+  <action name="actionLANG_ANSI_C">
+   <property name="text">
+    <string>LANG_ANSI_C</string>
+   </property>
+   <property name="toolTip">
+    <string>LANG_ANSI_C</string>
+   </property>
+  </action>
+  <action name="actionLANG_C_SHARP">
+   <property name="text">
+    <string>LANG_C_SHARP</string>
+   </property>
+  </action>
+  <action name="actionLANG_CPP">
+   <property name="text">
+    <string>LANG_CPP</string>
+   </property>
+  </action>
+  <action name="actionLANG_CAML">
+   <property name="text">
+    <string>LANG_CAML</string>
+   </property>
+  </action>
+  <action name="actionLANG_CMAKE">
+   <property name="text">
+    <string>LANG_CMAKE</string>
+   </property>
+  </action>
+  <action name="actionLANG_COBOL">
+   <property name="text">
+    <string>LANG_COBOL</string>
+   </property>
+  </action>
+  <action name="actionLANG_CSS">
+   <property name="text">
+    <string>LANG_CSS</string>
+   </property>
+  </action>
+  <action name="actionLANG_ANSI_D">
+   <property name="text">
+    <string>LANG_ANSI_D</string>
+   </property>
+  </action>
+  <action name="actionLANG_DIFF">
+   <property name="text">
+    <string>LANG_DIFF</string>
+   </property>
+  </action>
+  <action name="actionLANG_FLASH">
+   <property name="text">
+    <string>LANG_FLASH</string>
+   </property>
+  </action>
+  <action name="actionLANG_FORTRAN">
+   <property name="text">
+    <string>LANG_FORTRAN</string>
+   </property>
+  </action>
+  <action name="actionLANG_GUI4CLI">
+   <property name="text">
+    <string>LANG_GUI4CLI</string>
+   </property>
+  </action>
+  <action name="actionLANG_HASKELL">
+   <property name="text">
+    <string>LANG_HASKELL</string>
+   </property>
+  </action>
+  <action name="actionLANG_HTML">
+   <property name="text">
+    <string>LANG_HTML</string>
+   </property>
+  </action>
+  <action name="actionLANG_INNO">
+   <property name="text">
+    <string>LANG_INNO</string>
+   </property>
+  </action>
+  <action name="actionLANG_JAVA">
+   <property name="text">
+    <string>LANG_JAVA</string>
+   </property>
+  </action>
+  <action name="actionLANG_JAVASCRIPT">
+   <property name="text">
+    <string>LANG_JAVASCRIPT</string>
+   </property>
+  </action>
+  <action name="actionLANG_JSP">
+   <property name="text">
+    <string>LANG_JSP</string>
+   </property>
+  </action>
+  <action name="actionLANG_KIX">
+   <property name="text">
+    <string>LANG_KIX</string>
+   </property>
+  </action>
+  <action name="actionLANG_LISP">
+   <property name="text">
+    <string>LANG_LISP</string>
+   </property>
+  </action>
+  <action name="actionLANG_LUA">
+   <property name="text">
+    <string>LANG_LUA</string>
+   </property>
+  </action>
+  <action name="actionLANG_MAKEFILE">
+   <property name="text">
+    <string>LANG_MAKEFILE</string>
+   </property>
+  </action>
+  <action name="actionLANG_MATLAB">
+   <property name="text">
+    <string>LANG_MATLAB</string>
+   </property>
+  </action>
+  <action name="actionLANG_MS_INI">
+   <property name="text">
+    <string>LANG_MS_INI</string>
+   </property>
+  </action>
+  <action name="actionLANG_MSDOS">
+   <property name="text">
+    <string>LANG_MSDOS</string>
+   </property>
+  </action>
+  <action name="actionLANG_NORMAL_TEXT">
+   <property name="text">
+    <string>LANG_NORMAL_TEXT</string>
+   </property>
+  </action>
+  <action name="actionLANG_NSIS">
+   <property name="text">
+    <string>LANG_NSIS</string>
+   </property>
+  </action>
+  <action name="actionLANG_OBJECTIVE_C">
+   <property name="text">
+    <string>LANG_OBJECTIVE_C</string>
+   </property>
+  </action>
+  <action name="actionLANG_PASCAL">
+   <property name="text">
+    <string>LANG_PASCAL</string>
+   </property>
+  </action>
+  <action name="actionLANG_PERL">
+   <property name="text">
+    <string>LANG_PERL</string>
+   </property>
+  </action>
+  <action name="actionLANG_PHP">
+   <property name="text">
+    <string>LANG_PHP</string>
+   </property>
+  </action>
+  <action name="actionLANG_POSTSCRIPT">
+   <property name="text">
+    <string>LANG_POSTSCRIPT</string>
+   </property>
+  </action>
+  <action name="actionLANG_POWERSHELL">
+   <property name="text">
+    <string>LANG_POWERSHELL</string>
+   </property>
+  </action>
+  <action name="actionLANG_PROPS">
+   <property name="text">
+    <string>LANG_PROPS</string>
+   </property>
+  </action>
+  <action name="actionLANG_PYTHON">
+   <property name="text">
+    <string>LANG_PYTHON</string>
+   </property>
+  </action>
+  <action name="actionLANG_ANSI_R">
+   <property name="text">
+    <string>LANG_ANSI_R</string>
+   </property>
+  </action>
+  <action name="actionLANG_RESOURCE_FILE">
+   <property name="text">
+    <string>LANG_RESOURCE_FILE</string>
+   </property>
+  </action>
+  <action name="actionLANG_RUBY">
+   <property name="text">
+    <string>LANG_RUBY</string>
+   </property>
+  </action>
+  <action name="actionLANG_BASH">
+   <property name="text">
+    <string>LANG_BASH</string>
+   </property>
+  </action>
+  <action name="actionLANG_SCHEME">
+   <property name="text">
+    <string>LANG_SCHEME</string>
+   </property>
+  </action>
+  <action name="actionLANG_SMALLTALK">
+   <property name="text">
+    <string>LANG_SMALLTALK</string>
+   </property>
+  </action>
+  <action name="actionLANG_SQL">
+   <property name="text">
+    <string>LANG_SQL</string>
+   </property>
+  </action>
+  <action name="actionLANG_TCL">
+   <property name="text">
+    <string>LANG_TCL</string>
+   </property>
+  </action>
+  <action name="actionLANG_TEX">
+   <property name="text">
+    <string>LANG_TEX</string>
+   </property>
+  </action>
+  <action name="actionLANG_VB">
+   <property name="text">
+    <string>LANG_VB</string>
+   </property>
+  </action>
+  <action name="actionLANG_VHDL">
+   <property name="text">
+    <string>LANG_VHDL</string>
+   </property>
+  </action>
+  <action name="actionLANG_VERILOG">
+   <property name="text">
+    <string>LANG_VERILOG</string>
+   </property>
+  </action>
+  <action name="actionLANG_XML">
+   <property name="text">
+    <string>LANG_XML</string>
+   </property>
+  </action>
+  <action name="actionLANG_YAML">
+   <property name="text">
+    <string>LANG_YAML</string>
+   </property>
+  </action>
+  <action name="actionLANG_USER">
+   <property name="text">
+    <string>LANG_USER</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_PERFERENCES">
+   <property name="text">
+    <string>SETTINGS_PERFERENCES</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_LANG_STYLE">
+   <property name="text">
+    <string>SETTINGS_LANG_STYLE</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_SHORTCUT_MAPPER">
+   <property name="text">
+    <string>SETTINGS_SHORTCUT_MAPPER</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_IMPORT_PLUGIN">
+   <property name="text">
+    <string>SETTINGS_IMPORT_PLUGIN</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_IMPORT_STYLE_THEME">
+   <property name="text">
+    <string>SETTINGS_IMPORT_STYLE_THEME</string>
+   </property>
+  </action>
+  <action name="actionSETTINGS_EDIT_CONTEXTMENU">
+   <property name="text">
+    <string>SETTINGS_EDIT_CONTEXTMENU</string>
+   </property>
+  </action>
+  <action name="actionMACRO_RECORD">
+   <property name="text">
+    <string>MACRO_RECORD</string>
+   </property>
+  </action>
+  <action name="actionMACRO_STOP">
+   <property name="text">
+    <string>MACRO_STOP</string>
+   </property>
+  </action>
+  <action name="actionMACRO_PLAYBACK">
+   <property name="text">
+    <string>MACRO_PLAYBACK</string>
+   </property>
+  </action>
+  <action name="actionMACRO_SAVE">
+   <property name="text">
+    <string>MACRO_SAVE</string>
+   </property>
+  </action>
+  <action name="actionMACRO_RUN_MULTI_MACRO">
+   <property name="text">
+    <string>MACRO_RUN_MULTI_MACRO</string>
+   </property>
+  </action>
+  <action name="actionRUN_RUN">
+   <property name="text">
+    <string>RUN_RUN</string>
+   </property>
+  </action>
+  <action name="actionHELP_HELP">
+   <property name="text">
+    <string>HELP_HELP</string>
+   </property>
+  </action>
+  <action name="actionHELP_HOMEPAGE">
+   <property name="text">
+    <string>HELP_HOMEPAGE</string>
+   </property>
+  </action>
+  <action name="actionHELP_PROJECTPAGE">
+   <property name="text">
+    <string>HELP_PROJECTPAGE</string>
+   </property>
+  </action>
+  <action name="actionHELP_ONLINE_DOC">
+   <property name="text">
+    <string>HELP_ONLINE_DOC</string>
+   </property>
+  </action>
+  <action name="actionHELP_FORUM">
+   <property name="text">
+    <string>HELP_FORUM</string>
+   </property>
+  </action>
+  <action name="actionHELP_GET_PLUGINS">
+   <property name="text">
+    <string>HELP_GET_PLUGINS</string>
+   </property>
+  </action>
+  <action name="actionHELP_UPDATE_QPAD">
+   <property name="text">
+    <string>HELP_UPDATE_QPAD</string>
+   </property>
+  </action>
+  <action name="actionHELP_ABOUT">
+   <property name="text">
+    <string>HELP_ABOUT</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

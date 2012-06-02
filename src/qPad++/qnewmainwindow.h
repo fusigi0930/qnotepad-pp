@@ -20,6 +20,9 @@ public:
     explicit QNewMainWindow(QWidget *parent = 0);
     ~QNewMainWindow();
 
+protected:
+    virtual void changeEvent(QEvent * event);
+
 protected slots:
     virtual void slotCreate();
 

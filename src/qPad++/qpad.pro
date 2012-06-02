@@ -9,10 +9,9 @@ QT       += core gui network
 TARGET = qpad
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
-        qnewmainwindow.cpp \
-    basemainwindow.cpp \
+    qnewmainwindow.cpp \
+    base-class/basemainwindow.cpp \
     QtSingle/qtsinglecoreapplication.cpp \
     QtSingle/qtsingleapplication.cpp \
     QtSingle/qtlockedfile_win.cpp \
@@ -21,7 +20,7 @@ SOURCES += main.cpp\
     QtSingle/qtlocalpeer.cpp
 
 HEADERS  += qnewmainwindow.h \
-    basemainwindow.h \
+    base-class/basemainwindow.h \
     inc/debug.h \
     inc/constant.h \
     inc/mem.h \
@@ -36,14 +35,18 @@ FORMS    += ui/qnewmainwindow.ui
 INCLUDEPATH += \
     QtSingle \
     inc \
-    res
+    res \
+    base-class
 
 TRANSLATIONS += \
-    strings_en.ts
+    res/strings_en.ts
 
 OTHER_FILES +=
 
 DESTDIR = ../../bin
+
+RESOURCES += \
+    res/resource.qrc
 
 release {
     DEFINES -= \
