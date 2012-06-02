@@ -22,18 +22,24 @@ SOURCES += main.cpp\
 
 HEADERS  += qnewmainwindow.h \
     basemainwindow.h \
-    debug.h \
-    constant.h \
-    mem.h \
+    inc/debug.h \
+    inc/constant.h \
+    inc/mem.h \
     QtSingle/qtsinglecoreapplication.h \
     QtSingle/qtsingleapplication.h \
     QtSingle/qtlockedfile.h \
-    QtSingle/qtlocalpeer.h
+    QtSingle/qtlocalpeer.h \
+    res/strings.h
 
-FORMS    += qnewmainwindow.ui
+FORMS    += ui/qnewmainwindow.ui
 
 INCLUDEPATH += \
-    QtSingle
+    QtSingle \
+    inc \
+    res
+
+TRANSLATIONS += \
+    strings_en.ts
 
 OTHER_FILES +=
 
