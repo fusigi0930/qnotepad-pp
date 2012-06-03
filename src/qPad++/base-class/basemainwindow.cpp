@@ -12,7 +12,7 @@ BaseMainWindow::BaseMainWindow(QWidget *parent) :
 }
 
 BaseMainWindow::~BaseMainWindow() {
-    emit sigDestroy();
+    slotDestroy();
 }
 
 void BaseMainWindow::slotCreate() {

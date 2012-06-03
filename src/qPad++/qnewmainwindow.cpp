@@ -4,17 +4,19 @@
 #include "mem.h"
 #include <QtGui/QApplication>
 #include <QDesktopWidget>
+#include <Qsci/qsciscintilla.h>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
     ui(new Ui::QNewMainWindow)
 {
-
+    m_pTextEditor=NULL;
 }
 
 QNewMainWindow::~QNewMainWindow()
 {
     _DEL_MEM(ui);
+    _DEL_MEM(m_pTextEditor);
 }
 
 void QNewMainWindow::changeEvent(QEvent * event) {
@@ -35,6 +37,10 @@ void QNewMainWindow::slotCreate() {
 
     this->resize(QApplication::desktop()->width()/5*4, QApplication::desktop()->height()/5*4);
     BaseMainWindow::slotCreate();
+    // initial scintilla text editor
+    m_pTextEditor=new QsciScintilla;
+    this->setCentralWidget(m_pTextEditor);
+
     this->show();
 }
 

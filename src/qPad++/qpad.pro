@@ -9,6 +9,13 @@ QT       += core gui network
 TARGET = qpad
 TEMPLATE = app
 
+win32 {
+    LIBS += ../../bin/libqscintilla2.a
+}
+!win32 {
+    LIBS += ../../bin/libqscintilla2
+}
+
 SOURCES += main.cpp\
     qnewmainwindow.cpp \
     base-class/basemainwindow.cpp \
@@ -17,7 +24,8 @@ SOURCES += main.cpp\
     QtSingle/qtlockedfile_win.cpp \
     QtSingle/qtlockedfile_unix.cpp \
     QtSingle/qtlockedfile.cpp \
-    QtSingle/qtlocalpeer.cpp
+    QtSingle/qtlocalpeer.cpp \
+    base-class/basewidget.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -28,7 +36,8 @@ HEADERS  += qnewmainwindow.h \
     QtSingle/qtsingleapplication.h \
     QtSingle/qtlockedfile.h \
     QtSingle/qtlocalpeer.h \
-    res/strings.h
+    res/strings.h \
+    base-class/basewidget.h
 
 FORMS    += ui/qnewmainwindow.ui
 
@@ -36,7 +45,8 @@ INCLUDEPATH += \
     QtSingle \
     inc \
     res \
-    base-class
+    base-class \
+    ../qscintilla-gpl-2.6.1/Qt4
 
 TRANSLATIONS += \
     res/strings_en.ts

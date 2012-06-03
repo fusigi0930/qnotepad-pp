@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QString>
 #include "basemainwindow.h"
+#include <Qsci/qsciscintilla.h>
 
 namespace Ui {
 class QNewMainWindow;
@@ -13,8 +14,8 @@ class QNewMainWindow : public BaseMainWindow
 {
     Q_OBJECT
 
-
-public:
+private:
+    QsciScintilla *m_pTextEditor;
 
 public:
     explicit QNewMainWindow(QWidget *parent = 0);
