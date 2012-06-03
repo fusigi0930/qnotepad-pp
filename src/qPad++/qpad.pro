@@ -37,7 +37,8 @@ HEADERS  += qnewmainwindow.h \
     QtSingle/qtlockedfile.h \
     QtSingle/qtlocalpeer.h \
     res/strings.h \
-    base-class/basewidget.h
+    base-class/basewidget.h \
+    inc/qpadlexer.h
 
 FORMS    += ui/qnewmainwindow.ui
 

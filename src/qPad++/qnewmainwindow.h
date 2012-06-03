@@ -9,6 +9,9 @@
 #include <QFile>
 #include <QMdiArea>
 #include <QMdiSubWindow>
+#include "mem.h"
+#include <QAction>
+#include <QActionGroup>
 
 namespace Ui {
 class QNewMainWindow;
@@ -20,6 +23,15 @@ struct STextManager {
     QMdiSubWindow *ptrMdiSubWidget;
 };
 
+template<typename T_T, typename O_O>
+T_T *createObject() { return new O_O; }
+
+template<typename T_T>
+struct SActionMap {
+    QAction *ptrAction;
+    T_T* (*fnFunc)();
+};
+
 class QNewMainWindow : public BaseMainWindow
 {
     Q_OBJECT
@@ -27,6 +39,7 @@ class QNewMainWindow : public BaseMainWindow
 private:
     QMdiArea *m_pMdiArea;
     QMap<QString, STextManager> m_mapOpenedFiles;
+    QActionGroup m_langActionsGroup;
 
     int m_nNewDocNum;
 
@@ -45,6 +58,7 @@ private slots:
     // ui action's mapping functaions
     void actionFileOpen();
     void actionFileNew();
+    void actionLang();
 
 protected slots:
     virtual void slotCreate();

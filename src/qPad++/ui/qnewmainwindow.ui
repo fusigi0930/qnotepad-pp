@@ -1845,31 +1845,49 @@
    </property>
   </action>
   <action name="actionLANG_ADA">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ADA</string>
    </property>
   </action>
   <action name="actionLANG_ASP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ASP</string>
    </property>
   </action>
   <action name="actionLANG_ASSEMBLY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ASSEMBLY</string>
    </property>
   </action>
   <action name="actionLANG_AUTO_IT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_AUTO_IT</string>
    </property>
   </action>
   <action name="actionLANG_BATCH">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_BATCH</string>
    </property>
   </action>
   <action name="actionLANG_ANSI_C">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ANSI_C</string>
    </property>
@@ -1878,246 +1896,393 @@
    </property>
   </action>
   <action name="actionLANG_C_SHARP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_C_SHARP</string>
    </property>
   </action>
   <action name="actionLANG_CPP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_CPP</string>
    </property>
   </action>
   <action name="actionLANG_CAML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_CAML</string>
    </property>
   </action>
   <action name="actionLANG_CMAKE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_CMAKE</string>
    </property>
   </action>
   <action name="actionLANG_COBOL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_COBOL</string>
    </property>
   </action>
   <action name="actionLANG_CSS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_CSS</string>
    </property>
   </action>
   <action name="actionLANG_ANSI_D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ANSI_D</string>
    </property>
   </action>
   <action name="actionLANG_DIFF">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_DIFF</string>
    </property>
   </action>
   <action name="actionLANG_FLASH">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_FLASH</string>
    </property>
   </action>
   <action name="actionLANG_FORTRAN">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_FORTRAN</string>
    </property>
   </action>
   <action name="actionLANG_GUI4CLI">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_GUI4CLI</string>
    </property>
   </action>
   <action name="actionLANG_HASKELL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_HASKELL</string>
    </property>
   </action>
   <action name="actionLANG_HTML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_HTML</string>
    </property>
   </action>
   <action name="actionLANG_INNO">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_INNO</string>
    </property>
   </action>
   <action name="actionLANG_JAVA">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_JAVA</string>
    </property>
   </action>
   <action name="actionLANG_JAVASCRIPT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_JAVASCRIPT</string>
    </property>
   </action>
   <action name="actionLANG_JSP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_JSP</string>
    </property>
   </action>
   <action name="actionLANG_KIX">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_KIX</string>
    </property>
   </action>
   <action name="actionLANG_LISP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_LISP</string>
    </property>
   </action>
   <action name="actionLANG_LUA">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_LUA</string>
    </property>
   </action>
   <action name="actionLANG_MAKEFILE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_MAKEFILE</string>
    </property>
   </action>
   <action name="actionLANG_MATLAB">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_MATLAB</string>
    </property>
   </action>
   <action name="actionLANG_MS_INI">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_MS_INI</string>
    </property>
   </action>
   <action name="actionLANG_MSDOS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_MSDOS</string>
    </property>
   </action>
   <action name="actionLANG_NORMAL_TEXT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_NORMAL_TEXT</string>
    </property>
   </action>
   <action name="actionLANG_NSIS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_NSIS</string>
    </property>
   </action>
   <action name="actionLANG_OBJECTIVE_C">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_OBJECTIVE_C</string>
    </property>
   </action>
   <action name="actionLANG_PASCAL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_PASCAL</string>
    </property>
   </action>
   <action name="actionLANG_PERL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_PERL</string>
    </property>
   </action>
   <action name="actionLANG_PHP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_PHP</string>
    </property>
   </action>
   <action name="actionLANG_POSTSCRIPT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_POSTSCRIPT</string>
    </property>
   </action>
   <action name="actionLANG_POWERSHELL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_POWERSHELL</string>
    </property>
   </action>
   <action name="actionLANG_PROPS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_PROPS</string>
    </property>
   </action>
   <action name="actionLANG_PYTHON">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_PYTHON</string>
    </property>
   </action>
   <action name="actionLANG_ANSI_R">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_ANSI_R</string>
    </property>
   </action>
   <action name="actionLANG_RESOURCE_FILE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_RESOURCE_FILE</string>
    </property>
   </action>
   <action name="actionLANG_RUBY">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_RUBY</string>
    </property>
   </action>
   <action name="actionLANG_BASH">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_BASH</string>
    </property>
   </action>
   <action name="actionLANG_SCHEME">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_SCHEME</string>
    </property>
   </action>
   <action name="actionLANG_SMALLTALK">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_SMALLTALK</string>
    </property>
   </action>
   <action name="actionLANG_SQL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_SQL</string>
    </property>
   </action>
   <action name="actionLANG_TCL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_TCL</string>
    </property>
   </action>
   <action name="actionLANG_TEX">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_TEX</string>
    </property>
   </action>
   <action name="actionLANG_VB">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_VB</string>
    </property>
   </action>
   <action name="actionLANG_VHDL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_VHDL</string>
    </property>
   </action>
   <action name="actionLANG_VERILOG">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_VERILOG</string>
    </property>
   </action>
   <action name="actionLANG_XML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_XML</string>
    </property>
   </action>
   <action name="actionLANG_YAML">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_YAML</string>
    </property>
   </action>
   <action name="actionLANG_USER">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>LANG_USER</string>
    </property>

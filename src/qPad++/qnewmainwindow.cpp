@@ -1,7 +1,6 @@
 #include "qnewmainwindow.h"
 #include "ui_qnewmainwindow.h"
 #include "debug.h"
-#include "mem.h"
 #include <QtGui/QApplication>
 #include <QDesktopWidget>
 #include <Qsci/qsciscintilla.h>
@@ -11,10 +10,13 @@
 #include <QMessageBox>
 #include <QThread>
 #include "strings.h"
+#include "qpadlexer.h"
+#include "constant.h"
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
-    ui(new Ui::QNewMainWindow)
+    ui(new Ui::QNewMainWindow),
+    m_langActionsGroup(this)
 {
     m_pMdiArea=NULL;
     m_nNewDocNum=1;
@@ -28,6 +30,9 @@ QNewMainWindow::~QNewMainWindow()
     for (pFind=m_mapOpenedFiles.begin(); pFind != m_mapOpenedFiles.end(); ++pFind) {
         _DEBUG_MSG("delete memory: 0x%x", pFind.value().pTextEditor);
         m_pMdiArea->removeSubWindow(pFind.value().ptrMdiSubWidget);
+        QsciLexer *p=pFind.value().pTextEditor->lexer();
+        _DEL_MEM(p);
+        pFind.value().pTextEditor->setLexer(0);
         pFind.value().pTextEditor->close();
         _DEL_MEM(pFind.value().pTextEditor);
         _DEL_MEM(pFind.value().pFile);
@@ -45,6 +50,63 @@ void QNewMainWindow::setMenuActions() {
     ui->actionFILE_OPEN->setShortcuts(QKeySequence::Open);
     connect(ui->actionFILE_OPEN, SIGNAL(triggered()), this, SLOT(actionFileOpen()));
 
+    // Language menu actions
+    m_langActionsGroup.addAction(ui->actionLANG_ADA);
+    m_langActionsGroup.addAction(ui->actionLANG_ASP);
+    m_langActionsGroup.addAction(ui->actionLANG_ASSEMBLY);
+    m_langActionsGroup.addAction(ui->actionLANG_AUTO_IT);
+    m_langActionsGroup.addAction(ui->actionLANG_BATCH);
+    m_langActionsGroup.addAction(ui->actionLANG_ANSI_C);
+    m_langActionsGroup.addAction(ui->actionLANG_C_SHARP);
+    m_langActionsGroup.addAction(ui->actionLANG_CPP);
+    m_langActionsGroup.addAction(ui->actionLANG_CAML);
+    m_langActionsGroup.addAction(ui->actionLANG_CMAKE);
+    m_langActionsGroup.addAction(ui->actionLANG_COBOL);
+    m_langActionsGroup.addAction(ui->actionLANG_CSS);
+    m_langActionsGroup.addAction(ui->actionLANG_ANSI_D);
+    m_langActionsGroup.addAction(ui->actionLANG_DIFF);
+    m_langActionsGroup.addAction(ui->actionLANG_FLASH);
+    m_langActionsGroup.addAction(ui->actionLANG_FORTRAN);
+    m_langActionsGroup.addAction(ui->actionLANG_GUI4CLI);
+    m_langActionsGroup.addAction(ui->actionLANG_HASKELL);
+    m_langActionsGroup.addAction(ui->actionLANG_HTML);
+    m_langActionsGroup.addAction(ui->actionLANG_INNO);
+    m_langActionsGroup.addAction(ui->actionLANG_JAVA);
+    m_langActionsGroup.addAction(ui->actionLANG_JAVASCRIPT);
+    m_langActionsGroup.addAction(ui->actionLANG_JSP);
+    m_langActionsGroup.addAction(ui->actionLANG_KIX);
+    m_langActionsGroup.addAction(ui->actionLANG_LISP);
+    m_langActionsGroup.addAction(ui->actionLANG_LUA);
+    m_langActionsGroup.addAction(ui->actionLANG_MAKEFILE);
+    m_langActionsGroup.addAction(ui->actionLANG_MATLAB);
+    m_langActionsGroup.addAction(ui->actionLANG_MS_INI);
+    m_langActionsGroup.addAction(ui->actionLANG_MSDOS);
+    m_langActionsGroup.addAction(ui->actionLANG_NORMAL_TEXT);
+    m_langActionsGroup.addAction(ui->actionLANG_NSIS);
+    m_langActionsGroup.addAction(ui->actionLANG_OBJECTIVE_C);
+    m_langActionsGroup.addAction(ui->actionLANG_PASCAL);
+    m_langActionsGroup.addAction(ui->actionLANG_PERL);
+    m_langActionsGroup.addAction(ui->actionLANG_PHP);
+    m_langActionsGroup.addAction(ui->actionLANG_POSTSCRIPT);
+    m_langActionsGroup.addAction(ui->actionLANG_POWERSHELL);
+    m_langActionsGroup.addAction(ui->actionLANG_PROPS);
+    m_langActionsGroup.addAction(ui->actionLANG_PYTHON);
+    m_langActionsGroup.addAction(ui->actionLANG_ANSI_R);
+    m_langActionsGroup.addAction(ui->actionLANG_RESOURCE_FILE);
+    m_langActionsGroup.addAction(ui->actionLANG_RUBY);
+    m_langActionsGroup.addAction(ui->actionLANG_BASH);
+    m_langActionsGroup.addAction(ui->actionLANG_SCHEME);
+    m_langActionsGroup.addAction(ui->actionLANG_SMALLTALK);
+    m_langActionsGroup.addAction(ui->actionLANG_SQL);
+    m_langActionsGroup.addAction(ui->actionLANG_TCL);
+    m_langActionsGroup.addAction(ui->actionLANG_TEX);
+    m_langActionsGroup.addAction(ui->actionLANG_VB);
+    m_langActionsGroup.addAction(ui->actionLANG_VHDL);
+    m_langActionsGroup.addAction(ui->actionLANG_VERILOG);
+    m_langActionsGroup.addAction(ui->actionLANG_XML);
+    m_langActionsGroup.addAction(ui->actionLANG_YAML);
+    m_langActionsGroup.addAction(ui->actionLANG_USER);
+    connect(ui->actionLANG_CPP, SIGNAL(triggered()), this, SLOT(actionLang()));
 }
 
 void QNewMainWindow::actionFileNew() {
@@ -80,6 +142,27 @@ void QNewMainWindow::actionFileOpen(){
     }
 }
 
+void QNewMainWindow::actionLang() {
+    SActionMap<QsciLexer> menuLangActionsMap[] = {
+        { ui->actionLANG_CPP, createObject<QsciLexer, QsciLexerCPP> },
+        { NULL, NULL }
+    };
+    int i=0;
+    while (menuLangActionsMap[i].ptrAction) {
+        if(menuLangActionsMap[i].ptrAction->isChecked()) {
+            QsciLexer *p=reinterpret_cast<QsciScintilla*>
+                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->lexer();
+            reinterpret_cast<QsciScintilla*>
+                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->setLexer(0);
+            _DEL_MEM(p);
+            reinterpret_cast<QsciScintilla*>
+                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->setLexer(menuLangActionsMap[i].fnFunc());
+            break;
+        }
+        ++i;
+    }
+}
+
 bool QNewMainWindow::addDocPanel(QString str) {
     bool bRet=false;
     STextManager manager={0};
@@ -87,9 +170,14 @@ bool QNewMainWindow::addDocPanel(QString str) {
         str.sprintf("%s%d", _NEW_FILE_PREFIX, m_nNewDocNum++);
         manager.pTextEditor=new QsciScintilla;
 
+        QsciLexerCPP *lexer=new QsciLexerCPP(manager.pTextEditor);
+        manager.pTextEditor->setLexer(lexer);
         manager.ptrMdiSubWidget=m_pMdiArea->addSubWindow(manager.pTextEditor);
         manager.ptrMdiSubWidget->showMaximized();
         manager.ptrMdiSubWidget->setWindowTitle(str);
+        manager.ptrMdiSubWidget->setUserData(
+            EUSERDATA_SCINTILLA_TEXT_EDITOR,
+            reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
         m_mapOpenedFiles[str]=manager;
     }
     else {
@@ -112,6 +200,9 @@ bool QNewMainWindow::addDocPanel(QString str) {
         QApplication::restoreOverrideCursor();
         manager.ptrMdiSubWidget=m_pMdiArea->addSubWindow(manager.pTextEditor);
         manager.ptrMdiSubWidget->showMaximized();
+        manager.ptrMdiSubWidget->setUserData(
+            EUSERDATA_SCINTILLA_TEXT_EDITOR,
+            reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
         QString filename=str.mid(str.lastIndexOf('/')+1);
         manager.ptrMdiSubWidget->setWindowTitle(filename);
         m_mapOpenedFiles[str]=manager;

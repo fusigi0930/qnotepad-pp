@@ -9,6 +9,11 @@ enum EWINDOW_STATUS {
     ESTATUS_UNKNOW=-1
 };
 
+enum EUSER_DATA {
+    EUSERDATA_SCINTILLA_TEXT_EDITOR = 1001
+
+};
+
 #define _NEW_FILE_PREFIX    "NewFile"
 
 #endif // CONSTANT_H
