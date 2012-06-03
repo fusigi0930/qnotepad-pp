@@ -1797,5 +1797,15 @@
         <translatorcomment>File field</translatorcomment>
         <translation>&amp;File</translation>
     </message>
+    <message>
+        <location filename="strings.h" line="6"/>
+        <source>IDS_FILE_OPEN_FAILED_TITLE</source>
+        <translation>Open file failed</translation>
+    </message>
+    <message>
+        <location filename="strings.h" line="7"/>
+        <source>IDS_FILE_OPEN_FAILED_CONTENT</source>
+        <translation>The file %1 is opened failed, the reason is %2.</translation>
+    </message>
 </context>
 </TS>

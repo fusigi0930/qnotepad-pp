@@ -9,4 +9,6 @@ enum EWINDOW_STATUS {
     ESTATUS_UNKNOW=-1
 };
 
+#define _NEW_FILE_PREFIX    "NewFile"
+
 #endif // CONSTANT_H
