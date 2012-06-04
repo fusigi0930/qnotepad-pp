@@ -106,7 +106,63 @@ void QNewMainWindow::setMenuActions() {
     m_langActionsGroup.addAction(ui->actionLANG_XML);
     m_langActionsGroup.addAction(ui->actionLANG_YAML);
     m_langActionsGroup.addAction(ui->actionLANG_USER);
+
+    connect(ui->actionLANG_ADA, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_ASP, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_ASSEMBLY, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_AUTO_IT, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_BATCH, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_ANSI_C, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_C_SHARP, SIGNAL(triggered()), this, SLOT(actionLang()));
     connect(ui->actionLANG_CPP, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_CAML, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_CMAKE, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_COBOL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_CSS, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_ANSI_D, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_DIFF, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_FLASH, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_FORTRAN, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_GUI4CLI, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_HASKELL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_HTML, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_INNO, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_JAVA, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_JAVASCRIPT, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_JSP, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_KIX, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_LISP, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_LUA, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_MAKEFILE, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_MATLAB, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_MS_INI, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_MSDOS, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_NORMAL_TEXT, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_NSIS, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_OBJECTIVE_C, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_PASCAL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_PERL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_PHP, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_POSTSCRIPT, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_POWERSHELL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_PROPS, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_PYTHON, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_ANSI_R, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_RESOURCE_FILE, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_RUBY, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_BASH, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_SCHEME, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_SMALLTALK, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_SQL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_TCL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_TEX, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_VB, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_VHDL, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_VERILOG, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_XML, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_YAML, SIGNAL(triggered()), this, SLOT(actionLang()));
+    connect(ui->actionLANG_USER, SIGNAL(triggered()), this, SLOT(actionLang()));
+
 }
 
 void QNewMainWindow::actionFileNew() {
