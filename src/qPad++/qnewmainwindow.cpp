@@ -12,6 +12,7 @@
 #include "strings.h"
 #include "qpadlexer.h"
 #include "constant.h"
+#include <QTabBar>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -217,6 +218,20 @@ void QNewMainWindow::actionLang() {
         }
         ++i;
     }
+}
+
+QMap<QString, STextManager>::iterator QNewMainWindow::findKeyFormAreaSubWindow(QMdiSubWindow *ptrSub) {
+    QMap<QString, STextManager>::iterator pFind=m_mapOpenedFiles.end();
+    if (NULL == ptrSub) {
+        _DEBUG_MSG("no data");
+        return pFind;
+    }
+    for(pFind=m_mapOpenedFiles.begin(); pFind!=m_mapOpenedFiles.end(); ++pFind) {
+        if (pFind.value().ptrMdiSubWidget == ptrSub) {
+            break;
+        }
+    }
+    return pFind;
 }
 
 bool QNewMainWindow::addDocPanel(QString str) {

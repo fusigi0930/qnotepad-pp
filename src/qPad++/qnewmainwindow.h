@@ -53,6 +53,7 @@ protected:
 private:
     void setMenuActions();
     bool addDocPanel(QString str);
+    QMap<QString, STextManager>::iterator findKeyFormAreaSubWindow(QMdiSubWindow *ptrSub);
 
 private slots:
     // ui action's mapping functaions
