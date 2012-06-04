@@ -1,5 +1,5 @@
 #include <QtGui/QApplication>
-#include "QtSingleApplication.h"
+#include "qtsingleapplication.h"
 #include <QString>
 #include <QTranslator>
 #include "qnewmainwindow.h"
