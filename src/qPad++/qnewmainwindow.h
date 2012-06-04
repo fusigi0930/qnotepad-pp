@@ -66,6 +66,7 @@ protected slots:
 
 public slots:
     void slotAppCmd(QString qstr);
+    void slotDocWasModified();
     
 private:
     Ui::QNewMainWindow *ui;

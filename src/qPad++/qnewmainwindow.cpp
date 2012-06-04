@@ -300,7 +300,7 @@ bool QNewMainWindow::addDocPanel(QString str) {
         manager.pTextEditor->setLexer(lexer);
         manager.ptrMdiSubWidget=m_pMdiArea->addSubWindow(manager.pTextEditor);
         manager.ptrMdiSubWidget->showMaximized();
-        manager.ptrMdiSubWidget->setWindowTitle(str);
+        manager.ptrMdiSubWidget->setWindowTitle(str.append(" [*]"));
         manager.ptrMdiSubWidget->setUserData(
             EUSERDATA_SCINTILLA_TEXT_EDITOR,
             reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
@@ -330,9 +330,10 @@ bool QNewMainWindow::addDocPanel(QString str) {
             EUSERDATA_SCINTILLA_TEXT_EDITOR,
             reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
         QString filename=str.mid(str.lastIndexOf('/')+1);
-        manager.ptrMdiSubWidget->setWindowTitle(filename);
+        manager.ptrMdiSubWidget->setWindowTitle(filename.append(" [*]"));
         m_mapOpenedFiles[str]=manager;
     }
+    connect(manager.pTextEditor, SIGNAL(textChanged()), this, SLOT(slotDocWasModified()));
     bRet=true;
     return bRet;
 }
@@ -378,4 +379,13 @@ void QNewMainWindow::slotAppCmd(QString qstr) {
     _DEBUG_MSG("%s", qstr.toAscii().data());
     this->showMinimized();
     this->activateWindow();
+}
+
+void QNewMainWindow::slotDocWasModified() {
+    QList<QMdiSubWindow*> list = m_pMdiArea->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
+        QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(
+                    (*pFind)->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+        (*pFind)->setWindowModified(ptrEdit->isModified());
+    }
 }
