@@ -13,7 +13,7 @@ win32 {
     LIBS += ../../bin/libqscintilla2.a
 }
 !win32 {
-    LIBS += ../../bin/libqscintilla2
+    LIBS += -L../../bin/ -lqscintilla2
 }
 
 SOURCES += main.cpp\
