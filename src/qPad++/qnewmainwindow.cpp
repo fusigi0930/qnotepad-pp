@@ -185,6 +185,7 @@ void QNewMainWindow::actionFileOpen(){
         QMap<QString, STextManager>::iterator pFind=m_mapOpenedFiles.find(fileList.at(i));
         if (pFind != m_mapOpenedFiles.end()) {
             _DEBUG_MSG("the file: %s is already opened", fileList.at(i).toAscii().data());
+            m_pMdiArea->setActiveSubWindow(pFind.value().ptrMdiSubWidget);
             continue;
         }
 
@@ -201,7 +202,61 @@ void QNewMainWindow::actionFileOpen(){
 
 void QNewMainWindow::actionLang() {
     SActionMap<QsciLexer> menuLangActionsMap[] = {
+        { ui->actionLANG_ADA, NULL },
+        { ui->actionLANG_ASP, NULL },
+        { ui->actionLANG_ASSEMBLY, NULL },
+        { ui->actionLANG_AUTO_IT, NULL },
+        { ui->actionLANG_BATCH, createObject<QsciLexer, QsciLexerBatch> },
+        { ui->actionLANG_ANSI_C, createObject<QsciLexer, QsciLexerCPP> },
+        { ui->actionLANG_C_SHARP, createObject<QsciLexer, QsciLexerCSharp> },
         { ui->actionLANG_CPP, createObject<QsciLexer, QsciLexerCPP> },
+        { ui->actionLANG_CAML, NULL },
+        { ui->actionLANG_CMAKE, createObject<QsciLexer, QsciLexerCMake> },
+        { ui->actionLANG_COBOL, NULL },
+        { ui->actionLANG_CSS, createObject<QsciLexer, QsciLexerCSS> },
+        { ui->actionLANG_ANSI_D, createObject<QsciLexer, QsciLexerD> },
+        { ui->actionLANG_DIFF, createObject<QsciLexer, QsciLexerDiff> },
+        { ui->actionLANG_FLASH, NULL },
+        { ui->actionLANG_FORTRAN, createObject<QsciLexer, QsciLexerFortran> },
+        { ui->actionLANG_GUI4CLI, NULL },
+        { ui->actionLANG_HASKELL, NULL },
+        { ui->actionLANG_HTML, createObject<QsciLexer, QsciLexerHTML> },
+        { ui->actionLANG_INNO, NULL },
+        { ui->actionLANG_JAVA, createObject<QsciLexer, QsciLexerJava> },
+        { ui->actionLANG_JAVASCRIPT, createObject<QsciLexer, QsciLexerJavaScript> },
+        { ui->actionLANG_JSP, createObject<QsciLexer, QsciLexerJavaScript> },
+        { ui->actionLANG_KIX, NULL },
+        { ui->actionLANG_LISP, NULL },
+        { ui->actionLANG_LUA, createObject<QsciLexer, QsciLexerLua> },
+        { ui->actionLANG_MAKEFILE, createObject<QsciLexer, QsciLexerMakefile> },
+        { ui->actionLANG_MATLAB, createObject<QsciLexer, QsciLexerMatlab> },
+        { ui->actionLANG_MS_INI, NULL },
+        { ui->actionLANG_MSDOS, NULL },
+        { ui->actionLANG_NORMAL_TEXT, NULL },
+        { ui->actionLANG_NSIS, NULL },
+        { ui->actionLANG_OBJECTIVE_C, NULL },
+        { ui->actionLANG_PASCAL, createObject<QsciLexer, QsciLexerPascal> },
+        { ui->actionLANG_PERL, createObject<QsciLexer, QsciLexerPerl> },
+        { ui->actionLANG_PHP, NULL },
+        { ui->actionLANG_POSTSCRIPT, createObject<QsciLexer, QsciLexerPostScript> },
+        { ui->actionLANG_POWERSHELL, NULL },
+        { ui->actionLANG_PROPS, createObject<QsciLexer, QsciLexerProperties> },
+        { ui->actionLANG_PYTHON, createObject<QsciLexer, QsciLexerPython> },
+        { ui->actionLANG_ANSI_R, NULL },
+        { ui->actionLANG_RESOURCE_FILE, NULL },
+        { ui->actionLANG_RUBY, createObject<QsciLexer, QsciLexerRuby> },
+        { ui->actionLANG_BASH, createObject<QsciLexer, QsciLexerBash> },
+        { ui->actionLANG_SCHEME, NULL },
+        { ui->actionLANG_SMALLTALK, NULL },
+        { ui->actionLANG_SQL, createObject<QsciLexer, QsciLexerSQL> },
+        { ui->actionLANG_TCL, createObject<QsciLexer, QsciLexerTCL> },
+        { ui->actionLANG_TEX, createObject<QsciLexer, QsciLexerTeX> },
+        { ui->actionLANG_VB, NULL },
+        { ui->actionLANG_VHDL, createObject<QsciLexer, QsciLexerVHDL> },
+        { ui->actionLANG_VERILOG, createObject<QsciLexer, QsciLexerVerilog> },
+        { ui->actionLANG_XML, createObject<QsciLexer, QsciLexerXML> },
+        { ui->actionLANG_YAML, createObject<QsciLexer, QsciLexerYAML> },
+        { ui->actionLANG_USER, NULL },
         { NULL, NULL }
     };
     int i=0;
