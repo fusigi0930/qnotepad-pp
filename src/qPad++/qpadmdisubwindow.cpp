@@ -16,5 +16,6 @@ QPadMdiSubWindow::~QPadMdiSubWindow() {
 
 void QPadMdiSubWindow::closeEvent( QCloseEvent *event ) {
     _DEBUG_MSG("close event");
-
+    QWidget *p=widget();
+    _DEL_MEM(p);
 }

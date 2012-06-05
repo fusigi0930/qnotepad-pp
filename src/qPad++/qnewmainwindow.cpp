@@ -514,6 +514,7 @@ void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
     if (!ptrEdit) return;
 
     QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
+    if (pFind == m_mapOpenedFiles.end()) return;
 
     _DEBUG_MSG("key name: %s", pFind.key().toAscii().data());
 
