@@ -20,7 +20,7 @@ class QNewMainWindow;
 
 struct STextManager {
     QsciScintilla *pTextEditor;
-    QMdiSubWindow *ptrMdiSubWidget;
+    QMdiSubWindow *pMdiSubWidget;
 };
 
 template<typename T_T, typename O_O>

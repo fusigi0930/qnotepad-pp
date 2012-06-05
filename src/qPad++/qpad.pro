@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     QtSingle/qtlockedfile_unix.cpp \
     QtSingle/qtlockedfile.cpp \
     QtSingle/qtlocalpeer.cpp \
-    base-class/basewidget.cpp
+    base-class/basewidget.cpp \
+    qpadmdiarea.cpp \
+    qpadmdisubwindow.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -38,7 +40,9 @@ HEADERS  += qnewmainwindow.h \
     QtSingle/qtlocalpeer.h \
     res/strings.h \
     base-class/basewidget.h \
-    inc/qpadlexer.h
+    inc/qpadlexer.h \
+    qpadmdiarea.h \
+    qpadmdisubwindow.h
 
 FORMS    += ui/qnewmainwindow.ui
 
