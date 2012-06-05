@@ -12,13 +12,13 @@
 #include "mem.h"
 #include <QAction>
 #include <QActionGroup>
+#include <vector>
 
 namespace Ui {
 class QNewMainWindow;
 }
 
 struct STextManager {
-    QFile *pFile;
     QsciScintilla *pTextEditor;
     QMdiSubWindow *ptrMdiSubWidget;
 };
@@ -30,6 +30,8 @@ template<typename T_T>
 struct SActionMap {
     QAction *ptrAction;
     T_T* (*fnFunc)();
+
+    SActionMap(QAction *action, T_T* (*func)()) {ptrAction=action; fnFunc=func;}
 };
 
 class QNewMainWindow : public BaseMainWindow
@@ -40,6 +42,8 @@ private:
     QMdiArea *m_pMdiArea;
     QMap<QString, STextManager> m_mapOpenedFiles;
     QActionGroup m_langActionsGroup;
+
+    std::vector<SActionMap<QsciLexer> > m_vtMenuLangActions;
 
     int m_nNewDocNum;
 
@@ -52,13 +56,22 @@ protected:
 
 private:
     void setMenuActions();
+    void setFileMenuActions();
+    void setLangMenuActions();
+
     bool addDocPanel(QString str);
     QMap<QString, STextManager>::iterator findKeyFormAreaSubWindow(QMdiSubWindow *ptrSub);
+    QString saveDoc(QString qstrFile, STextManager *ptrManager);
+
+protected:
+    QMdiSubWindow* getMdiActiveWindow();
 
 private slots:
     // ui action's mapping functaions
     void actionFileOpen();
     void actionFileNew();
+    void actionFileSave();
+
     void actionLang();
 
 protected slots:
@@ -67,6 +80,7 @@ protected slots:
 public slots:
     void slotAppCmd(QString qstr);
     void slotDocWasModified();
+    void slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin);
     
 private:
     Ui::QNewMainWindow *ui;

@@ -21,6 +21,9 @@ QNewMainWindow::QNewMainWindow(QWidget *parent) :
 {
     m_pMdiArea=NULL;
     m_nNewDocNum=1;
+    m_vtMenuLangActions.clear();
+
+
 }
 
 QNewMainWindow::~QNewMainWindow()
@@ -36,7 +39,6 @@ QNewMainWindow::~QNewMainWindow()
         pFind.value().pTextEditor->setLexer(0);
         pFind.value().pTextEditor->close();
         _DEL_MEM(pFind.value().pTextEditor);
-        _DEL_MEM(pFind.value().pFile);
     }
     m_mapOpenedFiles.clear();
     m_pMdiArea->closeAllSubWindows();
@@ -44,12 +46,92 @@ QNewMainWindow::~QNewMainWindow()
 }
 
 void QNewMainWindow::setMenuActions() {
+    setFileMenuActions();
+    setLangMenuActions();
+}
+
+void QNewMainWindow::setFileMenuActions() {
     // File menu actions
     ui->actionFILE_NEW->setShortcuts(QKeySequence::New);
     connect(ui->actionFILE_NEW, SIGNAL(triggered()), this, SLOT(actionFileNew()));
 
     ui->actionFILE_OPEN->setShortcuts(QKeySequence::Open);
     connect(ui->actionFILE_OPEN, SIGNAL(triggered()), this, SLOT(actionFileOpen()));
+
+    ui->actionFILE_SAVE->setShortcuts(QKeySequence::Save);
+    connect(ui->actionFILE_SAVE, SIGNAL(triggered()), this, SLOT(actionFileSave()));
+}
+
+void QNewMainWindow::setLangMenuActions() {
+    // initial the language actions mapping table
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ADA, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ASP, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ASSEMBLY, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_AUTO_IT, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_BATCH, createObject<QsciLexer, QsciLexerBatch> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ANSI_C, createObject<QsciLexer, QsciLexerCPP> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_C_SHARP, createObject<QsciLexer, QsciLexerCSharp> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_CPP, createObject<QsciLexer, QsciLexerCPP> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_CAML, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_CMAKE, createObject<QsciLexer, QsciLexerCMake> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_COBOL, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_CSS, createObject<QsciLexer, QsciLexerCSS> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ANSI_D, createObject<QsciLexer, QsciLexerD> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_DIFF, createObject<QsciLexer, QsciLexerDiff> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_FLASH, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_FORTRAN, createObject<QsciLexer, QsciLexerFortran> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_GUI4CLI, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_HASKELL, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_HTML, createObject<QsciLexer, QsciLexerHTML> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_INNO, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_JAVA, createObject<QsciLexer, QsciLexerJava> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_JAVASCRIPT, createObject<QsciLexer, QsciLexerJavaScript> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_JSP, createObject<QsciLexer, QsciLexerJavaScript> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_KIX, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_LISP, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_LUA, createObject<QsciLexer, QsciLexerLua> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_MAKEFILE, createObject<QsciLexer, QsciLexerMakefile> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_MATLAB, createObject<QsciLexer, QsciLexerMatlab> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_MS_INI, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_MSDOS, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_NORMAL_TEXT, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_NSIS, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_OBJECTIVE_C, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_PASCAL, createObject<QsciLexer, QsciLexerPascal> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_PERL, createObject<QsciLexer, QsciLexerPerl> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_PHP, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_POSTSCRIPT, createObject<QsciLexer, QsciLexerPostScript> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_POWERSHELL, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_PROPS, createObject<QsciLexer, QsciLexerProperties> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_PYTHON, createObject<QsciLexer, QsciLexerPython> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_ANSI_R, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_RESOURCE_FILE, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_RUBY, createObject<QsciLexer, QsciLexerRuby> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_BASH, createObject<QsciLexer, QsciLexerBash> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_SCHEME, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_SMALLTALK, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_SQL, createObject<QsciLexer, QsciLexerSQL> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_TCL, createObject<QsciLexer, QsciLexerTCL> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_TEX, createObject<QsciLexer, QsciLexerTeX> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_VB, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_VHDL, createObject<QsciLexer, QsciLexerVHDL> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_VERILOG, createObject<QsciLexer, QsciLexerVerilog> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_XML, createObject<QsciLexer, QsciLexerXML> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_YAML, createObject<QsciLexer, QsciLexerYAML> ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( ui->actionLANG_USER, NULL ));
+    m_vtMenuLangActions.push_back(SActionMap<QsciLexer>( NULL, NULL ));
+
+    // hide the unsupport language action
+    for (int i=0; m_vtMenuLangActions[i].ptrAction; ++i) {
+        if (m_vtMenuLangActions[i].ptrAction == ui->actionLANG_NORMAL_TEXT)
+            continue;
+        if (!m_vtMenuLangActions[i].fnFunc) {
+            m_vtMenuLangActions[i].ptrAction->setVisible(false);
+        }
+    }
+
+    // hide the empty language sub menu
+    _DEBUG_MSG("LANG_A menu conunt: %d", ui->menuLANG_A->actions().count());
 
     // Language menu actions
     m_langActionsGroup.addAction(ui->actionLANG_ADA);
@@ -163,7 +245,6 @@ void QNewMainWindow::setMenuActions() {
     connect(ui->actionLANG_XML, SIGNAL(triggered()), this, SLOT(actionLang()));
     connect(ui->actionLANG_YAML, SIGNAL(triggered()), this, SLOT(actionLang()));
     connect(ui->actionLANG_USER, SIGNAL(triggered()), this, SLOT(actionLang()));
-
 }
 
 void QNewMainWindow::actionFileNew() {
@@ -189,86 +270,64 @@ void QNewMainWindow::actionFileOpen(){
             continue;
         }
 
-        QFile *file=new QFile(fileList.at(i));
-        if(!file->open(QFile::ReadWrite)) {
-            QMessageBox::warning(this, IDS_FILE_OPEN_FAILED_TITLE,
-                                 IDS_FILE_OPEN_FAILED_CONTENT.arg(fileList.at(i)).arg(file->errorString()));
-            _DEL_MEM(file);
-        }
         addDocPanel(fileList.at(i));
         _DEBUG_MSG("mdi subwindow list: %d", m_pMdiArea->subWindowList().count());
     }
 }
 
+void QNewMainWindow::actionFileSave() {
+    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    if (!ptrSubWin) return;
+
+    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
+    if (m_mapOpenedFiles.end() == pFind) return;
+
+    // detect is the file new file?
+    _DEBUG_MSG("filename: %s", pFind.key().toAscii().data());
+    if (0 == QString::compare(pFind.key().left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
+        QString qstrFile=this->saveDoc("", &pFind.value());
+        if (qstrFile.isEmpty()) return;
+
+        STextManager manager;
+        memcpy(&manager, &pFind.value(), sizeof(manager));
+
+        QString filename=qstrFile.mid(qstrFile.lastIndexOf('/')+1);
+        manager.ptrMdiSubWidget->setWindowTitle(filename.append(" [*]"));
+
+        m_mapOpenedFiles.remove(pFind.key());
+        m_mapOpenedFiles[qstrFile]=manager;
+
+        manager.pTextEditor->setModified(false);
+
+    }
+    else {
+        this->saveDoc(pFind.key(), &pFind.value());
+        pFind.value().pTextEditor->setModified(false);
+    }
+
+}
+
 void QNewMainWindow::actionLang() {
-    SActionMap<QsciLexer> menuLangActionsMap[] = {
-        { ui->actionLANG_ADA, NULL },
-        { ui->actionLANG_ASP, NULL },
-        { ui->actionLANG_ASSEMBLY, NULL },
-        { ui->actionLANG_AUTO_IT, NULL },
-        { ui->actionLANG_BATCH, createObject<QsciLexer, QsciLexerBatch> },
-        { ui->actionLANG_ANSI_C, createObject<QsciLexer, QsciLexerCPP> },
-        { ui->actionLANG_C_SHARP, createObject<QsciLexer, QsciLexerCSharp> },
-        { ui->actionLANG_CPP, createObject<QsciLexer, QsciLexerCPP> },
-        { ui->actionLANG_CAML, NULL },
-        { ui->actionLANG_CMAKE, createObject<QsciLexer, QsciLexerCMake> },
-        { ui->actionLANG_COBOL, NULL },
-        { ui->actionLANG_CSS, createObject<QsciLexer, QsciLexerCSS> },
-        { ui->actionLANG_ANSI_D, createObject<QsciLexer, QsciLexerD> },
-        { ui->actionLANG_DIFF, createObject<QsciLexer, QsciLexerDiff> },
-        { ui->actionLANG_FLASH, NULL },
-        { ui->actionLANG_FORTRAN, createObject<QsciLexer, QsciLexerFortran> },
-        { ui->actionLANG_GUI4CLI, NULL },
-        { ui->actionLANG_HASKELL, NULL },
-        { ui->actionLANG_HTML, createObject<QsciLexer, QsciLexerHTML> },
-        { ui->actionLANG_INNO, NULL },
-        { ui->actionLANG_JAVA, createObject<QsciLexer, QsciLexerJava> },
-        { ui->actionLANG_JAVASCRIPT, createObject<QsciLexer, QsciLexerJavaScript> },
-        { ui->actionLANG_JSP, createObject<QsciLexer, QsciLexerJavaScript> },
-        { ui->actionLANG_KIX, NULL },
-        { ui->actionLANG_LISP, NULL },
-        { ui->actionLANG_LUA, createObject<QsciLexer, QsciLexerLua> },
-        { ui->actionLANG_MAKEFILE, createObject<QsciLexer, QsciLexerMakefile> },
-        { ui->actionLANG_MATLAB, createObject<QsciLexer, QsciLexerMatlab> },
-        { ui->actionLANG_MS_INI, NULL },
-        { ui->actionLANG_MSDOS, NULL },
-        { ui->actionLANG_NORMAL_TEXT, NULL },
-        { ui->actionLANG_NSIS, NULL },
-        { ui->actionLANG_OBJECTIVE_C, NULL },
-        { ui->actionLANG_PASCAL, createObject<QsciLexer, QsciLexerPascal> },
-        { ui->actionLANG_PERL, createObject<QsciLexer, QsciLexerPerl> },
-        { ui->actionLANG_PHP, NULL },
-        { ui->actionLANG_POSTSCRIPT, createObject<QsciLexer, QsciLexerPostScript> },
-        { ui->actionLANG_POWERSHELL, NULL },
-        { ui->actionLANG_PROPS, createObject<QsciLexer, QsciLexerProperties> },
-        { ui->actionLANG_PYTHON, createObject<QsciLexer, QsciLexerPython> },
-        { ui->actionLANG_ANSI_R, NULL },
-        { ui->actionLANG_RESOURCE_FILE, NULL },
-        { ui->actionLANG_RUBY, createObject<QsciLexer, QsciLexerRuby> },
-        { ui->actionLANG_BASH, createObject<QsciLexer, QsciLexerBash> },
-        { ui->actionLANG_SCHEME, NULL },
-        { ui->actionLANG_SMALLTALK, NULL },
-        { ui->actionLANG_SQL, createObject<QsciLexer, QsciLexerSQL> },
-        { ui->actionLANG_TCL, createObject<QsciLexer, QsciLexerTCL> },
-        { ui->actionLANG_TEX, createObject<QsciLexer, QsciLexerTeX> },
-        { ui->actionLANG_VB, NULL },
-        { ui->actionLANG_VHDL, createObject<QsciLexer, QsciLexerVHDL> },
-        { ui->actionLANG_VERILOG, createObject<QsciLexer, QsciLexerVerilog> },
-        { ui->actionLANG_XML, createObject<QsciLexer, QsciLexerXML> },
-        { ui->actionLANG_YAML, createObject<QsciLexer, QsciLexerYAML> },
-        { ui->actionLANG_USER, NULL },
-        { NULL, NULL }
-    };
     int i=0;
-    while (menuLangActionsMap[i].ptrAction) {
-        if(menuLangActionsMap[i].ptrAction->isChecked()) {
-            QsciLexer *p=reinterpret_cast<QsciScintilla*>
-                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->lexer();
-            reinterpret_cast<QsciScintilla*>
-                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->setLexer(0);
+    while (m_vtMenuLangActions[i].ptrAction) {
+        if(m_vtMenuLangActions[i].ptrAction->isChecked()) {
+            QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+            if (!ptrSubWin) {
+                _DEBUG_MSG("null sub window pointer");
+                break;
+            }
+
+            QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>
+                    (ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+            if (!ptrEdit) {
+                _DEBUG_MSG("null text editor pointer");
+                break;
+            }
+
+            QsciLexer *p=ptrEdit->lexer();
+            ptrEdit->setLexer(0);
             _DEL_MEM(p);
-            reinterpret_cast<QsciScintilla*>
-                    (m_pMdiArea->activeSubWindow()->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR))->setLexer(menuLangActionsMap[i].fnFunc());
+            ptrEdit->setLexer(NULL == m_vtMenuLangActions[i].fnFunc ? 0 : m_vtMenuLangActions[i].fnFunc());
             break;
         }
         ++i;
@@ -308,22 +367,23 @@ bool QNewMainWindow::addDocPanel(QString str) {
     }
     else {
         QFile *file=new QFile(str);
-        if(!file->open(QFile::ReadWrite)) {
+        if(!file->open(QFile::ReadOnly)) {
             QMessageBox::warning(this, IDS_FILE_OPEN_FAILED_TITLE,
                                  IDS_FILE_OPEN_FAILED_CONTENT.arg(str).arg(file->errorString()));
             _DEL_MEM(file);
             return bRet;
         }
-        ;
-        manager.pFile=file;
+
         manager.pTextEditor=new QsciScintilla;
         _DEBUG_MSG("allocate memory: 0x%x", manager.pTextEditor);
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
         manager.pTextEditor->show();
+
         m_pMdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(manager.pTextEditor));
         manager.pTextEditor->read(file);
         QApplication::restoreOverrideCursor();
+
         manager.ptrMdiSubWidget=m_pMdiArea->addSubWindow(manager.pTextEditor);
         manager.ptrMdiSubWidget->showMaximized();
         manager.ptrMdiSubWidget->setUserData(
@@ -332,10 +392,61 @@ bool QNewMainWindow::addDocPanel(QString str) {
         QString filename=str.mid(str.lastIndexOf('/')+1);
         manager.ptrMdiSubWidget->setWindowTitle(filename.append(" [*]"));
         m_mapOpenedFiles[str]=manager;
+
+        file->close();
+        _DEL_MEM(file);
     }
-    connect(manager.pTextEditor, SIGNAL(textChanged()), this, SLOT(slotDocWasModified()));
+    _DEBUG_MSG("set active sub window: 0x%x", manager.ptrMdiSubWidget);
+    m_pMdiArea->setActiveSubWindow(manager.ptrMdiSubWidget);
+
+    connect(manager.pTextEditor, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
+
     bRet=true;
     return bRet;
+}
+
+QMdiSubWindow* QNewMainWindow::getMdiActiveWindow() {
+    if (1 >= m_pMdiArea->subWindowList().count()) {
+        _DEBUG_MSG("only 1 sub window");
+        return *m_pMdiArea->subWindowList().begin();
+    }
+    else {
+        _DEBUG_MSG("multiple sub window");
+        return m_pMdiArea->activeSubWindow();
+    }
+}
+
+QString QNewMainWindow::saveDoc(QString qstrFile, STextManager *ptrManager) {
+    if (!ptrManager)
+        return QString("");
+
+    // is new file?
+    if (qstrFile.isEmpty()) {
+        QFileDialog dlg;
+        dlg.setFileMode(QFileDialog::AnyFile);
+        dlg.setAcceptMode(QFileDialog::AcceptSave);
+        if (dlg.exec()) {
+            QStringList list=dlg.selectedFiles();
+            qstrFile=*list.begin();
+        }
+    }
+    _DEBUG_MSG("save filename: %s", qstrFile.toAscii().data());
+    if (qstrFile.isEmpty()) return QString("");
+
+    QFile file(qstrFile);
+    if (!file.open(QFile::WriteOnly)) {
+        _DEBUG_MSG("open be saved file failed");
+        QMessageBox::warning(this, IDS_FILE_OPEN_FAILED_TITLE,
+                             IDS_FILE_OPEN_FAILED_CONTENT.arg(qstrFile).arg(file.errorString()));
+    }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    ptrManager->pTextEditor->write(&file);
+    QApplication::restoreOverrideCursor();
+
+    file.close();
+
+    return qstrFile;
 }
 
 void QNewMainWindow::changeEvent(QEvent * event) {
@@ -353,6 +464,7 @@ void QNewMainWindow::slotCreate() {
     _DEBUG_MSG("%s", __PRETTY_FUNCTION__);
     ui->setupUi(this);
     ui->retranslateUi(this);
+
     // setup the ui object's actions
     setMenuActions();
 
@@ -370,8 +482,16 @@ void QNewMainWindow::slotCreate() {
     m_pMdiArea->setViewMode(QMdiArea::TabbedView);
     m_pMdiArea->setTabShape(QTabWidget::Triangular);
 
+    connect(m_pMdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)), this, SLOT(slotOnChangedSubWindow(QMdiSubWindow*)));
+
     // initial scintilla text editor
     addDocPanel("");
+    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    if (!ptrSubWin) return;
+    QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+    if (!ptrEdit) return;
+    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+
     this->show();
 }
 
@@ -382,10 +502,23 @@ void QNewMainWindow::slotAppCmd(QString qstr) {
 }
 
 void QNewMainWindow::slotDocWasModified() {
-    QList<QMdiSubWindow*> list = m_pMdiArea->subWindowList();
-    for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
-        QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(
-                    (*pFind)->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
-        (*pFind)->setWindowModified(ptrEdit->isModified());
-    }
+    _DEBUG_MSG("is the document modified??");
+    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    if (!ptrSubWin) return;
+    QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+    if (!ptrEdit) return;
+    ptrSubWin->setWindowModified(ptrEdit->isModified());
+
+    // process the menu action
+    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+}
+
+void QNewMainWindow::slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return;
+
+    QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+    if (!ptrEdit) return;
+
+    // process the menu action
+    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
 }
