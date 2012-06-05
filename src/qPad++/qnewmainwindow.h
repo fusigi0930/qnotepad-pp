@@ -74,6 +74,7 @@ private slots:
     void actionFileNew();
     void actionFileSave();
     void actionFileReload();
+    void actionFileSaveAs();
 
     void actionLang();
 
