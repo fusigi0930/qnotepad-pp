@@ -32,7 +32,7 @@ QNewMainWindow::~QNewMainWindow()
 
     QMap<QString, STextManager>::iterator pFind;
     for (pFind=m_mapOpenedFiles.begin(); pFind != m_mapOpenedFiles.end(); ++pFind) {
-        _DEBUG_MSG("delete memory: 0x%x", pFind.value().pTextEditor);
+        _DEBUG_MSG("sub window name: %s", pFind.value().ptrMdiSubWidget->windowTitle().toAscii().data());
         m_pMdiArea->removeSubWindow(pFind.value().ptrMdiSubWidget);
         QsciLexer *p=pFind.value().pTextEditor->lexer();
         _DEL_MEM(p);
@@ -60,6 +60,8 @@ void QNewMainWindow::setFileMenuActions() {
 
     ui->actionFILE_SAVE->setShortcuts(QKeySequence::Save);
     connect(ui->actionFILE_SAVE, SIGNAL(triggered()), this, SLOT(actionFileSave()));
+
+    connect(ui->actionFILE_RELOAD, SIGNAL(triggered()), this, SLOT(actionFileReload()));
 }
 
 void QNewMainWindow::setLangMenuActions() {
@@ -307,6 +309,27 @@ void QNewMainWindow::actionFileSave() {
 
 }
 
+void QNewMainWindow::actionFileReload() {
+    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    if (!ptrSubWin) return;
+
+    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
+    if (m_mapOpenedFiles.end() == pFind) return;
+
+    QFile file(pFind.key());
+    if(!file.open(QFile::ReadOnly)) {
+        QMessageBox::warning(this, IDS_FILE_OPEN_FAILED_TITLE,
+                             IDS_FILE_OPEN_FAILED_CONTENT.arg(pFind.key()).arg(file.errorString()));
+        return;
+    }
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    pFind.value().pTextEditor->read(&file);
+    file.close();
+    QApplication::restoreOverrideCursor();
+    pFind.value().pTextEditor->setModified(false);
+}
+
 void QNewMainWindow::actionLang() {
     int i=0;
     while (m_vtMenuLangActions[i].ptrAction) {
@@ -395,11 +418,13 @@ bool QNewMainWindow::addDocPanel(QString str) {
 
         file->close();
         _DEL_MEM(file);
+
     }
     _DEBUG_MSG("set active sub window: 0x%x", manager.ptrMdiSubWidget);
     m_pMdiArea->setActiveSubWindow(manager.ptrMdiSubWidget);
 
     connect(manager.pTextEditor, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
+    manager.pTextEditor->setModified(false);
 
     bRet=true;
     return bRet;
@@ -449,6 +474,29 @@ QString QNewMainWindow::saveDoc(QString qstrFile, STextManager *ptrManager) {
     return qstrFile;
 }
 
+void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return;
+
+    QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
+    if (!ptrEdit) return;
+
+    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
+
+    _DEBUG_MSG("key name: %s", pFind.key().toAscii().data());
+
+    // process the menu action
+    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+
+    if (pFind != m_mapOpenedFiles.end()) {
+        if(0 == QString::compare(pFind.key().left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
+            ui->actionFILE_RELOAD->setEnabled(false);
+        }
+        else {
+            ui->actionFILE_RELOAD->setEnabled(true);
+        }
+    }
+}
+
 void QNewMainWindow::changeEvent(QEvent * event) {
     BaseMainWindow::changeEvent(event);
     switch(event->type()) {
@@ -490,7 +538,7 @@ void QNewMainWindow::slotCreate() {
     if (!ptrSubWin) return;
     QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
     if (!ptrEdit) return;
-    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+    slotDocWasModified();
 
     this->show();
 }
@@ -509,16 +557,10 @@ void QNewMainWindow::slotDocWasModified() {
     if (!ptrEdit) return;
     ptrSubWin->setWindowModified(ptrEdit->isModified());
 
-    // process the menu action
-    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+    setUiMenuItem(ptrSubWin);
+
 }
 
 void QNewMainWindow::slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin) {
-    if (!ptrSubWin) return;
-
-    QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
-    if (!ptrEdit) return;
-
-    // process the menu action
-    ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
+    setUiMenuItem(ptrSubWin);
 }

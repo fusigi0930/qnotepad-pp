@@ -63,6 +63,8 @@ private:
     QMap<QString, STextManager>::iterator findKeyFormAreaSubWindow(QMdiSubWindow *ptrSub);
     QString saveDoc(QString qstrFile, STextManager *ptrManager);
 
+    void setUiMenuItem(QMdiSubWindow *ptrSubWin);
+
 protected:
     QMdiSubWindow* getMdiActiveWindow();
 
@@ -71,6 +73,7 @@ private slots:
     void actionFileOpen();
     void actionFileNew();
     void actionFileSave();
+    void actionFileReload();
 
     void actionLang();
 
