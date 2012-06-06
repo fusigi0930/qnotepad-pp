@@ -31,17 +31,6 @@ QNewMainWindow::~QNewMainWindow()
 {
     _DEL_MEM(ui);
 
-    QMap<QString, STextManager>::iterator pFind;
-    for (pFind=m_mapOpenedFiles.begin(); pFind != m_mapOpenedFiles.end(); ++pFind) {
-        _DEBUG_MSG("sub window name: %s", pFind.value().pMdiSubWidget->windowTitle().toAscii().data());
-        QsciLexer *p=pFind.value().pTextEditor->lexer();
-        _DEL_MEM(p);
-        pFind.value().pTextEditor->setLexer(0);
-        pFind.value().pTextEditor->close();
-        _DEL_MEM(pFind.value().pTextEditor);
-        m_pMdiArea->removeSubWindow(pFind.value().pMdiSubWidget);
-    }
-    m_mapOpenedFiles.clear();
     m_pMdiArea->closeAllSubWindows();
     _DEL_MEM(m_pMdiArea);
 }
@@ -66,6 +55,12 @@ void QNewMainWindow::setFileMenuActions() {
 
     ui->actionFILE_SAVEAS->setShortcuts(QKeySequence::SaveAs);
     connect(ui->actionFILE_SAVEAS, SIGNAL(triggered()), this, SLOT(actionFileSaveAs()));
+
+    connect(ui->actionFILE_SAVE_COPY, SIGNAL(triggered()), this, SLOT(actionFileSaveAsCopy()));
+
+    connect(ui->actionFILE_SAVE_ALL, SIGNAL(triggered()), this, SLOT(actionFileSaveAll()));
+
+    connect(ui->actionFILE_CLOSE, SIGNAL(triggered()), this, SLOT(actionFileClose()));
 }
 
 void QNewMainWindow::setLangMenuActions() {
@@ -253,6 +248,32 @@ void QNewMainWindow::setLangMenuActions() {
     connect(ui->actionLANG_USER, SIGNAL(triggered()), this, SLOT(actionLang()));
 }
 
+void QNewMainWindow::closeSubWinFile(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return;
+
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    if (ptrEdit->isModified()) {
+        int nRet=QMessageBox::question(this, IDS_SAVE_FILE_TITLE,
+                            IDS_WANT_TO_SAVE_FILE.arg(reinterpret_cast<QPadMdiSubWindow*>(ptrSubWin)->m_qstrFileName),
+                            QMessageBox::No | QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::NoButton);
+
+    }
+    ptrSubWin->close();
+}
+
+QPadMdiSubWindow* QNewMainWindow::findSubWinsFilename(QString qstr) {
+    QList<QMdiSubWindow *> list=m_pMdiArea->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
+        if(reinterpret_cast<QPadMdiSubWindow*>(*pFind)->m_qstrFileName == qstr) {
+            _DEBUG_MSG("find the same file in sub win: 0x%x", *pFind);
+            return reinterpret_cast<QPadMdiSubWindow*>(*pFind);
+        }
+    }
+    return NULL;
+}
+
 void QNewMainWindow::actionFileNew() {
     addDocPanel("");
 }
@@ -269,10 +290,10 @@ void QNewMainWindow::actionFileOpen(){
         return;
 
     for (int i=0; i<fileList.count(); ++i) {
-        QMap<QString, STextManager>::iterator pFind=m_mapOpenedFiles.find(fileList.at(i));
-        if (pFind != m_mapOpenedFiles.end()) {
+        QPadMdiSubWindow *ptrSubWin=this->findSubWinsFilename(fileList.at(i));
+        if (ptrSubWin) {
             _DEBUG_MSG("the file: %s is already opened", fileList.at(i).toAscii().data());
-            m_pMdiArea->setActiveSubWindow(pFind.value().pMdiSubWidget);
+            m_pMdiArea->setActiveSubWindow(ptrSubWin);
             continue;
         }
 
@@ -282,79 +303,116 @@ void QNewMainWindow::actionFileOpen(){
 }
 
 void QNewMainWindow::actionFileSave() {
-    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
     if (!ptrSubWin) return;
 
-    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
-    if (m_mapOpenedFiles.end() == pFind) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
 
     // detect is the file new file?
-    _DEBUG_MSG("filename: %s", pFind.key().toAscii().data());
-    if (0 == QString::compare(pFind.key().left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
-        QString qstrFile=this->saveDoc("", &pFind.value());
+    _DEBUG_MSG("filename: %s", ptrSubWin->m_qstrFileName.toAscii().data());
+    if (0 == QString::compare(ptrSubWin->m_qstrFileName.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
+        QString qstrFile=this->saveDoc("", ptrSubWin);
         if (qstrFile.isEmpty()) return;
 
-        STextManager manager;
-        memcpy(&manager, &pFind.value(), sizeof(manager));
-
+        ptrSubWin->m_qstrFileName=qstrFile;
         QString filename=qstrFile.mid(qstrFile.lastIndexOf('/')+1);
-        manager.pMdiSubWidget->setWindowTitle(filename.append(" [*]"));
+        ptrSubWin->setWindowTitle(filename.append(" [*]"));
 
-        m_mapOpenedFiles.remove(pFind.key());
-        m_mapOpenedFiles[qstrFile]=manager;
-
-        manager.pTextEditor->setModified(false);
+        ptrEdit->setModified(false);
 
     }
     else {
-        this->saveDoc(pFind.key(), &pFind.value());
-        pFind.value().pTextEditor->setModified(false);
+        if (ptrEdit->isModified()) {
+            this->saveDoc(ptrSubWin->m_qstrFileName, ptrSubWin);
+            ptrEdit->setModified(false);
+        }
     }
 
 }
 
 void QNewMainWindow::actionFileSaveAs() {
-    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
     if (!ptrSubWin) return;
 
-    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
-    if (m_mapOpenedFiles.end() == pFind) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
 
-    QString qstrFile=this->saveDoc("", &pFind.value());
+    QString qstrFile=this->saveDoc("", ptrSubWin);
     if (qstrFile.isEmpty()) return;
 
-    pFind.value().pTextEditor->setModified(false);
+    ptrSubWin->m_qstrFileName=qstrFile;
 
-    STextManager manager;
-    memcpy(&manager, &pFind.value(), sizeof(manager));
+    ptrEdit->setModified(false);
 
     QString filename=qstrFile.mid(qstrFile.lastIndexOf('/')+1);
-    manager.pMdiSubWidget->setWindowTitle(filename.append(" [*]"));
+    ptrSubWin->setWindowTitle(filename.append(" [*]"));
 
-    m_mapOpenedFiles.remove(pFind.key());
-    m_mapOpenedFiles[qstrFile]=manager;
 
 }
 
-void QNewMainWindow::actionFileReload() {
-    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+void QNewMainWindow::actionFileSaveAsCopy() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
     if (!ptrSubWin) return;
 
-    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
-    if (m_mapOpenedFiles.end() == pFind) return;
+    this->saveDoc("", ptrSubWin);
+}
 
-    QFile file(pFind.key());
+void QNewMainWindow::actionFileSaveAll() {
+    QList<QMdiSubWindow*> list=m_pMdiArea->subWindowList();
+    QList<QMdiSubWindow*>::iterator pFind;
+    for (pFind=list.begin(); pFind != list.end(); ++pFind) {
+        // detect is the file new file?
+        QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(*pFind);
+        QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+
+        _DEBUG_MSG("filename: %s", ptrSubWin->m_qstrFileName.toAscii().data());
+        if (0 == QString::compare(ptrSubWin->m_qstrFileName.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
+            QString qstrFile=this->saveDoc("", ptrSubWin);
+            if (qstrFile.isEmpty()) continue;
+
+            ptrSubWin->m_qstrFileName=qstrFile;
+            QString filename=qstrFile.mid(qstrFile.lastIndexOf('/')+1);
+            ptrSubWin->setWindowTitle(filename.append(" [*]"));
+
+            ptrEdit->setModified(false);
+
+        }
+        else {
+            if (ptrEdit->isModified()) {
+                this->saveDoc(ptrSubWin->m_qstrFileName, ptrSubWin);
+                ptrEdit->setModified(false);
+            }
+        }
+        ptrSubWin->setWindowModified(ptrEdit->isModified());
+
+        setUiMenuItem(ptrSubWin);
+    }
+}
+
+
+void QNewMainWindow::actionFileReload() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    QFile file(ptrSubWin->m_qstrFileName);
     if(!file.open(QFile::ReadOnly)) {
         QMessageBox::warning(this, IDS_FILE_OPEN_FAILED_TITLE,
-                             IDS_FILE_OPEN_FAILED_CONTENT.arg(pFind.key()).arg(file.errorString()));
+                             IDS_FILE_OPEN_FAILED_CONTENT.arg(ptrSubWin->m_qstrFileName.arg(file.errorString())));
         return;
     }
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    pFind.value().pTextEditor->read(&file);
+    ptrEdit->read(&file);
     file.close();
     QApplication::restoreOverrideCursor();
-    pFind.value().pTextEditor->setModified(false);
+    ptrEdit->setModified(false);
+}
+
+void QNewMainWindow::actionFileClose() {
+    QMdiSubWindow *ptrSubWin=this->getMdiActiveWindow();
+    closeSubWinFile(ptrSubWin);
 }
 
 void QNewMainWindow::actionLang() {
@@ -384,39 +442,26 @@ void QNewMainWindow::actionLang() {
     }
 }
 
-QMap<QString, STextManager>::iterator QNewMainWindow::findKeyFormAreaSubWindow(QMdiSubWindow *ptrSub) {
-    QMap<QString, STextManager>::iterator pFind=m_mapOpenedFiles.end();
-    if (NULL == ptrSub) {
-        _DEBUG_MSG("no data");
-        return pFind;
-    }
-    for(pFind=m_mapOpenedFiles.begin(); pFind!=m_mapOpenedFiles.end(); ++pFind) {
-        if (pFind.value().pMdiSubWidget == ptrSub) {
-            break;
-        }
-    }
-    return pFind;
-}
-
 bool QNewMainWindow::addDocPanel(QString str) {
     bool bRet=false;
-    STextManager manager={0};
+    QPadMdiSubWindow *pSubWin=new QPadMdiSubWindow(m_pMdiArea->viewport());
+    QsciScintilla *pEdit=new QsciScintilla;
+    pSubWin->setAttribute(Qt::WA_DeleteOnClose);
+    pSubWin->setWidget(pEdit);
+    m_pMdiArea->addSubWindow(pSubWin);
+    pSubWin->showMaximized();
+
     if (str.isEmpty()) {
         str.sprintf("%s%d", _NEW_FILE_PREFIX, m_nNewDocNum++);
-        manager.pTextEditor=new QsciScintilla;
+        pSubWin->m_qstrFileName=str;
 
-        QsciLexerCPP *lexer=new QsciLexerCPP(manager.pTextEditor);
-        manager.pTextEditor->setLexer(lexer);
-        manager.pMdiSubWidget = new QPadMdiSubWindow(m_pMdiArea->viewport());
-        manager.pMdiSubWidget->setAttribute(Qt::WA_DeleteOnClose);
-        manager.pMdiSubWidget->setWidget(manager.pTextEditor);
-        m_pMdiArea->addSubWindow(manager.pMdiSubWidget);
-        manager.pMdiSubWidget->showMaximized();
-        manager.pMdiSubWidget->setWindowTitle(str.append(" [*]"));
+        QsciLexerCPP *lexer=new QsciLexerCPP(pEdit);
+        pEdit->setLexer(lexer);
+
+        pSubWin->setWindowTitle(str.append(" [*]"));
 //        manager.pMdiSubWidget->setUserData(
 //            EUSERDATA_SCINTILLA_TEXT_EDITOR,
 //            reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
-        m_mapOpenedFiles[str]=manager;
     }
     else {
         QFile *file=new QFile(str);
@@ -427,37 +472,27 @@ bool QNewMainWindow::addDocPanel(QString str) {
             return bRet;
         }
 
-        manager.pTextEditor=new QsciScintilla;
-        _DEBUG_MSG("allocate memory: 0x%x", manager.pTextEditor);
-
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        manager.pTextEditor->show();
-
-        m_pMdiArea->setActiveSubWindow(qobject_cast<QMdiSubWindow*>(manager.pTextEditor));
-        manager.pTextEditor->read(file);
+        pEdit->read(file);
         QApplication::restoreOverrideCursor();
 
-        manager.pMdiSubWidget = new QPadMdiSubWindow(m_pMdiArea->viewport());
-        manager.pMdiSubWidget->setAttribute(Qt::WA_DeleteOnClose);
-        manager.pMdiSubWidget->setWidget(manager.pTextEditor);
-        m_pMdiArea->addSubWindow(manager.pMdiSubWidget);
-        manager.pMdiSubWidget->showMaximized();
 //        manager.pMdiSubWidget->setUserData(
 //            EUSERDATA_SCINTILLA_TEXT_EDITOR,
 //            reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
+        pSubWin->m_qstrFileName=str;
         QString filename=str.mid(str.lastIndexOf('/')+1);
-        manager.pMdiSubWidget->setWindowTitle(filename.append(" [*]"));
-        m_mapOpenedFiles[str]=manager;
+        pSubWin->setWindowTitle(filename.append(" [*]"));
 
         file->close();
         _DEL_MEM(file);
 
     }
-    _DEBUG_MSG("set active sub window: 0x%x", manager.pMdiSubWidget);
-    m_pMdiArea->setActiveSubWindow(manager.pMdiSubWidget);
+    m_pMdiArea->setActiveSubWindow(pSubWin);
 
-    connect(manager.pTextEditor, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
-    manager.pTextEditor->setModified(false);
+    connect(pEdit, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
+    connect(pSubWin, SIGNAL(sigCloseSubWindow(QMdiSubWindow*)), this, SLOT(slotOnCloseSubWindow(QMdiSubWindow*)));
+
+    pEdit->setModified(false);
 
     bRet=true;
     return bRet;
@@ -474,9 +509,11 @@ QMdiSubWindow* QNewMainWindow::getMdiActiveWindow() {
     }
 }
 
-QString QNewMainWindow::saveDoc(QString qstrFile, STextManager *ptrManager) {
-    if (!ptrManager)
+QString QNewMainWindow::saveDoc(QString qstrFile, QPadMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin)
         return QString("");
+
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
 
     // is new file?
     if (qstrFile.isEmpty()) {
@@ -499,7 +536,7 @@ QString QNewMainWindow::saveDoc(QString qstrFile, STextManager *ptrManager) {
     }
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    ptrManager->pTextEditor->write(&file);
+    ptrEdit->write(&file);
     QApplication::restoreOverrideCursor();
 
     file.close();
@@ -509,28 +546,25 @@ QString QNewMainWindow::saveDoc(QString qstrFile, STextManager *ptrManager) {
 
 void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
     if (!ptrSubWin) return;
+    QPadMdiSubWindow *ptrSubQWin=reinterpret_cast<QPadMdiSubWindow*>(ptrSubWin);
 
     QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());//(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
     if (!ptrEdit) return;
 
-    QMap<QString, STextManager>::iterator pFind=this->findKeyFormAreaSubWindow(ptrSubWin);
-    if (pFind == m_mapOpenedFiles.end()) return;
-
-    _DEBUG_MSG("key name: %s", pFind.key().toAscii().data());
+    _DEBUG_MSG("file name: %s", ptrSubQWin->m_qstrFileName.toAscii().data());
 
     // process the menu action
     ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
 
-    if (pFind != m_mapOpenedFiles.end()) {
-        if(0 == QString::compare(pFind.key().left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
-            ui->actionFILE_RELOAD->setEnabled(false);
-            ui->actionFILE_RENAME->setEnabled(false);
-        }
-        else {
-            ui->actionFILE_RELOAD->setEnabled(true);
-            ui->actionFILE_RENAME->setEnabled(true);
-        }
+    if(0 == QString::compare(ptrSubQWin->m_qstrFileName.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
+        ui->actionFILE_RELOAD->setEnabled(false);
+        ui->actionFILE_RENAME->setEnabled(false);
     }
+    else {
+        ui->actionFILE_RELOAD->setEnabled(true);
+        ui->actionFILE_RENAME->setEnabled(true);
+    }
+
     ui->actionFILE_SAVEAS->setEnabled(!ptrEdit->text().isEmpty());
     ui->actionFILE_SAVE_COPY->setEnabled(!ptrEdit->text().isEmpty());
 }
@@ -604,4 +638,8 @@ void QNewMainWindow::slotDocWasModified() {
 
 void QNewMainWindow::slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin) {
     setUiMenuItem(ptrSubWin);
+}
+
+void QNewMainWindow::slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return;
 }
