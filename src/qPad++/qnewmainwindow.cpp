@@ -61,6 +61,12 @@ void QNewMainWindow::setFileMenuActions() {
     connect(ui->actionFILE_SAVE_ALL, SIGNAL(triggered()), this, SLOT(actionFileSaveAll()));
 
     connect(ui->actionFILE_CLOSE, SIGNAL(triggered()), this, SLOT(actionFileClose()));
+
+    connect(ui->actionFILE_CLOSE_ALL, SIGNAL(triggered()), this, SLOT(actionFileCloseAll()));
+
+    connect(ui->actionFILE_CLOSE_EXCEPT_CUR, SIGNAL(triggered()), this, SLOT(actionFileCloseAllExceptCurrent()));
+
+    connect(ui->actionFILE_EXIT, SIGNAL(triggered()), this, SLOT(actionFileExit()));
 }
 
 void QNewMainWindow::setLangMenuActions() {
@@ -248,19 +254,38 @@ void QNewMainWindow::setLangMenuActions() {
     connect(ui->actionLANG_USER, SIGNAL(triggered()), this, SLOT(actionLang()));
 }
 
-void QNewMainWindow::closeSubWinFile(QMdiSubWindow *ptrSubWin) {
-    if (!ptrSubWin) return;
+int QNewMainWindow::closeSubWinFile(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return -1;
 
     QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
-    if (!ptrEdit) return;
+    if (!ptrEdit) return -1;
+
+    int nRet=-1;
 
     if (ptrEdit->isModified()) {
-        int nRet=QMessageBox::question(this, IDS_SAVE_FILE_TITLE,
+        nRet=QMessageBox::question(this, IDS_SAVE_FILE_TITLE,
                             IDS_WANT_TO_SAVE_FILE.arg(reinterpret_cast<QPadMdiSubWindow*>(ptrSubWin)->m_qstrFileName),
-                            QMessageBox::No | QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::NoButton);
+                            QMessageBox::No | QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::No);
+
+        switch(nRet) {
+            default:
+            case QMessageBox::Cancel:
+                return nRet;
+            case QMessageBox::No:
+                break;
+            case QMessageBox::Ok:
+            {
+                QString qstr=reinterpret_cast<QPadMdiSubWindow*>(ptrSubWin)->m_qstrFileName;
+
+                this->saveDoc(0 == QString::compare(qstr.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX) ?
+                              "" : qstr,
+                              reinterpret_cast<QPadMdiSubWindow*>(ptrSubWin));
+            }    break;
+        }
 
     }
     ptrSubWin->close();
+    return nRet;
 }
 
 QPadMdiSubWindow* QNewMainWindow::findSubWinsFilename(QString qstr) {
@@ -415,6 +440,36 @@ void QNewMainWindow::actionFileClose() {
     closeSubWinFile(ptrSubWin);
 }
 
+void QNewMainWindow::actionFileExit() {
+    actionFileCloseAll();
+    QApplication::quit();
+}
+
+void QNewMainWindow::actionFileCloseAll() {
+    QList<QMdiSubWindow*> list=m_pMdiArea->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
+        if (QMessageBox::Cancel == closeSubWinFile(*pFind))
+            break;
+    }
+}
+
+void QNewMainWindow::actionFileCloseAllExceptCurrent() {
+    QList<QMdiSubWindow*> list=m_pMdiArea->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
+        if (*pFind == this->getMdiActiveWindow())
+            continue;
+        closeSubWinFile(*pFind);
+    }
+}
+
+void QNewMainWindow::actionFilePrint() {
+
+}
+
+void QNewMainWindow::actionFilePrintNow() {
+
+}
+
 void QNewMainWindow::actionLang() {
     int i=0;
     while (m_vtMenuLangActions[i].ptrAction) {
@@ -567,6 +622,11 @@ void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
 
     ui->actionFILE_SAVEAS->setEnabled(!ptrEdit->text().isEmpty());
     ui->actionFILE_SAVE_COPY->setEnabled(!ptrEdit->text().isEmpty());
+
+
+    ui->actionFILE_CLOSE->setEnabled(NULL != this->getMdiActiveWindow());
+    ui->actionFILE_CLOSE_ALL->setEnabled(NULL != this->getMdiActiveWindow());
+
 }
 
 void QNewMainWindow::changeEvent(QEvent * event) {

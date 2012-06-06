@@ -58,7 +58,7 @@ private:
     QPadMdiSubWindow* findSubWinsFilename(QString qstr);
 
     void setUiMenuItem(QMdiSubWindow *ptrSubWin);
-    void closeSubWinFile(QMdiSubWindow *ptrSubWin);
+    int closeSubWinFile(QMdiSubWindow *ptrSubWin);
 
 protected:
     QMdiSubWindow* getMdiActiveWindow();
@@ -73,6 +73,11 @@ private slots:
     void actionFileSaveAsCopy();
     void actionFileSaveAll();
     void actionFileClose();
+    void actionFileCloseAll();
+    void actionFileCloseAllExceptCurrent();
+    void actionFileExit();
+    void actionFilePrint();
+    void actionFilePrintNow();
 
     void actionLang();
 
