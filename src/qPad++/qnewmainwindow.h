@@ -78,6 +78,7 @@ private slots:
     void actionFileExit();
     void actionFilePrint();
     void actionFilePrintNow();
+    void actionFileRename();
 
     void actionLang();
 

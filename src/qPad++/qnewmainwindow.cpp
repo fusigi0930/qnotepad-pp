@@ -67,6 +67,13 @@ void QNewMainWindow::setFileMenuActions() {
     connect(ui->actionFILE_CLOSE_EXCEPT_CUR, SIGNAL(triggered()), this, SLOT(actionFileCloseAllExceptCurrent()));
 
     connect(ui->actionFILE_EXIT, SIGNAL(triggered()), this, SLOT(actionFileExit()));
+
+    connect(ui->actionFILE_RENAME, SIGNAL(triggered()), this, SLOT(actionFileRename()));
+
+    ui->actionFILE_PRINT->setShortcuts(QKeySequence::Print);
+    connect(ui->actionFILE_PRINT, SIGNAL(triggered()), this, SLOT(actionFilePrint()));
+
+    connect(ui->actionFILE_PRINT_NOW, SIGNAL(triggered()), this, SLOT(actionFilePrintNow()));
 }
 
 void QNewMainWindow::setLangMenuActions() {
@@ -468,6 +475,27 @@ void QNewMainWindow::actionFilePrint() {
 
 void QNewMainWindow::actionFilePrintNow() {
 
+}
+
+void QNewMainWindow::actionFileRename() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+
+    if (0 == QString::compare(ptrSubWin->m_qstrFileName.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX))
+        return;
+
+    QFileDialog dlg;
+    dlg.setFileMode(QFileDialog::AnyFile);
+    dlg.setAcceptMode(QFileDialog::AcceptSave);
+    if (dlg.exec()) {
+        QStringList list=dlg.selectedFiles();
+        QString qstrFile=*list.begin();
+
+        QFile::rename(ptrSubWin->m_qstrFileName, qstrFile);
+        ptrSubWin->m_qstrFileName=qstrFile;
+        QString filename=qstrFile.mid(qstrFile.lastIndexOf('/')+1);
+        ptrSubWin->setWindowTitle(filename.append(" [*]"));
+    }
 }
 
 void QNewMainWindow::actionLang() {
