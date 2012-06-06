@@ -14,6 +14,7 @@
 #include "constant.h"
 #include <QTabBar>
 #include "qpadmdisubwindow.h"
+#include <QKeyEvent>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -37,6 +38,7 @@ QNewMainWindow::~QNewMainWindow()
 
 void QNewMainWindow::setMenuActions() {
     setFileMenuActions();
+    SetEditMenuActions();
     setLangMenuActions();
 }
 
@@ -74,6 +76,31 @@ void QNewMainWindow::setFileMenuActions() {
     connect(ui->actionFILE_PRINT, SIGNAL(triggered()), this, SLOT(actionFilePrint()));
 
     connect(ui->actionFILE_PRINT_NOW, SIGNAL(triggered()), this, SLOT(actionFilePrintNow()));
+}
+
+void QNewMainWindow::SetEditMenuActions() {
+    ui->actionEDIT_UNDO->setShortcuts(QKeySequence::Undo);
+    connect(ui->actionEDIT_UNDO, SIGNAL(triggered()), this, SLOT(actionEditUndo()));
+
+    ui->actionEDIT_REDO->setShortcuts(QKeySequence::Redo);
+    connect(ui->actionEDIT_REDO, SIGNAL(triggered()), this, SLOT(actionEditRedo()));
+
+    ui->actionEDIT_CUT->setShortcuts(QKeySequence::Cut);
+    connect(ui->actionEDIT_CUT, SIGNAL(triggered()), this, SLOT(actionEditCut()));
+
+    ui->actionEDIT_COPY->setShortcuts(QKeySequence::Copy);
+    connect(ui->actionEDIT_COPY, SIGNAL(triggered()), this, SLOT(actionEditCopy()));
+
+    ui->actionEDIT_PASTE->setShortcuts(QKeySequence::Paste);
+    connect(ui->actionEDIT_PASTE, SIGNAL(triggered()), this, SLOT(actionEditPaste()));
+
+    ui->actionEDIT_DEL->setShortcuts(QKeySequence::Delete);
+    connect(ui->actionEDIT_DEL, SIGNAL(triggered()), this, SLOT(actionEditDel()));
+
+    ui->actionEDIT_SELECT_ALL->setShortcuts(QKeySequence::SelectAll);
+    connect(ui->actionEDIT_SELECT_ALL, SIGNAL(triggered()), this, SLOT(actionEditSelectAll()));
+
+
 }
 
 void QNewMainWindow::setLangMenuActions() {
@@ -295,6 +322,10 @@ int QNewMainWindow::closeSubWinFile(QMdiSubWindow *ptrSubWin) {
     return nRet;
 }
 
+void QNewMainWindow::SetScintillaEditMenu(QMdiSubWindow *ptrSubWin) {
+
+}
+
 QPadMdiSubWindow* QNewMainWindow::findSubWinsFilename(QString qstr) {
     QList<QMdiSubWindow *> list=m_pMdiArea->subWindowList();
     for (QList<QMdiSubWindow*>::iterator pFind=list.begin(); pFind != list.end(); ++pFind) {
@@ -498,6 +529,72 @@ void QNewMainWindow::actionFileRename() {
     }
 }
 
+void QNewMainWindow::actionEditUndo() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->undo();
+}
+
+void QNewMainWindow::actionEditRedo() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->redo();
+}
+
+void QNewMainWindow::actionEditCut() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->cut();
+}
+
+void QNewMainWindow::actionEditCopy() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->copy();
+}
+
+void QNewMainWindow::actionEditPaste() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->paste();
+}
+
+void QNewMainWindow::actionEditDel() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    QKeyEvent key_down(QKeyEvent::KeyPress, Qt::Key_Delete, Qt::NoModifier, NULL, false, 1);
+    QKeyEvent key_up(QKeyEvent::KeyRelease, Qt::Key_Delete, Qt::NoModifier, NULL, false, 1);
+    QApplication::sendEvent(ptrEdit, &key_down);
+    QApplication::sendEvent(ptrEdit, &key_up);
+}
+
+void QNewMainWindow::actionEditSelectAll() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->selectAll();
+}
+
 void QNewMainWindow::actionLang() {
     int i=0;
     while (m_vtMenuLangActions[i].ptrAction) {
@@ -636,7 +733,7 @@ void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
 
     _DEBUG_MSG("file name: %s", ptrSubQWin->m_qstrFileName.toAscii().data());
 
-    // process the menu action
+    // process the menu action -- File
     ui->actionFILE_SAVE->setEnabled(ptrEdit->isModified());
 
     if(0 == QString::compare(ptrSubQWin->m_qstrFileName.left(strlen(_NEW_FILE_PREFIX)), _NEW_FILE_PREFIX)) {
@@ -654,6 +751,10 @@ void QNewMainWindow::setUiMenuItem(QMdiSubWindow *ptrSubWin) {
 
     ui->actionFILE_CLOSE->setEnabled(NULL != this->getMdiActiveWindow());
     ui->actionFILE_CLOSE_ALL->setEnabled(NULL != this->getMdiActiveWindow());
+
+    // Edit
+    ui->actionEDIT_UNDO->setEnabled(ptrEdit->isModified());
+    ui->actionEDIT_REDO->setEnabled(ptrEdit->isRedoAvailable());
 
 }
 

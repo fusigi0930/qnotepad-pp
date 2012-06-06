@@ -51,7 +51,9 @@ protected:
 private:
     void setMenuActions();
     void setFileMenuActions();
+    void SetEditMenuActions();
     void setLangMenuActions();
+    void SetScintillaEditMenu(QMdiSubWindow *ptrSubWin);
 
     bool addDocPanel(QString str);
     QString saveDoc(QString qstrFile, QPadMdiSubWindow *ptrSubWin);
@@ -79,6 +81,14 @@ private slots:
     void actionFilePrint();
     void actionFilePrintNow();
     void actionFileRename();
+
+    void actionEditUndo();
+    void actionEditRedo();
+    void actionEditCut();
+    void actionEditCopy();
+    void actionEditPaste();
+    void actionEditDel();
+    void actionEditSelectAll();
 
     void actionLang();
 
