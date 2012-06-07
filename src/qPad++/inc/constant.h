@@ -15,6 +15,11 @@ enum EUSER_DATA {
 
 };
 
+enum EHOT_KEYS {
+    EHT_BOOKMARKS,
+    EHT_NEXT_BOOKMARKS
+};
+
 #define _NEW_FILE_PREFIX    "NewFile"
 
 #endif // CONSTANT_H

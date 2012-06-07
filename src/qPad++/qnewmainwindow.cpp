@@ -15,6 +15,8 @@
 #include <QTabBar>
 #include "qpadmdisubwindow.h"
 #include <QKeyEvent>
+#include <Scintilla.h>
+#include <SciLexer.h>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -32,6 +34,11 @@ QNewMainWindow::~QNewMainWindow()
 {
     _DEL_MEM(ui);
 
+    for(QMap<unsigned int, QShortcut*>::iterator pFind=m_mapShortcuts.begin(); pFind != m_mapShortcuts.end(); ++pFind) {
+        _DEL_MEM(pFind.value());
+    }
+    m_mapShortcuts.clear();
+
     m_pMdiArea->closeAllSubWindows();
     _DEL_MEM(m_pMdiArea);
 }
@@ -40,6 +47,13 @@ void QNewMainWindow::setMenuActions() {
     setFileMenuActions();
     SetEditMenuActions();
     setLangMenuActions();
+}
+
+void QNewMainWindow::setUnmenuActoins() {
+    QShortcut *p=new QShortcut(QKeySequence("Ctrl+F2"), this);
+    connect(p, SIGNAL(activated()), this, SLOT(actionUnmenuBookmark()));
+    m_mapShortcuts[EHT_BOOKMARKS]=p;
+
 }
 
 void QNewMainWindow::setFileMenuActions() {
@@ -622,6 +636,17 @@ void QNewMainWindow::actionLang() {
     }
 }
 
+void QNewMainWindow::actionUnmenuBookmark() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    ptrEdit->SendScintilla(ptrEdit->SendScintilla(SCI_MARKERGET, nLine) ? SCI_MARKERDELETE : SCI_MARKERADD, nLine, 1);
+}
+
 bool QNewMainWindow::addDocPanel(QString str) {
     bool bRet=false;
     QPadMdiSubWindow *pSubWin=new QPadMdiSubWindow(m_pMdiArea->viewport());
@@ -671,6 +696,9 @@ bool QNewMainWindow::addDocPanel(QString str) {
 
     connect(pEdit, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
     connect(pSubWin, SIGNAL(sigCloseSubWindow(QMdiSubWindow*)), this, SLOT(slotOnCloseSubWindow(QMdiSubWindow*)));
+    pEdit->setMarginWidth(1, QString("####"));
+    pEdit->setMarginType(1, QsciScintilla::SymbolMargin);
+    pEdit->setMarginLineNumbers(1, true);
 
     pEdit->setModified(false);
 
@@ -776,6 +804,7 @@ void QNewMainWindow::slotCreate() {
 
     // setup the ui object's actions
     setMenuActions();
+    setUnmenuActoins();
 
     this->resize(QApplication::desktop()->width()/5*4, QApplication::desktop()->height()/5*4);
     BaseMainWindow::slotCreate();

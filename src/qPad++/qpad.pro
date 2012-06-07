@@ -51,7 +51,8 @@ INCLUDEPATH += \
     inc \
     res \
     base-class \
-    ../qscintilla-gpl-2.6.1/Qt4
+    ../qscintilla-gpl-2.6.1/Qt4 \
+    ../qscintilla-gpl-2.6.1/include
 
 TRANSLATIONS += \
     res/strings_en.ts

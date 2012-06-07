@@ -13,6 +13,8 @@
 #include <QActionGroup>
 #include <vector>
 #include "qpadmdisubwindow.h"
+#include <QMap>
+#include <QShortcut>
 
 namespace Ui {
 class QNewMainWindow;
@@ -36,6 +38,7 @@ class QNewMainWindow : public BaseMainWindow
 private:
     QMdiArea *m_pMdiArea;
     QActionGroup m_langActionsGroup;
+    QMap<unsigned int, QShortcut*> m_mapShortcuts;
 
     std::vector<SActionMap<QsciLexer> > m_vtMenuLangActions;
 
@@ -53,6 +56,8 @@ private:
     void setFileMenuActions();
     void SetEditMenuActions();
     void setLangMenuActions();
+
+    void setUnmenuActoins();
     void SetScintillaEditMenu(QMdiSubWindow *ptrSubWin);
 
     bool addDocPanel(QString str);
@@ -91,6 +96,8 @@ private slots:
     void actionEditSelectAll();
 
     void actionLang();
+
+    void actionUnmenuBookmark();
 
 protected slots:
     virtual void slotCreate();
