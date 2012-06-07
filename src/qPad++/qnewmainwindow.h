@@ -54,8 +54,9 @@ protected:
 private:
     void setMenuActions();
     void setFileMenuActions();
-    void SetEditMenuActions();
+    void setEditMenuActions();
     void setLangMenuActions();
+    void setSearchMenuActions();
 
     void setUnmenuActoins();
     void SetScintillaEditMenu(QMdiSubWindow *ptrSubWin);
@@ -97,7 +98,9 @@ private slots:
 
     void actionLang();
 
-    void actionUnmenuBookmark();
+    void actionSearchBookmark();
+    void actionSearchBookmarkNext();
+    void actionSearchBookmarkPrev();
 
 protected slots:
     virtual void slotCreate();

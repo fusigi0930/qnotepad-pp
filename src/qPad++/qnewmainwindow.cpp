@@ -45,15 +45,18 @@ QNewMainWindow::~QNewMainWindow()
 
 void QNewMainWindow::setMenuActions() {
     setFileMenuActions();
-    SetEditMenuActions();
+    setEditMenuActions();
     setLangMenuActions();
+    setSearchMenuActions();
 }
 
 void QNewMainWindow::setUnmenuActoins() {
-    QShortcut *p=new QShortcut(QKeySequence("Ctrl+F2"), this);
-    connect(p, SIGNAL(activated()), this, SLOT(actionUnmenuBookmark()));
-    m_mapShortcuts[EHT_BOOKMARKS]=p;
+//    QShortcut *p=new QShortcut(QKeySequence("Ctrl+F2"), this);
+//    connect(p, SIGNAL(activated()), this, SLOT(actionUnmenuBookmark()));
+//    m_mapShortcuts[EHT_BOOKMARKS]=p;
 
+//    p=new QShortcut(QKeySequence("F2"), this);
+//    connect(p, SIGNAL(activated()), this, SLOT(actionUnmenuBookmark()));
 }
 
 void QNewMainWindow::setFileMenuActions() {
@@ -92,7 +95,7 @@ void QNewMainWindow::setFileMenuActions() {
     connect(ui->actionFILE_PRINT_NOW, SIGNAL(triggered()), this, SLOT(actionFilePrintNow()));
 }
 
-void QNewMainWindow::SetEditMenuActions() {
+void QNewMainWindow::setEditMenuActions() {
     ui->actionEDIT_UNDO->setShortcuts(QKeySequence::Undo);
     connect(ui->actionEDIT_UNDO, SIGNAL(triggered()), this, SLOT(actionEditUndo()));
 
@@ -116,6 +119,25 @@ void QNewMainWindow::SetEditMenuActions() {
 
 
 }
+
+void QNewMainWindow::setSearchMenuActions() {
+    QList<QKeySequence> list;
+    list.push_back(QKeySequence("Ctrl+F2"));
+    ui->actionSEARCH_BOOKMARK_TOGGLE->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_BOOKMARK_TOGGLE, SIGNAL(triggered()), this, SLOT(actionSearchBookmark()));
+
+    list.push_back(QKeySequence("F2"));
+    ui->actionSEARCH_BOOKMARK_NEXT->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_BOOKMARK_NEXT, SIGNAL(triggered()), this, SLOT(actionSearchBookmarkNext()));
+
+    list.push_back(QKeySequence("Shift+F2"));
+    ui->actionSEARCH_BOOKMARK_PREV->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_BOOKMARK_PREV, SIGNAL(triggered()), this, SLOT(actionSearchBookmarkPrev()));
+}
+
 
 void QNewMainWindow::setLangMenuActions() {
     // initial the language actions mapping table
@@ -636,7 +658,7 @@ void QNewMainWindow::actionLang() {
     }
 }
 
-void QNewMainWindow::actionUnmenuBookmark() {
+void QNewMainWindow::actionSearchBookmark() {
     QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
     if (!ptrSubWin) return;
     QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
@@ -644,7 +666,43 @@ void QNewMainWindow::actionUnmenuBookmark() {
 
     int nLine=-1, nIndex=-1;
     ptrEdit->getCursorPosition(&nLine, &nIndex);
-    ptrEdit->SendScintilla(ptrEdit->SendScintilla(SCI_MARKERGET, nLine) ? SCI_MARKERDELETE : SCI_MARKERADD, nLine, 1);
+    ptrEdit->SendScintilla(ptrEdit->SendScintilla(SCI_MARKERGET, nLine) ? SCI_MARKERDELETE : SCI_MARKERADD, nLine, _BOOKMARK_NUM);
+}
+
+void QNewMainWindow::actionSearchBookmarkNext() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    int nNextLine=ptrEdit->SendScintilla(SCI_MARKERNEXT, nLine+1, 1 << _BOOKMARK_NUM);
+    _DEBUG_MSG("line: %d, next line: %d", nLine, nNextLine);
+    if (-1 == nNextLine)
+        nNextLine=ptrEdit->SendScintilla(SCI_MARKERNEXT, 0, 1 << _BOOKMARK_NUM);
+    if (-1 == nNextLine)
+        return;
+
+    ptrEdit->SendScintilla(SCI_GOTOLINE, nNextLine);
+}
+
+void QNewMainWindow::actionSearchBookmarkPrev() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    int nPrevLine=ptrEdit->SendScintilla(SCI_MARKERPREVIOUS, nLine-1, 1 << _BOOKMARK_NUM);
+    _DEBUG_MSG("line: %d, prev line: %d", nLine, nPrevLine);
+    if (-1 == nPrevLine)
+        nPrevLine=ptrEdit->SendScintilla(SCI_MARKERPREVIOUS, ptrEdit->lines(), 1 << _BOOKMARK_NUM);
+    if (-1 == nPrevLine)
+        return;
+
+    ptrEdit->SendScintilla(SCI_GOTOLINE, nPrevLine);
 }
 
 bool QNewMainWindow::addDocPanel(QString str) {
