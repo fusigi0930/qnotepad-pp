@@ -18,6 +18,7 @@
 #include <Scintilla.h>
 #include <SciLexer.h>
 #include <Qsci/qsciprinter.h>
+#include <QPrintDialog>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -543,6 +544,12 @@ void QNewMainWindow::actionFilePrint() {
     QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
     if (!ptrEdit) return;
 
+    QsciPrinter printer;
+    QPrintDialog dlg(&printer);
+
+    if (QDialog::Accepted == dlg.exec()) {
+        printer.printRange(ptrEdit);
+    }
 }
 
 void QNewMainWindow::actionFilePrintNow() {
