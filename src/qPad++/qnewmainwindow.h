@@ -57,6 +57,12 @@ private:
     void setEditMenuActions();
     void setLangMenuActions();
     void setSearchMenuActions();
+    void setViewMenuActions();
+    void setEncodingActions();
+    void setSettingsActions();
+    void setMacroActions();
+    void setRunActions();
+    void setHelpActions();
 
     void setUnmenuActoins();
     void SetScintillaEditMenu(QMdiSubWindow *ptrSubWin);

@@ -50,6 +50,12 @@ void QNewMainWindow::setMenuActions() {
     setEditMenuActions();
     setLangMenuActions();
     setSearchMenuActions();
+    setViewMenuActions();
+    setEncodingActions();
+    setSettingsActions();
+    setMacroActions();
+    setRunActions();
+    setHelpActions();
 }
 
 void QNewMainWindow::setUnmenuActoins() {
@@ -95,6 +101,10 @@ void QNewMainWindow::setFileMenuActions() {
     connect(ui->actionFILE_PRINT, SIGNAL(triggered()), this, SLOT(actionFilePrint()));
 
     connect(ui->actionFILE_PRINT_NOW, SIGNAL(triggered()), this, SLOT(actionFilePrintNow()));
+
+    ui->actionFILE_DEL->setEnabled(false);
+    ui->actionFILE_LOAD_SESSION->setEnabled(false);
+    ui->actionFILE_SAVE_SESSION->setEnabled(false);
 }
 
 void QNewMainWindow::setEditMenuActions() {
@@ -119,7 +129,46 @@ void QNewMainWindow::setEditMenuActions() {
     ui->actionEDIT_SELECT_ALL->setShortcuts(QKeySequence::SelectAll);
     connect(ui->actionEDIT_SELECT_ALL, SIGNAL(triggered()), this, SLOT(actionEditSelectAll()));
 
-
+    ui->actionEDIT_COPY_CLIP_FULLPATH->setEnabled(false);
+    ui->actionEDIT_COPY_CLIP_FILENAME->setEnabled(false);
+    ui->actionEDIT_COPY_CLIP_DIRPATH->setEnabled(false);
+    ui->actionEDIT_INDENT_INC->setEnabled(false);
+    ui->actionEDIT_INDENT_DEC->setEnabled(false);
+    ui->actionEDIT_CONVERT_CASE_UP->setEnabled(false);
+    ui->actionEDIT_CONVERT_CASE_LOW->setEnabled(false);
+    ui->actionEDIT_LINE_DUP->setEnabled(false);
+    ui->actionEDIT_LINE_SPLIT->setEnabled(false);
+    ui->actionEDIT_LINE_JOIN->setEnabled(false);
+    ui->actionEDIT_LINE_UP->setEnabled(false);
+    ui->actionEDIT_LINE_DOWN->setEnabled(false);
+    ui->actionEDIT_COMMENT_TOGGLE_BLOCK->setEnabled(false);
+    ui->actionEDIT_COMMENT_COMMENT->setEnabled(false);
+    ui->actionEDIT_COMMENT_UNCOMMENT->setEnabled(false);
+    ui->actionEDIT_COMMENT_STREAM->setEnabled(false);
+    ui->actionEDIT_AUTO_COMPLETE_FUNC->setEnabled(false);
+    ui->actionEDIT_AUTO_COMPLETE_WORD->setEnabled(false);
+    ui->actionEDIT_AUTO_COMPLETE_PARAM->setEnabled(false);
+    ui->actionEDIT_EOL_WINDOW->setEnabled(false);
+    ui->actionEDIT_EOL_UNIX->setEnabled(false);
+    ui->actionEDIT_EOL_MAC->setEnabled(false);
+    ui->actionEDIT_BLANK_TRIM_TIAL->setEnabled(false);
+    ui->actionEDIT_BLANK_TRIM_LEAD->setEnabled(false);
+    ui->actionEDIT_BLANK_TRIM_BOTH->setEnabled(false);
+    ui->actionEDIT_BLANK_EOL_SPACE->setEnabled(false);
+    ui->actionEDIT_BLANK_TRIM_ALL->setEnabled(false);
+    ui->actionEDIT_BLANK_TAP2SPACE->setEnabled(false);
+    ui->actionEDIT_BLANK_SPACE2TAP->setEnabled(false);
+    ui->actionEDIT_PASTE_HTML->setEnabled(false);
+    ui->actionEDIT_PASTE_RTF->setEnabled(false);
+    ui->actionEDIT_COPY_BINARY->setEnabled(false);
+    ui->actionEDIT_CUT_BINARY->setEnabled(false);
+    ui->actionEDIT_PASTE_BINARY->setEnabled(false);
+    ui->actionEDIT_COLUMN_MODE->setEnabled(false);
+    ui->actionEDIT_COLUMN_EDITOR->setEnabled(false);
+    ui->actionEDIT_CHAR_PANEL->setEnabled(false);
+    ui->actionEDIT_CLIP_HISTORY->setEnabled(false);
+    ui->actionEDIT_READ_ONLY->setEnabled(false);
+    ui->actionEDIT_UNREAD_ONLY->setEnabled(false);
 }
 
 void QNewMainWindow::setSearchMenuActions() {
@@ -138,6 +187,55 @@ void QNewMainWindow::setSearchMenuActions() {
     ui->actionSEARCH_BOOKMARK_PREV->setShortcuts(list);
     list.clear();
     connect(ui->actionSEARCH_BOOKMARK_PREV, SIGNAL(triggered()), this, SLOT(actionSearchBookmarkPrev()));
+
+    ui->actionSEARCH_FIND->setEnabled(false);
+    ui->actionSEARCH_FINDINFILES->setEnabled(false);
+    ui->actionSEARCH_FIND_NEXT->setEnabled(false);
+    ui->actionSEARCH_FIND_PREV->setEnabled(false);
+    ui->actionSEARCH_FIND_SET_NEXt->setEnabled(false);
+    ui->actionSEARCH_FIND_SET_PREV->setEnabled(false);
+    ui->actionSEARCH_FIND_VOLITALE_NEXT->setEnabled(false);
+    ui->actionSEARCH_FIND_VOLITALE_PREV->setEnabled(false);
+    ui->actionSEARCH_REPLACE->setEnabled(false);
+    ui->actionSEARCH_FIND_INC->setEnabled(false);
+    ui->actionSEARCH_FIND_RESULT->setEnabled(false);
+    ui->actionSEARCH_GOTO_NEXT_FIND->setEnabled(false);
+    ui->actionSEARCH_GOTO_PREV_FIND->setEnabled(false);
+    ui->actionSEARCH_GOTO_LINE->setEnabled(false);
+    ui->actionSEARCH_GOTO_MATCH_BRACE->setEnabled(false);
+    ui->actionSEARCH_MARKALL_1->setEnabled(false);
+    ui->actionSEARCH_MARKALL_2->setEnabled(false);
+    ui->actionSEARCH_MARKALL_3->setEnabled(false);
+    ui->actionSEARCH_MARKALL_4->setEnabled(false);
+    ui->actionSEARCH_MARK_ALL_5->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_1->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_2->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_3->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_4->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_5->setEnabled(false);
+    ui->actionSEARCH_UNMARKALL_ALL->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_1->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_2->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_3->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_4->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_5->setEnabled(false);
+    ui->actionSEARCH_JUMP_PREV_DEF->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_1->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_2->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_3->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_4->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_5->setEnabled(false);
+    ui->actionSEARCH_JUMP_NEXT_DEF->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_CLEAR->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_CUT_LINE->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_COPY_LINE->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_PASTE_LINE->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_DEL_LINE->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_DEL_UNMARK_LINE->setEnabled(false);
+    ui->actionSEARCH_BOOKMARK_INVERSE_BOOKMARK->setEnabled(false);
+    ui->actionSEARCH_FIND_CHAR_RANGE->setEnabled(false);
+
+
 }
 
 
@@ -205,7 +303,7 @@ void QNewMainWindow::setLangMenuActions() {
         if (m_vtMenuLangActions[i].ptrAction == ui->actionLANG_NORMAL_TEXT)
             continue;
         if (!m_vtMenuLangActions[i].fnFunc) {
-            m_vtMenuLangActions[i].ptrAction->setVisible(false);
+            m_vtMenuLangActions[i].ptrAction->setEnabled(false);
         }
     }
 
@@ -324,6 +422,146 @@ void QNewMainWindow::setLangMenuActions() {
     connect(ui->actionLANG_XML, SIGNAL(triggered()), this, SLOT(actionLang()));
     connect(ui->actionLANG_YAML, SIGNAL(triggered()), this, SLOT(actionLang()));
     connect(ui->actionLANG_USER, SIGNAL(triggered()), this, SLOT(actionLang()));
+}
+
+void QNewMainWindow::setViewMenuActions() {
+    ui->actionVIEW_ALWAYS_ON_TOP->setEnabled(false);
+    ui->actionVIEW_FULL_SCREEN->setEnabled(false);
+    ui->actionVIEW_POST_IT->setEnabled(false);
+    ui->actionVIEW_SS_TAB_SPACE->setEnabled(false);
+    ui->actionVIEW_SS_EOL->setEnabled(false);
+    ui->actionVIEW_SS_ALL_CHARS->setEnabled(false);
+    ui->actionVIEW_SS_INDENT_GUIDE->setEnabled(false);
+    ui->actionVIEW_SS_WARP_SYMBOL->setEnabled(false);
+    ui->actionVIEW_ZOOM_IN->setEnabled(false);
+    ui->actionVIEW_ZOOM_OUT->setEnabled(false);
+    ui->actionVIEW_ZOOM_DEFAULT->setEnabled(false);
+    ui->actionVIEW_MOVE_OTHER_VIEW->setEnabled(false);
+    ui->actionVIEW_CLONE_OTHER_VIEW->setEnabled(false);
+    ui->actionVIEW_MOVE_NEW_INSTANCE->setEnabled(false);
+    ui->actionVIEW_OPEN_NEW_INSTANCE->setEnabled(false);
+    ui->actionVIEW_WARP->setEnabled(false);
+    ui->actionVIEW_SWITCH_OTHER_VIEW->setEnabled(false);
+    ui->actionVIEW_USER_DIALOG->setEnabled(false);
+    ui->actionVIEW_FOLD_ALL->setEnabled(false);
+    ui->actionVIEW_UNFOLD_ALL->setEnabled(false);
+    ui->actionVIEW_FOLD_CURRENT->setEnabled(false);
+    ui->actionVIEW_UNFOLD_CURRENT->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_1->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_2->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_3->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_4->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_5->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_6->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_7->setEnabled(false);
+    ui->actionVIEW_COLLAPSE_8->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_1->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_2->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_3->setEnabled(false);
+    ui->VIEW_UNCOLLAPSE_4->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_5->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_6->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_7->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_8->setEnabled(false);
+    ui->actionVIEW_SUMMARY->setEnabled(false);
+    ui->actionVIEW_PROJECT_1->setEnabled(false);
+    ui->actionVIEW_PROJECT_2->setEnabled(false);
+    ui->actionVIEW_PROJECT_3->setEnabled(false);
+    ui->actionVIEW_SYNC_VERT_SCROLL->setEnabled(false);
+    ui->actionVIEW_SNYC_HORI_SCROLL->setEnabled(false);
+    ui->actionVIEW_TEXT_RTL->setEnabled(false);
+    ui->actionVIEW_TEXT_LTR->setEnabled(false);
+}
+
+void QNewMainWindow::setEncodingActions() {
+    ui->actionENCODING_ANSI->setEnabled(false);
+    ui->actionENCODING_UTF8_NO_BOM->setEnabled(false);
+    ui->actionENCODING_UTF8->setEnabled(false);
+    ui->actionENCODING_UCS2_BE->setEnabled(false);
+    ui->actionENCODING_UCS2_LE->setEnabled(false);
+    ui->actionENCODING_ISO8859_6->setEnabled(false);
+    ui->actionENCODING_OEM720->setEnabled(false);
+    ui->actionENCODING_WINDOW_1256->setEnabled(false);
+    ui->actionENCODING_ISO8859_4->setEnabled(false);
+    ui->actionENCODING_ISO8859_13->setEnabled(false);
+    ui->actionENCODING_OEM775->setEnabled(false);
+    ui->actionENCODING_WINDOW_1257->setEnabled(false);
+    ui->actionENCODING_ISO8859_14->setEnabled(false);
+    ui->actionENCODING_ISO8859_5->setEnabled(false);
+    ui->actionENCODING_KOI8_R->setEnabled(false);
+    ui->actionENCODING_KOI8_U->setEnabled(false);
+    ui->actionENCODING_MACINTOSH->setEnabled(false);
+    ui->actionENCODING_OEM_855->setEnabled(false);
+    ui->actionENCODING_OEM_856->setEnabled(false);
+    ui->actionENCODING_WINDOW_1251->setEnabled(false);
+    ui->actionENCODING_OEM_852->setEnabled(false);
+    ui->actionENCODING_WINDOW_1250->setEnabled(false);
+    ui->actionENCODING_BIG5->setEnabled(false);
+    ui->actionENCODING_GB2312->setEnabled(false);
+    ui->actionENCODING_ISO8859_2->setEnabled(false);
+    ui->actionENCODING_ISO8859_7->setEnabled(false);
+    ui->actionENCODING_OEM_737->setEnabled(false);
+    ui->actionENCODING_OEM_869->setEnabled(false);
+    ui->actionENCODING_WINDOW_1253->setEnabled(false);
+    ui->actionENCODING_ISO8859_8->setEnabled(false);
+    ui->actionENCODING_OEM_862->setEnabled(false);
+    ui->actionENCODING_WINDOW_1255->setEnabled(false);
+    ui->actionENCODING_SHIFT_JIS->setEnabled(false);
+    ui->actionENCODING_WINDOW_949->setEnabled(false);
+    ui->actionENCODING_EUC_KR->setEnabled(false);
+    ui->actionENCODING_OEM_861->setEnabled(false);
+    ui->actionENCODING_OEM_865->setEnabled(false);
+    ui->actionENCODING_TIS_620->setEnabled(false);
+    ui->actionENCODING_ISO8859_3->setEnabled(false);
+    ui->actionENCODING_ISO8859_9->setEnabled(false);
+    ui->actionENCODING_OEM_857->setEnabled(false);
+    ui->actionENCODING_WINDOW_1254->setEnabled(false);
+    ui->actionENCODING_ISO8859_1->setEnabled(false);
+    ui->actionENCODING_ISO8859_15->setEnabled(false);
+    ui->actionENCODING_OEM_850->setEnabled(false);
+    ui->actionENCODING_OEM_858->setEnabled(false);
+    ui->actionENCODING_OEM_860->setEnabled(false);
+    ui->actionENCODING_OEM_863->setEnabled(false);
+    ui->actionENCODING_OEM_US->setEnabled(false);
+    ui->actionENCODING_WINDOW_1252->setEnabled(false);
+    ui->actionENCODING_WINDOW_1258->setEnabled(false);
+    ui->actionENCODING_CONV_ANSI->setEnabled(false);
+    ui->actionENCODING_CONV_UTF8_NO_BOM->setEnabled(false);
+    ui->actionENCODING_CONV_UTF8->setEnabled(false);
+    ui->actionENCODING_CONV_UCS2_BE->setEnabled(false);
+    ui->actionENCODING_CONV_UCS2_LE->setEnabled(false);
+}
+
+void QNewMainWindow::setSettingsActions() {
+    ui->actionSETTINGS_PERFERENCES->setEnabled(false);
+    ui->actionSETTINGS_LANG_STYLE->setEnabled(false);
+    ui->actionSETTINGS_SHORTCUT_MAPPER->setEnabled(false);
+    ui->actionSETTINGS_IMPORT_PLUGIN->setEnabled(false);
+    ui->actionSETTINGS_IMPORT_STYLE_THEME->setEnabled(false);
+    ui->actionSETTINGS_EDIT_CONTEXTMENU->setEnabled(false);
+}
+
+void QNewMainWindow::setMacroActions() {
+    ui->actionMACRO_RECORD->setEnabled(false);
+    ui->actionMACRO_STOP->setEnabled(false);
+    ui->actionMACRO_PLAYBACK->setEnabled(false);
+    ui->actionMACRO_SAVE->setEnabled(false);
+    ui->actionMACRO_RUN_MULTI_MACRO->setEnabled(false);
+}
+
+void QNewMainWindow::setRunActions() {
+    ui->actionRUN_RUN->setEnabled(false);
+}
+
+void QNewMainWindow::setHelpActions() {
+    ui->actionHELP_HELP->setEnabled(false);
+    ui->actionHELP_HOMEPAGE->setEnabled(false);
+    ui->actionHELP_PROJECTPAGE->setEnabled(false);
+    ui->actionHELP_ONLINE_DOC->setEnabled(false);
+    ui->actionHELP_FORUM->setEnabled(false);
+    ui->actionHELP_GET_PLUGINS->setEnabled(false);
+    ui->actionHELP_UPDATE_QPAD->setEnabled(false);
+    ui->actionHELP_ABOUT->setEnabled(false);
 }
 
 int QNewMainWindow::closeSubWinFile(QMdiSubWindow *ptrSubWin) {
