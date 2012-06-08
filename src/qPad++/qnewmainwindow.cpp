@@ -458,7 +458,7 @@ void QNewMainWindow::setViewMenuActions() {
     ui->actionVIEW_UNCOLLAPSE_1->setEnabled(false);
     ui->actionVIEW_UNCOLLAPSE_2->setEnabled(false);
     ui->actionVIEW_UNCOLLAPSE_3->setEnabled(false);
-    ui->VIEW_UNCOLLAPSE_4->setEnabled(false);
+    ui->actionVIEW_UNCOLLAPSE_4->setEnabled(false);
     ui->actionVIEW_UNCOLLAPSE_5->setEnabled(false);
     ui->actionVIEW_UNCOLLAPSE_6->setEnabled(false);
     ui->actionVIEW_UNCOLLAPSE_7->setEnabled(false);

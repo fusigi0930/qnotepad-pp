@@ -299,7 +299,7 @@
      <addaction name="actionVIEW_UNCOLLAPSE_1"/>
      <addaction name="actionVIEW_UNCOLLAPSE_2"/>
      <addaction name="actionVIEW_UNCOLLAPSE_3"/>
-     <addaction name="VIEW_UNCOLLAPSE_4"/>
+     <addaction name="actionVIEW_UNCOLLAPSE_4"/>
      <addaction name="actionVIEW_UNCOLLAPSE_5"/>
      <addaction name="actionVIEW_UNCOLLAPSE_6"/>
      <addaction name="actionVIEW_UNCOLLAPSE_7"/>
@@ -1487,7 +1487,7 @@
     <string>VIEW_UNCOLLAPSE_3</string>
    </property>
   </action>
-  <action name="VIEW_UNCOLLAPSE_4">
+  <action name="actionVIEW_UNCOLLAPSE_4">
    <property name="text">
     <string>VIEW_UNCOLLAPSE_4</string>
    </property>
