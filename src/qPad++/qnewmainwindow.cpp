@@ -17,6 +17,7 @@
 #include <QKeyEvent>
 #include <Scintilla.h>
 #include <SciLexer.h>
+#include <Qsci/qsciprinter.h>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -537,11 +538,21 @@ void QNewMainWindow::actionFileCloseAllExceptCurrent() {
 }
 
 void QNewMainWindow::actionFilePrint() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
 
 }
 
 void QNewMainWindow::actionFilePrintNow() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
 
+    QsciPrinter printer;
+    printer.printRange(ptrEdit);
 }
 
 void QNewMainWindow::actionFileRename() {
@@ -755,8 +766,9 @@ bool QNewMainWindow::addDocPanel(QString str) {
     connect(pEdit, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
     connect(pSubWin, SIGNAL(sigCloseSubWindow(QMdiSubWindow*)), this, SLOT(slotOnCloseSubWindow(QMdiSubWindow*)));
     pEdit->setMarginWidth(1, QString("####"));
-    pEdit->setMarginType(1, QsciScintilla::SymbolMargin);
+    pEdit->setMarginType(1, QsciScintilla::SymbolMarginDefaultBackgroundColor);
     pEdit->setMarginLineNumbers(1, true);
+    pEdit->markerDefine(QsciScintilla::RightTriangle, _BOOKMARK_NUM);
 
     pEdit->setModified(false);
 
