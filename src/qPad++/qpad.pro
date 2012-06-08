@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     QtSingle/qtlocalpeer.cpp \
     base-class/basewidget.cpp \
     qpadmdiarea.cpp \
-    qpadmdisubwindow.cpp
+    qpadmdisubwindow.cpp \
+    base-class/basedialog.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -42,7 +43,8 @@ HEADERS  += qnewmainwindow.h \
     base-class/basewidget.h \
     inc/qpadlexer.h \
     qpadmdiarea.h \
-    qpadmdisubwindow.h
+    qpadmdisubwindow.h \
+    base-class/basedialog.h
 
 FORMS    += ui/qnewmainwindow.ui
 
