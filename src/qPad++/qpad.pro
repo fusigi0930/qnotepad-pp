@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     base-class/basewidget.cpp \
     qpadmdiarea.cpp \
     qpadmdisubwindow.cpp \
-    base-class/basedialog.cpp
+    base-class/basedialog.cpp \
+    qpadgotolinedialog.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -49,9 +50,11 @@ HEADERS  += qnewmainwindow.h \
     inc/qpadlexer.h \
     qpadmdiarea.h \
     qpadmdisubwindow.h \
-    base-class/basedialog.h
+    base-class/basedialog.h \
+    qpadgotolinedialog.h
 
-FORMS    += ui/qnewmainwindow.ui
+FORMS    += ui/qnewmainwindow.ui \
+    ui/qpadgotolinedialog.ui
 
 INCLUDEPATH += \
     QtSingle \

@@ -107,6 +107,7 @@ private slots:
     void actionSearchBookmark();
     void actionSearchBookmarkNext();
     void actionSearchBookmarkPrev();
+    void actionSearchGotoLine();
 
 protected slots:
     virtual void slotCreate();

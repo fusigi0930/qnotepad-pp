@@ -188,6 +188,11 @@ void QNewMainWindow::setSearchMenuActions() {
     list.clear();
     connect(ui->actionSEARCH_BOOKMARK_PREV, SIGNAL(triggered()), this, SLOT(actionSearchBookmarkPrev()));
 
+    list.push_back(QKeySequence("Ctrl+G"));
+    ui->actionSEARCH_GOTO_LINE->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_GOTO_LINE, SIGNAL(triggered()), this, SLOT(actionSearchGotoLine()));
+
     ui->actionSEARCH_FIND->setEnabled(false);
     ui->actionSEARCH_FINDINFILES->setEnabled(false);
     ui->actionSEARCH_FIND_NEXT->setEnabled(false);
@@ -201,7 +206,7 @@ void QNewMainWindow::setSearchMenuActions() {
     ui->actionSEARCH_FIND_RESULT->setEnabled(false);
     ui->actionSEARCH_GOTO_NEXT_FIND->setEnabled(false);
     ui->actionSEARCH_GOTO_PREV_FIND->setEnabled(false);
-    ui->actionSEARCH_GOTO_LINE->setEnabled(false);
+
     ui->actionSEARCH_GOTO_MATCH_BRACE->setEnabled(false);
     ui->actionSEARCH_MARKALL_1->setEnabled(false);
     ui->actionSEARCH_MARKALL_2->setEnabled(false);
@@ -959,6 +964,15 @@ void QNewMainWindow::actionSearchBookmarkPrev() {
         return;
 
     ptrEdit->SendScintilla(SCI_GOTOLINE, nPrevLine);
+}
+
+void QNewMainWindow::actionSearchGotoLine() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nMaxLine=ptrEdit->lines();
 }
 
 bool QNewMainWindow::addDocPanel(QString str) {
