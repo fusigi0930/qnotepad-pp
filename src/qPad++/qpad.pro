@@ -5,7 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui network
-
+win32 {
+    system(\"C:/Program Files (x86)/Git/bin/sh.exe\" --login --norc pre-build.sh)
+}
+include(version_info)
+message(version is: $${VERSION})
+#VERSION = 0.0.1.2
 TARGET = qpad
 TEMPLATE = app
 
