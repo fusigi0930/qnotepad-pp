@@ -19,6 +19,7 @@
 #include <SciLexer.h>
 #include <Qsci/qsciprinter.h>
 #include <QPrintDialog>
+#include "qpadgotolinedialog.h"
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -973,6 +974,18 @@ void QNewMainWindow::actionSearchGotoLine() {
     if (!ptrEdit) return;
 
     int nMaxLine=ptrEdit->lines();
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+
+    QPadGotoLineDialog dlg;
+    dlg.m_nMaxLine=nMaxLine;
+    dlg.m_nCurrentLine=nLine;
+    if (QDialog::Accepted == dlg.exec()) {
+        if (QPadGotoLineDialog::ETYPE_LINE == dlg.m_nType) {
+            ptrEdit->SendScintilla(SCI_GOTOLINE, dlg.m_nCurrentLine-1);
+        }
+    }
+
 }
 
 bool QNewMainWindow::addDocPanel(QString str) {

@@ -1,18 +1,66 @@
 #include "qpadgotolinedialog.h"
 #include "ui_qpadgotolinedialog.h"
+#include "debug.h"
+#include "mem.h"
+#include <QString>
 
 QPadGotoLineDialog::QPadGotoLineDialog(QWidget *parent) :
     BaseDialog(parent),
     ui(new Ui::QPadGotoLineDialog)
 {
-
+    m_nMaxLine=0;
+    m_nCurrentLine=0;
+    m_nMaxOffset=0;
+    m_nCurrentOffset=0;
+    m_nType=QPadGotoLineDialog::ETYPE_LINE;
 }
 
 QPadGotoLineDialog::~QPadGotoLineDialog()
 {
-    delete ui;
+    _DEL_MEM(ui);
+}
+
+void QPadGotoLineDialog::changeEvent(QEvent * event) {
+    BaseDialog::changeEvent(event);
+    switch(event->type()) {
+        default:
+            break;
+        case QEvent::LanguageChange:
+            ui->retranslateUi(this);
+            break;
+    }
 }
 
 void QPadGotoLineDialog::slotCreate() {
+    _DEBUG_MSG("+++");
     ui->setupUi(this);
+
+    ui->ID_RADIO_BUTTON_LINE->setChecked(true);
+
+    QString qstr;
+    qstr.sprintf("%d", m_nMaxLine);
+    ui->ID_LABEL_MAX->setText(qstr);
+    qstr.sprintf("%d", m_nCurrentLine+1);
+    ui->ID_LABEL_NOW_LINE->setText(qstr);
+
+    connect(ui->ID_RADIO_BUTTON_LINE, SIGNAL(toggle(bool)), this, SLOT(actionLine(bool)));
+    connect(ui->ID_RADIO_BUTTON_OFFSET, SIGNAL(toggle(bool)), this, SLOT(actionOffset(bool)));
+}
+
+void QPadGotoLineDialog::actionLine(bool bChecked) {
+    m_nType=QPadGotoLineDialog::ETYPE_LINE;
+}
+
+void QPadGotoLineDialog::actionOffset(bool bChecked) {
+    m_nType=QPadGotoLineDialog::ETYPE_OFFSET;
+}
+
+void QPadGotoLineDialog::accept() {
+    if (ui->ID_EDIT_GOTO->text().isEmpty()) {
+        m_nCurrentOffset=m_nCurrentLine=-1;
+    }
+    else {
+        m_nCurrentOffset=m_nCurrentLine=ui->ID_EDIT_GOTO->text().toInt();
+    }
+    QDialog::accept();
 }

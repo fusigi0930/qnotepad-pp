@@ -1818,4 +1818,47 @@
         <translation>Save</translation>
     </message>
 </context>
+<context>
+    <name>QPadGotoLineDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="obsolete">Dialog</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="14"/>
+        <source>ID_DIALOG_GOTO_TITLE</source>
+        <translation>Go To ...</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="42"/>
+        <source>ID_RADIO_BUTTON_LINE</source>
+        <translation>&amp;Line</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="55"/>
+        <source>ID_RADIO_BUTTON_OFFSET</source>
+        <translation>&amp;Offset</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="68"/>
+        <source>LABEL_YOUR_LOCATION</source>
+        <translation>You are Here:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="81"/>
+        <source>LABEL_GOTO</source>
+        <translation>You want to go to:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="94"/>
+        <source>LABEL_MAX</source>
+        <translation>You cannot further than:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadgotolinedialog.ui" line="107"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="130"/>
+        <source>dynamic</source>
+        <translation>dynamic</translation>
+    </message>
+</context>
 </TS>
