@@ -976,13 +976,20 @@ void QNewMainWindow::actionSearchGotoLine() {
     int nMaxLine=ptrEdit->lines();
     int nLine=-1, nIndex=-1;
     ptrEdit->getCursorPosition(&nLine, &nIndex);
+    int nPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
+    _DEBUG_MSG("line:%d, index:%d, pos: %d", nLine, nIndex, nPos);
 
     QPadGotoLineDialog dlg;
     dlg.m_nMaxLine=nMaxLine;
     dlg.m_nCurrentLine=nLine;
+    dlg.m_nCurrentOffset=nPos;
+    dlg.m_nMaxOffset=ptrEdit->length();
     if (QDialog::Accepted == dlg.exec()) {
         if (QPadGotoLineDialog::ETYPE_LINE == dlg.m_nType) {
-            ptrEdit->SendScintilla(SCI_GOTOLINE, dlg.m_nCurrentLine-1);
+            ptrEdit->SendScintilla(SCI_GOTOLINE, 0 < dlg.m_nCurrentLine ? dlg.m_nCurrentLine-1: nLine);
+        }
+        else {
+            ptrEdit->SendScintilla(SCI_GOTOPOS, 0 < dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
         }
     }
 

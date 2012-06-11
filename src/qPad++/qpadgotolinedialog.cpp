@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "mem.h"
 #include <QString>
+#include <QTimer>
 
 QPadGotoLineDialog::QPadGotoLineDialog(QWidget *parent) :
     BaseDialog(parent),
@@ -43,16 +44,61 @@ void QPadGotoLineDialog::slotCreate() {
     qstr.sprintf("%d", m_nCurrentLine+1);
     ui->ID_LABEL_NOW_LINE->setText(qstr);
 
-    connect(ui->ID_RADIO_BUTTON_LINE, SIGNAL(toggle(bool)), this, SLOT(actionLine(bool)));
-    connect(ui->ID_RADIO_BUTTON_OFFSET, SIGNAL(toggle(bool)), this, SLOT(actionOffset(bool)));
+    qstr.clear();
+    int nMax=m_nMaxLine;
+    while (nMax) {
+        qstr.append("0");
+        nMax/=10;
+    }
+    ui->ID_EDIT_GOTO->setInputMask(qstr);
+
+    connect(ui->ID_RADIO_BUTTON_LINE, SIGNAL(clicked(bool)), this, SLOT(actionLine(bool)));
+    connect(ui->ID_RADIO_BUTTON_OFFSET, SIGNAL(clicked(bool)), this, SLOT(actionOffset(bool)));
+
+    QTimer::singleShot(0, ui->ID_EDIT_GOTO, SLOT(setFocus()));
 }
 
 void QPadGotoLineDialog::actionLine(bool bChecked) {
+    _DEBUG_MSG("+++");
     m_nType=QPadGotoLineDialog::ETYPE_LINE;
+    QString qstr;
+    qstr.sprintf("%d", m_nMaxLine);
+    ui->ID_LABEL_MAX->setText(qstr);
+    qstr.sprintf("%d", m_nCurrentLine+1);
+    ui->ID_LABEL_NOW_LINE->setText(qstr);
+
+    qstr.clear();
+    int nMax=m_nMaxLine;
+    while (nMax) {
+        qstr.append("0");
+        nMax/=10;
+    }
+    ui->ID_EDIT_GOTO->setInputMask(qstr);
+    ui->ID_EDIT_GOTO->clear();
+    ui->ID_EDIT_GOTO->setCursorPosition(0);
+    ui->ID_EDIT_GOTO->setFocus();
+
 }
 
 void QPadGotoLineDialog::actionOffset(bool bChecked) {
+    _DEBUG_MSG("+++");
     m_nType=QPadGotoLineDialog::ETYPE_OFFSET;
+    QString qstr;
+    qstr.sprintf("%d", m_nMaxOffset);
+    ui->ID_LABEL_MAX->setText(qstr);
+    qstr.sprintf("%d", m_nCurrentOffset);
+    ui->ID_LABEL_NOW_LINE->setText(qstr);
+
+    qstr.clear();
+    int nMax=m_nMaxOffset;
+    while (nMax) {
+        qstr.append("0");
+        nMax/=10;
+    }
+    ui->ID_EDIT_GOTO->setInputMask(qstr);
+    ui->ID_EDIT_GOTO->clear();
+    ui->ID_EDIT_GOTO->setCursorPosition(0);
+    ui->ID_EDIT_GOTO->setFocus();
 }
 
 void QPadGotoLineDialog::accept() {
