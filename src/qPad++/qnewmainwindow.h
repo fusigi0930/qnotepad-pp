@@ -38,7 +38,10 @@ class QNewMainWindow : public BaseMainWindow
 private:
     QMdiArea *m_pMdiArea;
     QActionGroup m_langActionsGroup;
+    QActionGroup m_encodingActionsGroup;
     QMap<unsigned int, QShortcut*> m_mapShortcuts;
+
+    QMap<QAction*, QString> m_mapEncodings;
 
     std::vector<SActionMap<QsciLexer> > m_vtMenuLangActions;
 

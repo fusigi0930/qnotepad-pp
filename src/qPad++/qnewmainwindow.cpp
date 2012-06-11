@@ -26,7 +26,8 @@
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
     ui(new Ui::QNewMainWindow),
-    m_langActionsGroup(this)
+    m_langActionsGroup(this),
+    m_encodingActionsGroup(this)
 {
     m_pMdiArea=NULL;
     m_nNewDocNum=1;
@@ -482,6 +483,110 @@ void QNewMainWindow::setViewMenuActions() {
 }
 
 void QNewMainWindow::setEncodingActions() {
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ANSI);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_UTF8_NO_BOM);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_UTF8);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_UCS2_BE);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_UCS2_LE);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_6);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM720);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1256);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_4);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_13);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM775);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1257);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_14);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_5);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_KOI8_R);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_KOI8_U);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_MACINTOSH);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_855);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_856);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1251);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_852);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1250);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_BIG5);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_GB2312);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_2);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_7);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_737);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_869);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1253);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_8);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_862);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1255);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_SHIFT_JIS);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_949);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_EUC_KR);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_861);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_865);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_TIS_620);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_3);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_9);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_857);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1254);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_1);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_ISO8859_15);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_850);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_858);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_860);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_863);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_OEM_US);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1252);
+    m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1258);
+
+    m_mapEncodings[ui->actionENCODING_ANSI]=            "";
+    m_mapEncodings[ui->actionENCODING_UTF8_NO_BOM]=	"UTF-8";
+    m_mapEncodings[ui->actionENCODING_UTF8]=            "UTF-8";
+    m_mapEncodings[ui->actionENCODING_UCS2_BE]=     	"UTF-16BE";
+    m_mapEncodings[ui->actionENCODING_UCS2_LE]= 	"UTF-16LE";
+    m_mapEncodings[ui->actionENCODING_ISO8859_6]=	"ISO 8859-6";
+    m_mapEncodings[ui->actionENCODING_OEM720]=          "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1256]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_4]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_13]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM775]=          "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1257]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_14]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_5]=	"";
+    m_mapEncodings[ui->actionENCODING_KOI8_R]=          "";
+    m_mapEncodings[ui->actionENCODING_KOI8_U]=      	"";
+    m_mapEncodings[ui->actionENCODING_MACINTOSH]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_855]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_856]= 	"";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1251]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_852]=         "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1250]=	"";
+    m_mapEncodings[ui->actionENCODING_BIG5]=            "Big5";
+    m_mapEncodings[ui->actionENCODING_GB2312]=      	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_2]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_7]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_737]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_869]=     	"";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1253]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_8]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_862]=         "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1255]=	"";
+    m_mapEncodings[ui->actionENCODING_SHIFT_JIS]=	"";
+    m_mapEncodings[ui->actionENCODING_WINDOW_949]=	"";
+    m_mapEncodings[ui->actionENCODING_EUC_KR]=          "";
+    m_mapEncodings[ui->actionENCODING_OEM_861]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_865]=     	"";
+    m_mapEncodings[ui->actionENCODING_TIS_620]=         "";
+    m_mapEncodings[ui->actionENCODING_ISO8859_3]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_9]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_857]=     	"";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1254]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_1]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_15]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_850]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_858]=     	"";
+    m_mapEncodings[ui->actionENCODING_OEM_860]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_863]=         "";
+    m_mapEncodings[ui->actionENCODING_OEM_US]=          "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1252]=	"";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1258]=	"";
+
     ui->actionENCODING_ANSI->setEnabled(false);
     ui->actionENCODING_UTF8_NO_BOM->setEnabled(false);
     ui->actionENCODING_UTF8->setEnabled(false);
