@@ -19,6 +19,9 @@ enum EHOT_KEYS {
     EHK_UNKNOW=-1
 };
 
+#define _CP_UTF16_LE        1200
+#define _CP_UTF16_BE        1201
+
 #define _NEW_FILE_PREFIX    "NewFile"
 #define _BOOKMARK_NUM       1
 

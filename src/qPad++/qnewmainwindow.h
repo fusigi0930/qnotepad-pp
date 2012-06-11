@@ -74,6 +74,8 @@ private:
     void setUiMenuItem(QMdiSubWindow *ptrSubWin);
     int closeSubWinFile(QMdiSubWindow *ptrSubWin);
 
+    int reloadFileWithCharset(char *charset);
+
 protected:
     QMdiSubWindow* getMdiActiveWindow();
 

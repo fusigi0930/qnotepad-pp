@@ -20,6 +20,8 @@
 #include <Qsci/qsciprinter.h>
 #include <QPrintDialog>
 #include "qpadgotolinedialog.h"
+#include <QTextCodec>
+#include <QByteArray>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -619,6 +621,36 @@ QPadMdiSubWindow* QNewMainWindow::findSubWinsFilename(QString qstr) {
     return NULL;
 }
 
+int QNewMainWindow::reloadFileWithCharset(char *charset) {
+    int nRet=-1;
+    if (NULL == charset)
+        return nRet;
+
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return nRet;
+
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return nRet;
+
+    QFile file(ptrSubWin->m_qstrFileName);
+    if (!file.open(QFile::ReadOnly)) {
+        _DEBUG_MSG("open file %s failed", ptrSubWin->m_qstrFileName.toAscii().data());
+        return nRet;
+    }
+    QByteArray dbBuffer=file.readAll();
+    file.close();
+
+    QTextCodec *codec = QTextCodec::codecForName(charset);
+    if (!codec) return nRet;
+
+    QString qstrUCS2=codec->toUnicode(dbBuffer);
+    dbBuffer.clear();
+
+    ptrEdit->setUtf8(true);
+    ptrEdit->setText(qstrUCS2);
+
+}
+
 void QNewMainWindow::actionFileNew() {
     addDocPanel("");
 }
@@ -989,7 +1021,7 @@ void QNewMainWindow::actionSearchGotoLine() {
             ptrEdit->SendScintilla(SCI_GOTOLINE, 0 < dlg.m_nCurrentLine ? dlg.m_nCurrentLine-1: nLine);
         }
         else {
-            ptrEdit->SendScintilla(SCI_GOTOPOS, 0 < dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
+            ptrEdit->SendScintilla(SCI_GOTOPOS, 0 <= dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
         }
     }
 
