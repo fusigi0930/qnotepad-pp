@@ -114,6 +114,8 @@ private slots:
     void actionSearchBookmarkPrev();
     void actionSearchGotoLine();
 
+    void actionEncoding();
+
 protected slots:
     virtual void slotCreate();
 

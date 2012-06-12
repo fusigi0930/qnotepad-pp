@@ -1556,51 +1556,81 @@
    </property>
   </action>
   <action name="actionENCODING_ANSI">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ANSI</string>
    </property>
   </action>
   <action name="actionENCODING_UTF8_NO_BOM">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_UTF8_NO_BOM</string>
    </property>
   </action>
   <action name="actionENCODING_UTF8">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_UTF8</string>
    </property>
   </action>
   <action name="actionENCODING_UCS2_BE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_UCS2_BE</string>
    </property>
   </action>
   <action name="actionENCODING_UCS2_LE">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_UCS2_LE</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_6">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_6</string>
    </property>
   </action>
   <action name="actionENCODING_OEM720">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM720</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1256">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1256</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_4">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_4</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_13">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_13</string>
    </property>
@@ -1609,206 +1639,329 @@
    </property>
   </action>
   <action name="actionENCODING_OEM775">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM775</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1257">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1257</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_14">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_14</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_5">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_5</string>
    </property>
   </action>
   <action name="actionENCODING_KOI8_R">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_KOI8_R</string>
    </property>
   </action>
   <action name="actionENCODING_KOI8_U">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_KOI8_U</string>
    </property>
   </action>
   <action name="actionENCODING_MACINTOSH">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_MACINTOSH</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_855">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_855</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_856">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_855</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1251">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1251</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_852">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_852</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1250">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1250</string>
    </property>
   </action>
   <action name="actionENCODING_BIG5">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_BIG5</string>
    </property>
   </action>
   <action name="actionENCODING_GB2312">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_GB2312</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_2</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_7">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_7</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_737">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_737</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_869">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_869</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1253">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1253</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_8">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_8</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_862">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_862</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1255">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1255</string>
    </property>
   </action>
   <action name="actionENCODING_SHIFT_JIS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_SHIFT_JIS</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_949">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_949</string>
    </property>
   </action>
   <action name="actionENCODING_EUC_KR">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_EUC_KR</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_861">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_861</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_865">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_865</string>
    </property>
   </action>
   <action name="actionENCODING_TIS_620">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_TIS_620</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_3</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_9">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_9</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_857">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_857</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1254">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1254</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_1</string>
    </property>
   </action>
   <action name="actionENCODING_ISO8859_15">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_ISO8859_15</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_850">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_850</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_858">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_858</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_860">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_860</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_863">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_863</string>
    </property>
   </action>
   <action name="actionENCODING_OEM_US">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_OEM_US</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1252">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1252</string>
    </property>
   </action>
   <action name="actionENCODING_WINDOW_1258">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ENCODING_WINDOW_1258</string>
    </property>

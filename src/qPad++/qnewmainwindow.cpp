@@ -22,6 +22,7 @@
 #include "qpadgotolinedialog.h"
 #include <QTextCodec>
 #include <QByteArray>
+#include <QList>
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -535,58 +536,116 @@ void QNewMainWindow::setEncodingActions() {
     m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1252);
     m_encodingActionsGroup.addAction(ui->actionENCODING_WINDOW_1258);
 
-    m_mapEncodings[ui->actionENCODING_ANSI]=            "";
+    m_mapEncodings[ui->actionENCODING_ANSI]=            "System";
     m_mapEncodings[ui->actionENCODING_UTF8_NO_BOM]=	"UTF-8";
     m_mapEncodings[ui->actionENCODING_UTF8]=            "UTF-8";
     m_mapEncodings[ui->actionENCODING_UCS2_BE]=     	"UTF-16BE";
     m_mapEncodings[ui->actionENCODING_UCS2_LE]= 	"UTF-16LE";
-    m_mapEncodings[ui->actionENCODING_ISO8859_6]=	"ISO 8859-6";
-    m_mapEncodings[ui->actionENCODING_OEM720]=          "";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1256]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_4]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_13]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM775]=          "";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1257]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_14]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_5]=	"";
-    m_mapEncodings[ui->actionENCODING_KOI8_R]=          "";
-    m_mapEncodings[ui->actionENCODING_KOI8_U]=      	"";
-    m_mapEncodings[ui->actionENCODING_MACINTOSH]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM_855]=         "";
-    m_mapEncodings[ui->actionENCODING_OEM_856]= 	"";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1251]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM_852]=         "";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1250]=	"";
+    m_mapEncodings[ui->actionENCODING_ISO8859_6]=	"ISO-8859-6";
+    m_mapEncodings[ui->actionENCODING_OEM720]=          "arabic";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1256]=	"Windows-1256";
+    m_mapEncodings[ui->actionENCODING_ISO8859_4]=	"ISO-8859-4";
+    m_mapEncodings[ui->actionENCODING_ISO8859_13]=	"ISO-8859-13";
+    m_mapEncodings[ui->actionENCODING_OEM775]=          "latin4";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1257]=	"Windows-1257";
+    m_mapEncodings[ui->actionENCODING_ISO8859_14]=	"ISO-8859-14";
+    m_mapEncodings[ui->actionENCODING_ISO8859_5]=	"ISO-8859-5";
+    m_mapEncodings[ui->actionENCODING_KOI8_R]=          "KOI8-R";
+    m_mapEncodings[ui->actionENCODING_KOI8_U]=      	"KOI8-U";
+    m_mapEncodings[ui->actionENCODING_MACINTOSH]=	"macintosh";
+    m_mapEncodings[ui->actionENCODING_OEM_855]=         "cyrillic";
+    m_mapEncodings[ui->actionENCODING_OEM_856]= 	"hebrew";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1251]=	"Windows-1251";
+    m_mapEncodings[ui->actionENCODING_OEM_852]=         "latin2-1250";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1250]=	"Windows-1250";
     m_mapEncodings[ui->actionENCODING_BIG5]=            "Big5";
-    m_mapEncodings[ui->actionENCODING_GB2312]=      	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_2]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_7]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM_737]=         "";
-    m_mapEncodings[ui->actionENCODING_OEM_869]=     	"";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1253]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_8]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM_862]=         "";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1255]=	"";
-    m_mapEncodings[ui->actionENCODING_SHIFT_JIS]=	"";
-    m_mapEncodings[ui->actionENCODING_WINDOW_949]=	"";
-    m_mapEncodings[ui->actionENCODING_EUC_KR]=          "";
+    m_mapEncodings[ui->actionENCODING_GB2312]=      	"GB18030-0";
+    m_mapEncodings[ui->actionENCODING_ISO8859_2]=	"ISO-8859-2";
+    m_mapEncodings[ui->actionENCODING_ISO8859_7]=	"ISO-8859-7";
+    m_mapEncodings[ui->actionENCODING_OEM_737]=         "greek";
+    m_mapEncodings[ui->actionENCODING_OEM_869]=     	"greek";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1253]=	"Windows-1253";
+    m_mapEncodings[ui->actionENCODING_ISO8859_8]=	"ISO 8859-8";
+    m_mapEncodings[ui->actionENCODING_OEM_862]=         "hebrew";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1255]=	"Windows-1255";
+    m_mapEncodings[ui->actionENCODING_SHIFT_JIS]=	"Shift-JIS";
+    m_mapEncodings[ui->actionENCODING_WINDOW_949]=	"CP949";
+    m_mapEncodings[ui->actionENCODING_EUC_KR]=          "EUC-KR";
     m_mapEncodings[ui->actionENCODING_OEM_861]=         "";
     m_mapEncodings[ui->actionENCODING_OEM_865]=     	"";
-    m_mapEncodings[ui->actionENCODING_TIS_620]=         "";
-    m_mapEncodings[ui->actionENCODING_ISO8859_3]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_9]=	"";
+    m_mapEncodings[ui->actionENCODING_TIS_620]=         "TIS-620";
+    m_mapEncodings[ui->actionENCODING_ISO8859_3]=	"ISO-8859-3";
+    m_mapEncodings[ui->actionENCODING_ISO8859_9]=	"ISO-8859-9";
     m_mapEncodings[ui->actionENCODING_OEM_857]=     	"";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1254]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_1]=	"";
-    m_mapEncodings[ui->actionENCODING_ISO8859_15]=	"";
-    m_mapEncodings[ui->actionENCODING_OEM_850]=         "";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1254]=	"Windows-1254";
+    m_mapEncodings[ui->actionENCODING_ISO8859_1]=	"ISO-8859-1";
+    m_mapEncodings[ui->actionENCODING_ISO8859_15]=	"ISO-8859-15";
+    m_mapEncodings[ui->actionENCODING_OEM_850]=         "latin1";
     m_mapEncodings[ui->actionENCODING_OEM_858]=     	"";
     m_mapEncodings[ui->actionENCODING_OEM_860]=         "";
     m_mapEncodings[ui->actionENCODING_OEM_863]=         "";
-    m_mapEncodings[ui->actionENCODING_OEM_US]=          "";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1252]=	"";
-    m_mapEncodings[ui->actionENCODING_WINDOW_1258]=	"";
+    m_mapEncodings[ui->actionENCODING_OEM_US]=          "System";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1252]=	"Windows-1252";
+    m_mapEncodings[ui->actionENCODING_WINDOW_1258]=	"Windows-1258";
 
+    connect(ui->actionENCODING_ANSI, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_UTF8_NO_BOM, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_UTF8, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_UCS2_BE, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_UCS2_LE, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_6, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM720, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1256, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_4, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_13, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM775, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1257, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_14, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_5, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_KOI8_R, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_KOI8_U, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_MACINTOSH, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_855, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_856, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1251, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_852, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1250, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_BIG5, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_GB2312, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_2, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_7, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_737, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_869, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1253, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_8, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_862, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1255, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_SHIFT_JIS, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_949, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_EUC_KR, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_861, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_865, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_TIS_620, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_3, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_9, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_857, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1254, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_1, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_ISO8859_15, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_850, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_858, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_860, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_863, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_OEM_US, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1252, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_WINDOW_1258, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_CONV_ANSI, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_CONV_UTF8_NO_BOM, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_CONV_UTF8, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_CONV_UCS2_BE, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+    connect(ui->actionENCODING_CONV_UCS2_LE, SIGNAL(triggered()), this, SLOT(actionEncoding()));
+
+#if 0
     ui->actionENCODING_ANSI->setEnabled(false);
     ui->actionENCODING_UTF8_NO_BOM->setEnabled(false);
     ui->actionENCODING_UTF8->setEnabled(false);
@@ -609,8 +668,8 @@ void QNewMainWindow::setEncodingActions() {
     ui->actionENCODING_WINDOW_1251->setEnabled(false);
     ui->actionENCODING_OEM_852->setEnabled(false);
     ui->actionENCODING_WINDOW_1250->setEnabled(false);
-    ui->actionENCODING_BIG5->setEnabled(false);
-    ui->actionENCODING_GB2312->setEnabled(false);
+    //ui->actionENCODING_BIG5->setEnabled(false);
+    //ui->actionENCODING_GB2312->setEnabled(false);
     ui->actionENCODING_ISO8859_2->setEnabled(false);
     ui->actionENCODING_ISO8859_7->setEnabled(false);
     ui->actionENCODING_OEM_737->setEnabled(false);
@@ -643,6 +702,7 @@ void QNewMainWindow::setEncodingActions() {
     ui->actionENCODING_CONV_UTF8->setEnabled(false);
     ui->actionENCODING_CONV_UCS2_BE->setEnabled(false);
     ui->actionENCODING_CONV_UCS2_LE->setEnabled(false);
+#endif
 }
 
 void QNewMainWindow::setSettingsActions() {
@@ -753,7 +813,8 @@ int QNewMainWindow::reloadFileWithCharset(char *charset) {
 
     ptrEdit->setUtf8(true);
     ptrEdit->setText(qstrUCS2);
-
+    ptrSubWin->m_qstrCharset=charset;
+    ptrEdit->setModified(false);
 }
 
 void QNewMainWindow::actionFileNew() {
@@ -1129,7 +1190,21 @@ void QNewMainWindow::actionSearchGotoLine() {
             ptrEdit->SendScintilla(SCI_GOTOPOS, 0 <= dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
         }
     }
+}
 
+void QNewMainWindow::actionEncoding() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    QMap<QAction*, QString>::iterator pFind;
+    for (pFind=m_mapEncodings.begin(); pFind != m_mapEncodings.end(); ++pFind) {
+        if (pFind.key()->isChecked()) {
+            reloadFileWithCharset(pFind.value().toAscii().data());
+            return;
+        }
+    }
 }
 
 bool QNewMainWindow::addDocPanel(QString str) {
@@ -1163,13 +1238,15 @@ bool QNewMainWindow::addDocPanel(QString str) {
         }
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
+        pSubWin->m_qstrFileName=str;
         pEdit->read(file);
+        reloadFileWithCharset("Big5");
         QApplication::restoreOverrideCursor();
 
 //        manager.pMdiSubWidget->setUserData(
 //            EUSERDATA_SCINTILLA_TEXT_EDITOR,
 //            reinterpret_cast<QObjectUserData*>(manager.pTextEditor));
-        pSubWin->m_qstrFileName=str;
+
         QString filename=str.mid(str.lastIndexOf('/')+1);
         pSubWin->setWindowTitle(filename.append(" [*]"));
 
@@ -1181,7 +1258,7 @@ bool QNewMainWindow::addDocPanel(QString str) {
 
     connect(pEdit, SIGNAL(modificationChanged(bool)), this, SLOT(slotDocWasModified()));
     connect(pSubWin, SIGNAL(sigCloseSubWindow(QMdiSubWindow*)), this, SLOT(slotOnCloseSubWindow(QMdiSubWindow*)));
-    pEdit->setMarginWidth(1, QString("####"));
+    pEdit->setMarginWidth(1, QString("######"));
     pEdit->setMarginType(1, QsciScintilla::SymbolMarginDefaultBackgroundColor);
     pEdit->setMarginLineNumbers(1, true);
     pEdit->markerDefine(QsciScintilla::RightTriangle, _BOOKMARK_NUM);

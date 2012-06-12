@@ -11,6 +11,7 @@ class QPadMdiSubWindow : public QMdiSubWindow
 
 public:
     QString m_qstrFileName;
+    QString m_qstrCharset;
 public:
     explicit QPadMdiSubWindow(QWidget *parent = 0);
     virtual ~QPadMdiSubWindow();
