@@ -159,7 +159,9 @@ HEADERS = \
 	../src/SVector.h \
 	../src/UniConversion.h \
 	../src/ViewStyle.h \
-	../src/XPM.h
+	../src/XPM.h \
+    ../lexers/LexCoffeeScripp \
+    ../lexers/LexOScripp
 
 SOURCES = \
 	qsciscintilla.cpp \
@@ -324,7 +326,11 @@ SOURCES = \
 	../src/Style.cpp \
 	../src/UniConversion.cpp \
 	../src/ViewStyle.cpp \
-	../src/XPM.cpp
+	../src/XPM.cpp \
+    ../lexers/LexAVS.cpp \
+    ../lexers/LexVisualProlog.cpp \
+    ../lexers/LexTCMD.cpp \
+    ../lexers/LexECL.cpp
 
 TRANSLATIONS = \
 	qscintilla_cs.ts \

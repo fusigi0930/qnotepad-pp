@@ -22,6 +22,7 @@ namespace Scintilla {
  */
 class XPM {
 #if defined(PLAT_QT)
+
     QPixmap qpm;
 
 public:
@@ -29,10 +30,12 @@ public:
     XPM(const char *const *linesForm);
     ~XPM() {}
 
-    void RefreshColourPalette(Palette &pal, bool want) {}
+    //void RefreshColourPalette(Palette &pal, bool want) {}
     void Draw(Surface *surface, PRectangle &rc);
 
     const QPixmap &Pixmap() const {return qpm;}
+    int GetHeight() const { return qpm.height(); }
+    int GetWidth() const { return qpm.width(); }
 #else
 	int pid;		// Assigned by container
 	int height;
@@ -41,12 +44,12 @@ public:
 	char *data;
 	char codeTransparent;
 	char *codes;
-	ColourPair *colours;
+	ColourDesired *colours;
 	ColourDesired ColourDesiredFromCode(int ch) const;
-	ColourAllocated ColourFromCode(int ch) const;
+	ColourDesired ColourFromCode(int ch) const;
 	void FillRun(Surface *surface, int code, int startX, int y, int x);
 	char **lines;
-	ColourPair *colourCodeTable[256];
+	ColourDesired *colourCodeTable[256];
 public:
 	XPM(const char *textForm);
 	XPM(const char *const *linesForm);
@@ -54,10 +57,6 @@ public:
 	void Init(const char *textForm);
 	void Init(const char *const *linesForm);
 	void Clear();
-	/// Similar to same named method in ViewStyle:
-	void RefreshColourPalette(Palette &pal, bool want);
-	/// No palette used, so just copy the desired colours to the allocated colours
-	void CopyDesiredColours();
 	/// Decompose image into runs and use FillRectangle for each run
 	void Draw(Surface *surface, PRectangle &rc);
 	char **InLinesForm() { return lines; }
