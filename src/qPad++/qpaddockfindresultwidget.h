@@ -3,6 +3,7 @@
 
 #include "basedockwidget.h"
 #include <QListWidget>
+#include <QTreeWidget>
 
 class QPadDockFindResultWidget : public BaseDockWidget
 {
@@ -10,6 +11,7 @@ class QPadDockFindResultWidget : public BaseDockWidget
 
 private:
     QListWidget *m_pList;
+    QTreeWidget *m_pTree;
 
 public:
     explicit QPadDockFindResultWidget(QWidget *parent = 0);

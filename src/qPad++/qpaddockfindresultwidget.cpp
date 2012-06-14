@@ -9,6 +9,7 @@ QPadDockFindResultWidget::QPadDockFindResultWidget(QWidget *parent) :
     BaseDockWidget(parent)
 {
     m_pList=NULL;
+    m_pTree=NULL;
 }
 
 QPadDockFindResultWidget::~QPadDockFindResultWidget() {
@@ -17,13 +18,15 @@ QPadDockFindResultWidget::~QPadDockFindResultWidget() {
 
 void QPadDockFindResultWidget::slotCreate() {
     setWindowTitle(IDS_TITLE_FIND_RESULT);
-    m_pList=new QListWidget(this);
-    setWidget(m_pList);
+    m_pTree=new QTreeWidget(this);
+    setAllowedAreas(Qt::BottomDockWidgetArea);
+    setFeatures(QDockWidget::DockWidgetClosable);
+    setWidget(m_pTree);
 
-    m_pList->addItems(QStringList() << "test1" << "test2" << "test3" << "test4");
 }
 
 void QPadDockFindResultWidget::slotDestroy() {
     setWidget(NULL);
     _DEL_MEM(m_pList);
+    _DEL_MEM(m_pTree);
 }

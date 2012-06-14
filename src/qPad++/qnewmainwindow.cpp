@@ -1398,7 +1398,6 @@ void QNewMainWindow::slotCreate() {
 
     // Dock widget test
     m_pDockFindResult=new QPadDockFindResultWidget(this);
-    m_pDockFindResult->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
 
     addDockWidget(Qt::BottomDockWidgetArea, m_pDockFindResult);
 
