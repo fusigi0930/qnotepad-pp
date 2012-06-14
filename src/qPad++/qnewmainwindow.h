@@ -15,6 +15,7 @@
 #include "qpadmdisubwindow.h"
 #include <QMap>
 #include <QShortcut>
+#include <QDockWidget>
 
 namespace Ui {
 class QNewMainWindow;
@@ -37,6 +38,7 @@ class QNewMainWindow : public BaseMainWindow
 
 private:
     QMdiArea *m_pMdiArea;
+    QDockWidget *m_pDockFindResult;
     QActionGroup m_langActionsGroup;
     QActionGroup m_encodingActionsGroup;
     QMap<unsigned int, QShortcut*> m_mapShortcuts;

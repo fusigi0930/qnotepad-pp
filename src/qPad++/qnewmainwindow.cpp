@@ -23,6 +23,8 @@
 #include <QTextCodec>
 #include <QByteArray>
 #include <QList>
+#include <QListWidget>
+#include "qpaddockfindresultwidget.h"
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -33,7 +35,7 @@ QNewMainWindow::QNewMainWindow(QWidget *parent) :
     m_pMdiArea=NULL;
     m_nNewDocNum=1;
     m_vtMenuLangActions.clear();
-
+    m_pDockFindResult=NULL;
 
 }
 
@@ -48,6 +50,7 @@ QNewMainWindow::~QNewMainWindow()
 
     m_pMdiArea->closeAllSubWindows();
     _DEL_MEM(m_pMdiArea);
+    _DEL_MEM(m_pDockFindResult);
 }
 
 void QNewMainWindow::setMenuActions() {
@@ -1392,6 +1395,12 @@ void QNewMainWindow::slotCreate() {
     QsciScintilla* ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());//(ptrSubWin->userData(EUSERDATA_SCINTILLA_TEXT_EDITOR));
     if (!ptrEdit) return;
     slotDocWasModified();
+
+    // Dock widget test
+    m_pDockFindResult=new QPadDockFindResultWidget(this);
+    m_pDockFindResult->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::BottomDockWidgetArea);
+
+    addDockWidget(Qt::BottomDockWidgetArea, m_pDockFindResult);
 
     this->show();
 }

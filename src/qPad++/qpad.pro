@@ -37,7 +37,9 @@ SOURCES += main.cpp\
     qpadmdiarea.cpp \
     qpadmdisubwindow.cpp \
     base-class/basedialog.cpp \
-    qpadgotolinedialog.cpp
+    qpadgotolinedialog.cpp \
+    base-class/basedockwidget.cpp \
+    qpaddockfindresultwidget.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -54,7 +56,9 @@ HEADERS  += qnewmainwindow.h \
     qpadmdiarea.h \
     qpadmdisubwindow.h \
     base-class/basedialog.h \
-    qpadgotolinedialog.h
+    qpadgotolinedialog.h \
+    base-class/basedockwidget.h \
+    qpaddockfindresultwidget.h
 
 FORMS    += ui/qnewmainwindow.ui \
     ui/qpadgotolinedialog.ui
