@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     base-class/basedialog.cpp \
     qpadgotolinedialog.cpp \
     base-class/basedockwidget.cpp \
-    qpaddockfindresultwidget.cpp
+    qpaddockfindresultwidget.cpp \
+    qpadfindreplacedialog.cpp
 
 HEADERS  += qnewmainwindow.h \
     base-class/basemainwindow.h \
@@ -58,10 +59,12 @@ HEADERS  += qnewmainwindow.h \
     base-class/basedialog.h \
     qpadgotolinedialog.h \
     base-class/basedockwidget.h \
-    qpaddockfindresultwidget.h
+    qpaddockfindresultwidget.h \
+    qpadfindreplacedialog.h
 
 FORMS    += ui/qnewmainwindow.ui \
-    ui/qpadgotolinedialog.ui
+    ui/qpadgotolinedialog.ui \
+    ui/qpadfindreplacedialog.ui
 
 INCLUDEPATH += \
     QtSingle \
