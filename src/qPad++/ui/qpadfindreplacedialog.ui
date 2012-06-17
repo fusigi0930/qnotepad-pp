@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QPadFindReplaceDialog</class>
  <widget class="QDialog" name="QPadFindReplaceDialog">
@@ -5,13 +6,507 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>594</width>
+    <height>392</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QTabWidget" name="ID_TAB">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>571</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="ID_TAB_FIND">
+    <attribute name="title">
+     <string>IDS_TAB_FIND</string>
+    </attribute>
+    <widget class="QLabel" name="ID_LABEL_1">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_FIND_WHAT</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_FIND">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_WHOLE_WORD_FIND">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_WHOLE_WORD</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_FIND">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_WARP_FIND">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_WARP</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_FA_IN_ALL_FIND">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>70</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_FA_IN_ALL</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_FIND_NEXT_FIND">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>10</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_FIND_NEXT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_FA_IN_CUR_FIND">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>100</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_FA_IN_CUR</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_COUNT_FIND">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>40</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_COUNT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_CLOSE_FIND">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>130</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID_BUTTON_CLOSE</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="ID_TAB_REPLACE">
+    <attribute name="title">
+     <string>IDS_TAB_REPLACE</string>
+    </attribute>
+    <widget class="QLabel" name="ID_LABEL_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_FIND_WHAT</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_R_FIND">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_WHOLE_WORD_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_WHOLE_WORD</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_WARP_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_WARP</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="ID_TAB_FIND_IN_FILES">
+    <attribute name="title">
+     <string>IDS_TAB_FIND_IN_FILES</string>
+    </attribute>
+    <widget class="QLabel" name="ID_LABEL_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_FIND_WHAT</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_FIND_FILES">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_WHOLE_WORD_FIND_FILES">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_WHOLE_WORD</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_FIND_FILES">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="ID_TAB_MARK">
+    <attribute name="title">
+     <string>IDS_TAB_MARK</string>
+    </attribute>
+    <widget class="QLabel" name="ID_LABEL_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_FIND_WHAT</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_MARK">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_WHOLE_WORD_MARK">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_WHOLE_WORD</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_WARP_MARK">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_WARP</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_MARK">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="ID_GROUP_SEARCH_MODE">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>280</y>
+     <width>191</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>IDS_GROUP_SEARCH_MODE</string>
+   </property>
+   <widget class="QRadioButton" name="ID_RADIO_SM_NORMAL">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_NORMAL</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ID_RADIO_SM_EXTEND">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_EXTEND</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ID_RADIO_SM_REGEX">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_REGEX</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="ID_GROUP_TRANSPARENT">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>279</y>
+     <width>241</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>IDS_GROUP_TRANSPARENT</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <widget class="QRadioButton" name="ID_RADIO_ON_LOST_FOCUS">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>211</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_ON_LOST_FOCUS</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ID_RADIO_ALWAYS">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>211</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_ALWAYS</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="ID_SLIDER_TRANSPARENT">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>211</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="ID_GROUP_DIRECTION">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>280</y>
+     <width>120</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>IDS_GROUP_DIRECTION</string>
+   </property>
+   <widget class="QRadioButton" name="ID_RADIO_UP">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>83</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_UP</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ID_RADIO_DOWN">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>83</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IDS_RADIO_DOWN</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -1134,657 +1134,657 @@
         <translation>Text Direction LTR</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1560"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1563"/>
         <source>ENCODING_ANSI</source>
         <translation>Encode in ANSI</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1565"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1571"/>
         <source>ENCODING_UTF8_NO_BOM</source>
         <translation>Encode in UTF-8 without BOM</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1570"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1579"/>
         <source>ENCODING_UTF8</source>
         <translation>Encode in UTF-8</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1575"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1587"/>
         <source>ENCODING_UCS2_BE</source>
         <translation>Encode in UCS-2 Big Endian</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1580"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1595"/>
         <source>ENCODING_UCS2_LE</source>
         <translation>Encode in UCS-2 Little Endian</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1585"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1603"/>
         <source>ENCODING_ISO8859_6</source>
         <translation>ISO 8859-6</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1590"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1611"/>
         <source>ENCODING_OEM720</source>
         <translation>OEM 720</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1595"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1619"/>
         <source>ENCODING_WINDOW_1256</source>
         <translation>Windows-1256</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1600"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1627"/>
         <source>ENCODING_ISO8859_4</source>
         <translation>ISO 8859-4</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1605"/>
-        <location filename="../ui/qnewmainwindow.ui" line="1608"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1635"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1638"/>
         <source>ENCODING_ISO8859_13</source>
         <translation>ISO 8859-13</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1613"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1646"/>
         <source>ENCODING_OEM775</source>
         <translation>OEM 775</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1618"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1654"/>
         <source>ENCODING_WINDOW_1257</source>
         <translation>Windows-1257</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1623"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1662"/>
         <source>ENCODING_ISO8859_14</source>
         <translation>ISO 8859-14</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1628"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1670"/>
         <source>ENCODING_ISO8859_5</source>
         <translation>ISO 8859-5</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1633"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1678"/>
         <source>ENCODING_KOI8_R</source>
         <translation>KOI8-R</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1638"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1686"/>
         <source>ENCODING_KOI8_U</source>
         <translation>KOI8-U</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1643"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1694"/>
         <source>ENCODING_MACINTOSH</source>
         <translation>Macintosh</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1648"/>
-        <location filename="../ui/qnewmainwindow.ui" line="1653"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1702"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1710"/>
         <source>ENCODING_OEM_855</source>
         <translation>OEM 855</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1658"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1718"/>
         <source>ENCODING_WINDOW_1251</source>
         <translation>Windows-1251</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1663"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1726"/>
         <source>ENCODING_OEM_852</source>
         <translation>OEM 852</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1668"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1734"/>
         <source>ENCODING_WINDOW_1250</source>
         <translation>Windows-1250</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1673"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1742"/>
         <source>ENCODING_BIG5</source>
         <translation>Big5 (Traditional)</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1678"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1750"/>
         <source>ENCODING_GB2312</source>
         <translation>GB2312 (Simplified)</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1683"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1758"/>
         <source>ENCODING_ISO8859_2</source>
         <translation>ISO 8859-2</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1688"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1766"/>
         <source>ENCODING_ISO8859_7</source>
         <translation>ISO 8859-7</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1693"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1774"/>
         <source>ENCODING_OEM_737</source>
         <translation>OEM 737</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1698"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1782"/>
         <source>ENCODING_OEM_869</source>
         <translation>OEM 869</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1703"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1790"/>
         <source>ENCODING_WINDOW_1253</source>
         <translation>Windows-1253</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1708"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1798"/>
         <source>ENCODING_ISO8859_8</source>
         <translation>ISO 8859-8</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1713"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1806"/>
         <source>ENCODING_OEM_862</source>
         <translation>OEM 862</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1718"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1814"/>
         <source>ENCODING_WINDOW_1255</source>
         <translation>Windows-1255</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1723"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1822"/>
         <source>ENCODING_SHIFT_JIS</source>
         <translation>Shift-JIS</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1728"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1830"/>
         <source>ENCODING_WINDOW_949</source>
         <translation>Windows 949</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1733"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1838"/>
         <source>ENCODING_EUC_KR</source>
         <translation>EUC-KR</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1738"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1846"/>
         <source>ENCODING_OEM_861</source>
         <translation>OEM 861 : Icelandic</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1743"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1854"/>
         <source>ENCODING_OEM_865</source>
         <translation>OEM 865 : Nordic</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1748"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1862"/>
         <source>ENCODING_TIS_620</source>
         <translation>TIS-620</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1753"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1870"/>
         <source>ENCODING_ISO8859_3</source>
         <translation>ISO 8859-3</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1758"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1878"/>
         <source>ENCODING_ISO8859_9</source>
         <translation>ISO 8859-9</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1763"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1886"/>
         <source>ENCODING_OEM_857</source>
         <translation>OEM 857</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1768"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1894"/>
         <source>ENCODING_WINDOW_1254</source>
         <translation>Windows-1254</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1773"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1902"/>
         <source>ENCODING_ISO8859_1</source>
         <translation>ISO 8859-1</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1778"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1910"/>
         <source>ENCODING_ISO8859_15</source>
         <translation>ISO 8859-15</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1783"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1918"/>
         <source>ENCODING_OEM_850</source>
         <translation>OEM 850</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1788"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1926"/>
         <source>ENCODING_OEM_858</source>
         <translation>OEM 858</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1793"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1934"/>
         <source>ENCODING_OEM_860</source>
         <translation>OEM 860 : Portuguese</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1798"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1942"/>
         <source>ENCODING_OEM_863</source>
         <translation>OEM 863 : French</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1803"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1950"/>
         <source>ENCODING_OEM_US</source>
         <translation>OEM-US</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1808"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1958"/>
         <source>ENCODING_WINDOW_1252</source>
         <translation>Windows-1252</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1813"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1966"/>
         <source>ENCODING_WINDOW_1258</source>
         <translation>Windows-1258</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1818"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1971"/>
         <source>ENCODING_CONV_ANSI</source>
         <translation>Convert to ANSI</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1823"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1976"/>
         <source>ENCODING_CONV_UTF8_NO_BOM</source>
         <translation>Convert to UTF-8 without BOM</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1828"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1981"/>
         <source>ENCODING_CONV_UTF8</source>
         <translation>Convert to UTF-8</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1833"/>
-        <location filename="../ui/qnewmainwindow.ui" line="1836"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1986"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1989"/>
         <source>ENCODING_CONV_UCS2_BE</source>
         <translation>Convert to UCS-2 Big Endian</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1841"/>
-        <location filename="../ui/qnewmainwindow.ui" line="1844"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1994"/>
+        <location filename="../ui/qnewmainwindow.ui" line="1997"/>
         <source>ENCODING_CONV_UCS2_LE</source>
         <translation>Convert to UCS-2 Little Endian</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1852"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2005"/>
         <source>LANG_ADA</source>
         <translation>Ada</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1860"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2013"/>
         <source>LANG_ASP</source>
         <translation>ASP</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1868"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2021"/>
         <source>LANG_ASSEMBLY</source>
         <translation>Assembly</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1876"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2029"/>
         <source>LANG_AUTO_IT</source>
         <translation>AutoIt</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1884"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2037"/>
         <source>LANG_BATCH</source>
         <translation>Batch</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1892"/>
-        <location filename="../ui/qnewmainwindow.ui" line="1895"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2045"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2048"/>
         <source>LANG_ANSI_C</source>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1903"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2056"/>
         <source>LANG_C_SHARP</source>
         <translation>C#</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1911"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2064"/>
         <source>LANG_CPP</source>
         <translation>C++</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1919"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2072"/>
         <source>LANG_CAML</source>
         <translation>Caml</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1927"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2080"/>
         <source>LANG_CMAKE</source>
         <translation>Cmake</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1935"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2088"/>
         <source>LANG_COBOL</source>
         <translation>COBOL</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1943"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2096"/>
         <source>LANG_CSS</source>
         <translation>CSS</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1951"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2104"/>
         <source>LANG_ANSI_D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1959"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2112"/>
         <source>LANG_DIFF</source>
         <translation>Diff</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1967"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2120"/>
         <source>LANG_FLASH</source>
         <translation>Flash actionscript</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1975"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2128"/>
         <source>LANG_FORTRAN</source>
         <translation>Fortran</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1983"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2136"/>
         <source>LANG_GUI4CLI</source>
         <translation>Gui4Cli</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1991"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2144"/>
         <source>LANG_HASKELL</source>
         <translation>Haskell</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="1999"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2152"/>
         <source>LANG_HTML</source>
         <translation>HTML</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2007"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2160"/>
         <source>LANG_INNO</source>
         <translation>INNO</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2015"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2168"/>
         <source>LANG_JAVA</source>
         <translation>Java</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2023"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2176"/>
         <source>LANG_JAVASCRIPT</source>
         <translation>Javascript</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2031"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2184"/>
         <source>LANG_JSP</source>
         <translation>JSP</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2039"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2192"/>
         <source>LANG_KIX</source>
         <translation>KIXtart</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2047"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2200"/>
         <source>LANG_LISP</source>
         <translation>LISP</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2055"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2208"/>
         <source>LANG_LUA</source>
         <translation>Lua</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2063"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2216"/>
         <source>LANG_MAKEFILE</source>
         <translation>Makefile</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2071"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2224"/>
         <source>LANG_MATLAB</source>
         <translation>Matlab</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2079"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2232"/>
         <source>LANG_MS_INI</source>
         <translation>MS INI file</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2087"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2240"/>
         <source>LANG_MSDOS</source>
         <translation>MS-DOS Style</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2095"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2248"/>
         <source>LANG_NORMAL_TEXT</source>
         <translation>Normal Text</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2103"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2256"/>
         <source>LANG_NSIS</source>
         <translation>NSIS</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2111"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2264"/>
         <source>LANG_OBJECTIVE_C</source>
         <translation>Objective-C</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2119"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2272"/>
         <source>LANG_PASCAL</source>
         <translation>Pascal</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2127"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2280"/>
         <source>LANG_PERL</source>
         <translation>Perl</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2135"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2288"/>
         <source>LANG_PHP</source>
         <translation>PHP</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2143"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2296"/>
         <source>LANG_POSTSCRIPT</source>
         <translation>Postscript</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2151"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2304"/>
         <source>LANG_POWERSHELL</source>
         <translation>PowerShell</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2159"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2312"/>
         <source>LANG_PROPS</source>
         <translation>Properties</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2167"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2320"/>
         <source>LANG_PYTHON</source>
         <translation>Python</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2175"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2328"/>
         <source>LANG_ANSI_R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2183"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2336"/>
         <source>LANG_RESOURCE_FILE</source>
         <translation>Resource file</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2191"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2344"/>
         <source>LANG_RUBY</source>
         <translation>Ruby</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2199"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2352"/>
         <source>LANG_BASH</source>
         <translation>Shell</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2207"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2360"/>
         <source>LANG_SCHEME</source>
         <translation>Scheme</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2215"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2368"/>
         <source>LANG_SMALLTALK</source>
         <translation>Smalltalk</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2223"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2376"/>
         <source>LANG_SQL</source>
         <translation>SQL</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2231"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2384"/>
         <source>LANG_TCL</source>
         <translation>TCL</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2239"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2392"/>
         <source>LANG_TEX</source>
         <translation>TeX</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2247"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2400"/>
         <source>LANG_VB</source>
         <translation>Visual Basic</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2255"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2408"/>
         <source>LANG_VHDL</source>
         <translation>VHDL</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2263"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2416"/>
         <source>LANG_VERILOG</source>
         <translation>Verilog</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2271"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2424"/>
         <source>LANG_XML</source>
         <translation>XML</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2279"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2432"/>
         <source>LANG_YAML</source>
         <translation>YAML</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2287"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2440"/>
         <source>LANG_USER</source>
         <translation>User-Defined</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2292"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2445"/>
         <source>SETTINGS_PERFERENCES</source>
         <translation>Preferences...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2297"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2450"/>
         <source>SETTINGS_LANG_STYLE</source>
         <translation>Style Configurator...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2302"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2455"/>
         <source>SETTINGS_SHORTCUT_MAPPER</source>
         <translation>Shortcut Mapper...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2307"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2460"/>
         <source>SETTINGS_IMPORT_PLUGIN</source>
         <translation>Import plugin(s)...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2312"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2465"/>
         <source>SETTINGS_IMPORT_STYLE_THEME</source>
         <translation>Import style theme(s)...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2317"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2470"/>
         <source>SETTINGS_EDIT_CONTEXTMENU</source>
         <translation>Edit Popup ContextMenu</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2322"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2475"/>
         <source>MACRO_RECORD</source>
         <translation>Start Re&amp;cording</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2327"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2480"/>
         <source>MACRO_STOP</source>
         <translation>S&amp;top Recording</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2332"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2485"/>
         <source>MACRO_PLAYBACK</source>
         <translation>&amp;Playback</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2337"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2490"/>
         <source>MACRO_SAVE</source>
         <translation>&amp;Save Current Recorded Macro...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2342"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2495"/>
         <source>MACRO_RUN_MULTI_MACRO</source>
         <translation>&amp;Run a Macro Multiple Times...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2347"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2500"/>
         <source>RUN_RUN</source>
         <translation>&amp;Run...</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2352"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2505"/>
         <source>HELP_HELP</source>
         <translation>Help Contents</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2357"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2510"/>
         <source>HELP_HOMEPAGE</source>
         <translation>qPad++ Hone</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2362"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2515"/>
         <source>HELP_PROJECTPAGE</source>
         <translation>qPad++ Project Page</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2367"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2520"/>
         <source>HELP_ONLINE_DOC</source>
         <translation>Online Documentation</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2372"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2525"/>
         <source>HELP_FORUM</source>
         <translation>Forum</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2377"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2530"/>
         <source>HELP_GET_PLUGINS</source>
         <translation>Get More Plugins</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2382"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2535"/>
         <source>HELP_UPDATE_QPAD</source>
         <translation>Update qPad++</translation>
     </message>
     <message>
-        <location filename="../ui/qnewmainwindow.ui" line="2387"/>
+        <location filename="../ui/qnewmainwindow.ui" line="2540"/>
         <source>HELP_ABOUT</source>
         <translation>About qPad++</translation>
     </message>
@@ -1817,6 +1817,145 @@
         <source>IDS_SAVE_FILE_TITLE</source>
         <translation>Save</translation>
     </message>
+    <message>
+        <location filename="strings.h" line="10"/>
+        <source>IDS_TITLE_FIND_RESULT</source>
+        <translation>Find result</translation>
+    </message>
+</context>
+<context>
+    <name>QPadFindReplaceDialog</name>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="30"/>
+        <source>IDS_TAB_FIND</source>
+        <translation>Find</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="42"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="177"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="247"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="304"/>
+        <source>IDS_LABEL_FIND_WHAT</source>
+        <translation>&amp;Find what:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="68"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="203"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="273"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="330"/>
+        <source>IDS_CHECK_MATCH_WHOLE_WORD</source>
+        <translation>Match &amp;whole word only</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="81"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="229"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="286"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="356"/>
+        <source>IDS_CHECK_MATCH_CASE</source>
+        <translation>Match &amp;case</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="94"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="216"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="343"/>
+        <source>IDS_CHECK_WARP</source>
+        <translation>War&amp;p around</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="107"/>
+        <source>IDS_BUTTON_FA_IN_ALL</source>
+        <translation>Find All in All &amp;Opened Documents</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="120"/>
+        <source>IDS_BUTTON_FIND_NEXT</source>
+        <translation>Find Next</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="133"/>
+        <source>IDS_BUTTON_FA_IN_CUR</source>
+        <translation>Find All in Current Document</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="146"/>
+        <source>IDS_BUTTON_COUNT</source>
+        <translation>Coun&amp;t</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="159"/>
+        <source>ID_BUTTON_CLOSE</source>
+        <translation>Close</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="165"/>
+        <source>IDS_TAB_REPLACE</source>
+        <translation>Replace</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="235"/>
+        <source>IDS_TAB_FIND_IN_FILES</source>
+        <translation>Find in Files</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="292"/>
+        <source>IDS_TAB_MARK</source>
+        <translation>Mark</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="371"/>
+        <source>IDS_GROUP_SEARCH_MODE</source>
+        <translation>Search Mode</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="383"/>
+        <source>IDS_RADIO_NORMAL</source>
+        <translation>&amp;Normal</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="396"/>
+        <source>IDS_RADIO_EXTEND</source>
+        <translation>E&amp;xtended (\n, \t, \0, \x...)</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="409"/>
+        <source>IDS_RADIO_REGEX</source>
+        <translation>Re&amp;gular expression</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="423"/>
+        <source>IDS_GROUP_TRANSPARENT</source>
+        <translation>Transparenc&amp;y</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="441"/>
+        <source>IDS_RADIO_ON_LOST_FOCUS</source>
+        <translation>On losing fouces</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="454"/>
+        <source>IDS_RADIO_ALWAYS</source>
+        <translation>Always</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="481"/>
+        <source>IDS_GROUP_DIRECTION</source>
+        <translation>Direction</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="493"/>
+        <source>IDS_RADIO_UP</source>
+        <translation>&amp;Up</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="506"/>
+        <source>IDS_RADIO_DOWN</source>
+        <translation>&amp;Down</translation>
+    </message>
 </context>
 <context>
     <name>QPadGotoLineDialog</name>
@@ -1830,33 +1969,33 @@
         <translation>Go To ...</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="42"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="20"/>
         <source>ID_RADIO_BUTTON_LINE</source>
         <translation>&amp;Line</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="55"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="72"/>
         <source>ID_RADIO_BUTTON_OFFSET</source>
         <translation>&amp;Offset</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="68"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="27"/>
         <source>LABEL_YOUR_LOCATION</source>
         <translation>You are Here:</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="81"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="41"/>
         <source>LABEL_GOTO</source>
         <translation>You want to go to:</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="94"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="48"/>
         <source>LABEL_MAX</source>
         <translation>You cannot further than:</translation>
     </message>
     <message>
-        <location filename="../ui/qpadgotolinedialog.ui" line="107"/>
-        <location filename="../ui/qpadgotolinedialog.ui" line="130"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="34"/>
+        <location filename="../ui/qpadgotolinedialog.ui" line="55"/>
         <source>dynamic</source>
         <translation>dynamic</translation>
     </message>
