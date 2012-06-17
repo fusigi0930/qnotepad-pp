@@ -45,7 +45,7 @@
     <widget class="QComboBox" name="ID_COMBO_FIND">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>100</x>
        <y>10</y>
        <width>291</width>
        <height>22</height>
@@ -93,15 +93,21 @@
      <property name="text">
       <string>IDS_CHECK_WARP</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="ID_BUTTON_FA_IN_ALL_FIND">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>410</x>
        <y>70</y>
-       <width>91</width>
-       <height>23</height>
+       <width>141</width>
+       <height>41</height>
       </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
       <string>IDS_BUTTON_FA_IN_ALL</string>
@@ -110,9 +116,9 @@
     <widget class="QPushButton" name="ID_BUTTON_FIND_NEXT_FIND">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>410</x>
        <y>10</y>
-       <width>91</width>
+       <width>141</width>
        <height>23</height>
       </rect>
      </property>
@@ -123,10 +129,10 @@
     <widget class="QPushButton" name="ID_BUTTON_FA_IN_CUR_FIND">
      <property name="geometry">
       <rect>
-       <x>460</x>
-       <y>100</y>
-       <width>91</width>
-       <height>23</height>
+       <x>410</x>
+       <y>120</y>
+       <width>141</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
@@ -136,9 +142,9 @@
     <widget class="QPushButton" name="ID_BUTTON_COUNT_FIND">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>410</x>
        <y>40</y>
-       <width>91</width>
+       <width>141</width>
        <height>23</height>
       </rect>
      </property>
@@ -149,9 +155,9 @@
     <widget class="QPushButton" name="ID_BUTTON_CLOSE_FIND">
      <property name="geometry">
       <rect>
-       <x>460</x>
-       <y>130</y>
-       <width>91</width>
+       <x>410</x>
+       <y>170</y>
+       <width>141</width>
        <height>23</height>
       </rect>
      </property>
@@ -180,7 +186,7 @@
     <widget class="QComboBox" name="ID_COMBO_R_FIND">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>100</x>
        <y>10</y>
        <width>291</width>
        <height>22</height>
@@ -214,6 +220,9 @@
      </property>
      <property name="text">
       <string>IDS_CHECK_WARP</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_REPLACE">
@@ -250,7 +259,7 @@
     <widget class="QComboBox" name="ID_COMBO_FIND_FILES">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>100</x>
        <y>10</y>
        <width>291</width>
        <height>22</height>
@@ -307,7 +316,7 @@
     <widget class="QComboBox" name="ID_COMBO_MARK">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>100</x>
        <y>10</y>
        <width>291</width>
        <height>22</height>
@@ -341,6 +350,9 @@
      </property>
      <property name="text">
       <string>IDS_CHECK_WARP</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QCheckBox" name="ID_CHECK_MATCH_CASE_MARK">
@@ -381,6 +393,9 @@
     </property>
     <property name="text">
      <string>IDS_RADIO_NORMAL</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="ID_RADIO_SM_EXTEND">
@@ -439,6 +454,9 @@
     </property>
     <property name="text">
      <string>IDS_RADIO_ON_LOST_FOCUS</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="ID_RADIO_ALWAYS">
@@ -504,6 +522,9 @@
     </property>
     <property name="text">
      <string>IDS_RADIO_DOWN</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

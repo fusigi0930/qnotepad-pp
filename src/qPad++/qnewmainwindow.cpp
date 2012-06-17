@@ -25,6 +25,7 @@
 #include <QList>
 #include <QListWidget>
 #include "qpaddockfindresultwidget.h"
+#include "qpadfindreplacedialog.h"
 
 QNewMainWindow::QNewMainWindow(QWidget *parent) :
     BaseMainWindow(parent),
@@ -201,7 +202,11 @@ void QNewMainWindow::setSearchMenuActions() {
     list.clear();
     connect(ui->actionSEARCH_GOTO_LINE, SIGNAL(triggered()), this, SLOT(actionSearchGotoLine()));
 
-    ui->actionSEARCH_FIND->setEnabled(false);
+    list.push_back(QKeySequence("Ctrl+F"));
+    ui->actionSEARCH_FIND->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_FIND, SIGNAL(triggered()), this, SLOT(actionSearchFind()));
+
     ui->actionSEARCH_FINDINFILES->setEnabled(false);
     ui->actionSEARCH_FIND_NEXT->setEnabled(false);
     ui->actionSEARCH_FIND_PREV->setEnabled(false);
@@ -1193,6 +1198,13 @@ void QNewMainWindow::actionSearchGotoLine() {
             ptrEdit->SendScintilla(SCI_GOTOPOS, 0 <= dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
         }
     }
+}
+
+void QNewMainWindow::actionSearchFind() {
+    QPadFindReplaceDialog *pDlg=new QPadFindReplaceDialog(this);
+    pDlg->show();
+    pDlg->raise();
+    pDlg->activateWindow();
 }
 
 void QNewMainWindow::actionEncoding() {

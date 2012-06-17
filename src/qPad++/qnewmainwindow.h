@@ -115,6 +115,7 @@ private slots:
     void actionSearchBookmarkNext();
     void actionSearchBookmarkPrev();
     void actionSearchGotoLine();
+    void actionSearchFind();
 
     void actionEncoding();
 

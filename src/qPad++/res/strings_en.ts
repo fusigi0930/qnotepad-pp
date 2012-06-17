@@ -1841,7 +1841,7 @@
         <location filename="../ui/qpadfindreplacedialog.ui" line="247"/>
         <location filename="../ui/qpadfindreplacedialog.ui" line="304"/>
         <source>IDS_LABEL_FIND_WHAT</source>
-        <translation>&amp;Find what:</translation>
+        <translation>Find what:</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="68"/>
@@ -1869,7 +1869,8 @@
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="107"/>
         <source>IDS_BUTTON_FA_IN_ALL</source>
-        <translation>Find All in All &amp;Opened Documents</translation>
+        <translation>Find All in All Opened 
+Documents</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="120"/>
@@ -1879,7 +1880,8 @@
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="133"/>
         <source>IDS_BUTTON_FA_IN_CUR</source>
-        <translation>Find All in Current Document</translation>
+        <translation>Find All in Current 
+Document</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="146"/>
