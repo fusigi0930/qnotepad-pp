@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QCheckBox>
 #include <QRadioButton>
+#include "qpadmdisubwindow.h"
+#include <Qsci/qsciscintilla.h>
 
 QPadFindReplaceDialog::QPadFindReplaceDialog(QWidget *parent) :
     BaseDialog(parent),

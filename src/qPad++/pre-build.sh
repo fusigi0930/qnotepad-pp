@@ -1,4 +1,4 @@
-VER=$(git describe --long | sed s/^v// | sed s/-g.*// | sed s/-/\./)
+VER=$(git describe --long | sed s/^.*v// | sed s/-g.*// | sed s/-/\./)
 if [ -f "version_info" ]; then
 	rm version_info
 fi
