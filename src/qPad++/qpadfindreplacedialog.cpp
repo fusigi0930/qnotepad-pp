@@ -74,6 +74,26 @@ void QPadFindReplaceDialog::getCommonUiValue() {
     m_nTransparentValue=ui->ID_SLIDER_TRANSPARENT->value();
 }
 
+void QPadFindReplaceDialog::getFindTabValue() {
+    // get the check box value
+    m_nSearchFeature=0;
+    QCheckBox *ptrFeatureBoxArray[] = {
+        ui->ID_CHECK_MATCH_WHOLE_WORD_FIND,
+        ui->ID_CHECK_MATCH_CASE_FIND,
+        ui->ID_CHECK_WARP_FIND,
+        NULL
+    };
+    int i=0;
+    while (ptrFeatureBoxArray[i]) {
+        if (Qt::Checked == ptrFeatureBoxArray[i]->checkState()) {
+            m_nSearchFeature |= (1 << i);
+        }
+        ++i;
+    }
+
+    getCommonUiValue();
+}
+
 void QPadFindReplaceDialog::showEvent(QShowEvent *event) {
     _DEBUG_MSG("+++");
     if (!m_bIsCreated) {
@@ -94,7 +114,10 @@ void QPadFindReplaceDialog::slotCreate() {
     ui->setupUi(this);
 
     connect(ui->ID_TAB, SIGNAL(currentChanged(int)), this , SLOT(slotChangeTab(int)));
+
     connect(ui->ID_BUTTON_FIND_NEXT_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindNext()));
+    connect(ui->ID_BUTTON_COUNT_FIND, SIGNAL(clicked()), this, SLOT(slotFindCount()));
+
     connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
 
     QTimer::singleShot(0, this, SLOT(slotInitTab()));
@@ -106,23 +129,7 @@ void QPadFindReplaceDialog::slotCreate() {
 }
 
 void QPadFindReplaceDialog::slotFindFindNext() {
-    // get the check box value
-    m_nSearchFeature=0;
-    QCheckBox *ptrFeatureBoxArray[] = {
-        ui->ID_CHECK_MATCH_WHOLE_WORD_FIND,
-        ui->ID_CHECK_MATCH_CASE_FIND,
-        ui->ID_CHECK_WARP_FIND,
-        NULL
-    };
-    int i=0;
-    while (ptrFeatureBoxArray[i]) {
-        if (Qt::Checked == ptrFeatureBoxArray[i]->checkState()) {
-            m_nSearchFeature |= (1 << i);
-        }
-        ++i;
-    }
-
-    getCommonUiValue();
+    getFindTabValue();
 
     QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
     if (!ptrMainWin) return;
@@ -150,7 +157,27 @@ void QPadFindReplaceDialog::slotFindFindNext() {
 }
 
 void QPadFindReplaceDialog::slotFindCount() {
+    getFindTabValue();
+    int nCount=0;
 
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       m_nDirection == QPadFindReplaceDialog::EDIR_DOWN, -1, -1, false, false);
+
+    while (bResult) {
+        ++nCount;
+        bResult=ptrEdit->findNext();
+    }
+    _DEBUG_MSG("total count: %d", nCount);
 }
 
 void QPadFindReplaceDialog::slotInitTab() {

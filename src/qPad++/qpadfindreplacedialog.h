@@ -63,6 +63,7 @@ protected:
 
 private:
     void getCommonUiValue();
+    void getFindTabValue();
 
 signals:
     void sigOnCloseDlg();
