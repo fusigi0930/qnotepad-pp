@@ -96,6 +96,7 @@ private slots:
     void slotChangeTab(int nIndex);
     void slotInitTab();
     void slotFindFindNext();
+    void slotOnTransparentSlider(int nValue);
 
 protected slots:
     virtual void slotCreate();

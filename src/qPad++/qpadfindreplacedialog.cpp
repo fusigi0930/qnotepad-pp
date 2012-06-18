@@ -7,6 +7,7 @@
 #include <QRadioButton>
 #include "qpadmdisubwindow.h"
 #include <Qsci/qsciscintilla.h>
+#include "qnewmainwindow.h"
 
 QPadFindReplaceDialog::QPadFindReplaceDialog(QWidget *parent) :
     BaseDialog(parent),
@@ -88,15 +89,18 @@ void QPadFindReplaceDialog::closeEvent(QCloseEvent *event) {
     emit sigOnCloseDlg();
 }
 
-
 void QPadFindReplaceDialog::slotCreate() {
     _DEBUG_MSG("+++");
     ui->setupUi(this);
 
     connect(ui->ID_TAB, SIGNAL(currentChanged(int)), this , SLOT(slotChangeTab(int)));
     connect(ui->ID_BUTTON_FIND_NEXT_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindNext()));
+    connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
 
     QTimer::singleShot(0, this, SLOT(slotInitTab()));
+
+    setWindowOpacity(1.0);
+
     m_bIsCreated=true;
     show();
 }
@@ -133,4 +137,13 @@ void QPadFindReplaceDialog::slotInitTab() {
 
 void QPadFindReplaceDialog::slotChangeTab(int nIndex) {
     this->setWindowTitle(ui->ID_TAB->tabText(nIndex));
+}
+
+void QPadFindReplaceDialog::slotOnTransparentSlider(int nValue) {
+    if (0 == nValue) {
+        setWindowOpacity(0.3);
+        return;
+    }
+    float fValue=static_cast<float>(nValue+30 > 100 ? 100 : nValue+30)/100;
+    setWindowOpacity(fValue);
 }
