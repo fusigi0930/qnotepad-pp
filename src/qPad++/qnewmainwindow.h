@@ -16,6 +16,7 @@
 #include <QMap>
 #include <QShortcut>
 #include <QDockWidget>
+#include "qpadfindreplacedialog.h"
 
 namespace Ui {
 class QNewMainWindow;
@@ -39,6 +40,8 @@ class QNewMainWindow : public BaseMainWindow
 private:
     QMdiArea *m_pMdiArea;
     QDockWidget *m_pDockFindResult;
+    QPadFindReplaceDialog *m_pFindDlg;
+
     QActionGroup m_langActionsGroup;
     QActionGroup m_encodingActionsGroup;
     QMap<unsigned int, QShortcut*> m_mapShortcuts;
@@ -55,6 +58,7 @@ public:
 
 protected:
     virtual void changeEvent(QEvent * event);
+    virtual void closeEvent(QCloseEvent *event);
 
 private:
     void setMenuActions();
@@ -83,6 +87,8 @@ private:
 
 protected:
     QMdiSubWindow* getMdiActiveWindow();
+
+signals:
 
 private slots:
     // ui action's mapping functaions
@@ -127,6 +133,8 @@ public slots:
     void slotDocWasModified();
     void slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin);
     void slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin);
+    void slotOnCloseFindDialog();
+    void slotOnFindFindNext(QPadFindReplaceDialog::SValue value, QString expression);
     
 private:
     Ui::QNewMainWindow *ui;

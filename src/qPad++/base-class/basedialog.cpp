@@ -10,7 +10,7 @@ BaseDialog::BaseDialog(QWidget *parent) :
 }
 
 BaseDialog::~BaseDialog() {
-    slotDestroy();
+    BaseDialog::slotDestroy();
 }
 
 void BaseDialog::slotCreate() {

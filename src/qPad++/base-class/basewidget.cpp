@@ -10,7 +10,7 @@ BaseWidget::BaseWidget(QWidget *parent) :
 }
 
 BaseWidget::~BaseWidget() {
-    slotDestroy();
+    BaseWidget::slotDestroy();
 }
 
 void BaseWidget::slotCreate() {

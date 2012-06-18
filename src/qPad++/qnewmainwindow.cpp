@@ -37,6 +37,7 @@ QNewMainWindow::QNewMainWindow(QWidget *parent) :
     m_nNewDocNum=1;
     m_vtMenuLangActions.clear();
     m_pDockFindResult=NULL;
+    m_pFindDlg=NULL;
 
 }
 
@@ -1201,10 +1202,18 @@ void QNewMainWindow::actionSearchGotoLine() {
 }
 
 void QNewMainWindow::actionSearchFind() {
-    QPadFindReplaceDialog *pDlg=new QPadFindReplaceDialog(this);
-    pDlg->show();
-    pDlg->raise();
-    pDlg->activateWindow();
+    if (!m_pFindDlg) {
+        m_pFindDlg=new QPadFindReplaceDialog(this);
+        m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_FIND;
+
+        connect(m_pFindDlg, SIGNAL(sigOnCloseDlg()), this, SLOT(slotOnCloseFindDialog()));
+        connect(m_pFindDlg, SIGNAL(sigFindFindNext(QPadFindReplaceDialog::SValue,QString)),
+                this, SLOT(slotOnFindFindNext(QPadFindReplaceDialog::SValue,QString)));
+    }
+
+    m_pFindDlg->show();
+    m_pFindDlg->raise();
+    m_pFindDlg->activateWindow();
 }
 
 void QNewMainWindow::actionEncoding() {
@@ -1375,6 +1384,12 @@ void QNewMainWindow::changeEvent(QEvent * event) {
     }
 }
 
+void QNewMainWindow::closeEvent(QCloseEvent *event) {
+    if (m_pFindDlg) {
+        m_pFindDlg->close();
+    }
+}
+
 void QNewMainWindow::slotCreate() {
     _DEBUG_MSG("%s", __PRETTY_FUNCTION__);
     ui->setupUi(this);
@@ -1443,4 +1458,34 @@ void QNewMainWindow::slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin) {
 
 void QNewMainWindow::slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin) {
     if (!ptrSubWin) return;
+}
+
+void QNewMainWindow::slotOnCloseFindDialog() {
+    _DEL_MEM(m_pFindDlg);
+}
+
+void QNewMainWindow::slotOnFindFindNext(QPadFindReplaceDialog::SValue value, QString expression) {
+    _DEBUG_MSG("+++");
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    _DEBUG_MSG("line: %d, index: %d\n", nLine, nIndex);
+
+    if (value.nDirection == QPadFindReplaceDialog::EDIR_UP) {
+        int nBLine, nELine, nBIndex, nEIndex;
+        ptrEdit->getSelection(&nBLine, &nBIndex, &nELine, &nEIndex);
+        nIndex= (nIndex - (nEIndex - nBIndex) < 0 ? 0 : nIndex - (nEIndex - nBIndex));
+    }
+
+    bool bResult=ptrEdit->findFirst(expression, value.nMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       value.nDirection == QPadFindReplaceDialog::EDIR_DOWN, nLine, nIndex, true, true);
+
+    _DEBUG_MSG("find result: %d", bResult);
 }
