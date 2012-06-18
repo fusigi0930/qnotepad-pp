@@ -124,9 +124,32 @@ void QPadFindReplaceDialog::slotFindFindNext() {
 
     getCommonUiValue();
 
-    QPadFindReplaceDialog::SValue value(m_nSearchMode, m_nSearchFeature, m_nDirection, m_nTransparentMode, m_nTransparentValue);
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
 
-    emit sigFindFindNext(value, ui->ID_COMBO_FIND->currentText());
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    _DEBUG_MSG("line: %d, index: %d\n", nLine, nIndex);
+
+    if (m_nDirection == QPadFindReplaceDialog::EDIR_UP) {
+        int nBLine, nELine, nBIndex, nEIndex;
+        ptrEdit->getSelection(&nBLine, &nBIndex, &nELine, &nEIndex);
+        nIndex= (nIndex - (nEIndex - nBIndex) < 0 ? 0 : nIndex - (nEIndex - nBIndex));
+    }
+
+    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       m_nDirection == QPadFindReplaceDialog::EDIR_DOWN, nLine, nIndex, true, true);
+
+}
+
+void QPadFindReplaceDialog::slotFindCount() {
 
 }
 

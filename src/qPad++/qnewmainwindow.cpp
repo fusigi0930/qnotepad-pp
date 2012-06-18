@@ -1207,8 +1207,6 @@ void QNewMainWindow::actionSearchFind() {
         m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_FIND;
 
         connect(m_pFindDlg, SIGNAL(sigOnCloseDlg()), this, SLOT(slotOnCloseFindDialog()));
-        connect(m_pFindDlg, SIGNAL(sigFindFindNext(QPadFindReplaceDialog::SValue,QString)),
-                this, SLOT(slotOnFindFindNext(QPadFindReplaceDialog::SValue,QString)));
     }
 
     m_pFindDlg->show();
@@ -1464,28 +1462,4 @@ void QNewMainWindow::slotOnCloseFindDialog() {
     _DEL_MEM(m_pFindDlg);
 }
 
-void QNewMainWindow::slotOnFindFindNext(QPadFindReplaceDialog::SValue value, QString expression) {
-    _DEBUG_MSG("+++");
-    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
-    if (!ptrSubWin) return;
-    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
-    if (!ptrEdit) return;
 
-    int nLine=-1, nIndex=-1;
-    ptrEdit->getCursorPosition(&nLine, &nIndex);
-    _DEBUG_MSG("line: %d, index: %d\n", nLine, nIndex);
-
-    if (value.nDirection == QPadFindReplaceDialog::EDIR_UP) {
-        int nBLine, nELine, nBIndex, nEIndex;
-        ptrEdit->getSelection(&nBLine, &nBIndex, &nELine, &nEIndex);
-        nIndex= (nIndex - (nEIndex - nBIndex) < 0 ? 0 : nIndex - (nEIndex - nBIndex));
-    }
-
-    bool bResult=ptrEdit->findFirst(expression, value.nMode == QPadFindReplaceDialog::EMODE_REGEX,
-                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
-                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
-                       (value.nFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
-                       value.nDirection == QPadFindReplaceDialog::EDIR_DOWN, nLine, nIndex, true, true);
-
-    _DEBUG_MSG("find result: %d", bResult);
-}

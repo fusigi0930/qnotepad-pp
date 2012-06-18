@@ -85,7 +85,7 @@ private:
 
     int reloadFileWithCharset(char *charset);
 
-protected:
+public:
     QMdiSubWindow* getMdiActiveWindow();
 
 signals:
@@ -134,7 +134,6 @@ public slots:
     void slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin);
     void slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin);
     void slotOnCloseFindDialog();
-    void slotOnFindFindNext(QPadFindReplaceDialog::SValue value, QString expression);
     
 private:
     Ui::QNewMainWindow *ui;
