@@ -88,6 +88,7 @@ private:
 
 public:
     QMdiSubWindow* getMdiActiveWindow();
+    QMdiArea* getMdiArea() { return m_pMdiArea; }
 
 signals:
 

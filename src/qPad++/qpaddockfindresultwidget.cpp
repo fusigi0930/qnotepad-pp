@@ -78,5 +78,8 @@ void QPadDockFindResultWidget::slotAddItem(QTreeWidgetItem *root) {
     m_pTree->insertTopLevelItem(0, root);
 
     m_pTree->expandItem(root);
-    m_pTree->expandItem(root->child(0));
+    _DEBUG_MSG("child count: %d", root->childCount());
+
+    for (int i=0; i<root->childCount(); ++i)
+        m_pTree->expandItem(root->child(i));
 }

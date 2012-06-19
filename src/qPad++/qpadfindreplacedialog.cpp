@@ -97,6 +97,59 @@ void QPadFindReplaceDialog::getFindTabValue() {
     getCommonUiValue();
 }
 
+void QPadFindReplaceDialog::findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin) {
+    QPadMdiSubWindow *ptrSubWin=dynamic_cast<QPadMdiSubWindow*>(ptrWin);
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nCurPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
+
+    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       true, 0, 0, false, false);
+
+    if (!bResult) {
+        return;
+    }
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    QTreeWidgetItem *ptrRoot=root;
+    _DEBUG_MSG("ptrRoot: 0x%x", ptrRoot);
+    if (!ptrRoot) return;
+
+    QTreeWidgetItem* pFile=new QTreeWidgetItem(ptrRoot, QStringList(ptrSubWin->m_qstrFileName));
+    pFile->setTextColor(0, QColor(0, 150, 0));
+    pFile->setBackgroundColor(0, QColor(210, 250, 210));
+    ptrRoot->addChild(pFile);
+
+    while (bResult) {
+        int nNextLine, nNextIndex;
+        ptrEdit->getCursorPosition(&nNextLine, &nNextIndex);
+
+        int nPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
+
+        QTreeWidgetItem *pItem=new QTreeWidgetItem(pFile,
+                                   QStringList(QString("Line %1: %2")
+                                            .arg(nNextLine)
+                                            .arg(ptrEdit->text(nNextLine).replace("\r","").replace("\n", ""))));
+        pItem->setData(0, EROLE_SUB_WIN, reinterpret_cast<qlonglong>(ptrSubWin));
+        pItem->setData(0, EROLE_FIND_POS, nPos);
+        pFile->addChild(pItem);
+
+        bResult=ptrEdit->findNext();
+        ptrEdit->getCursorPosition(&nNextLine, &nNextIndex);
+        if (nNextLine == nLine && nNextIndex == nIndex)
+            break;
+    }
+
+    emit sigInsertRootInResultWin(ptrRoot);
+    ptrEdit->SendScintilla(SCI_GOTOPOS, nCurPos);
+}
+
 void QPadFindReplaceDialog::showEvent(QShowEvent *event) {
     _DEBUG_MSG("+++");
     if (!m_bIsCreated) {
@@ -121,7 +174,8 @@ void QPadFindReplaceDialog::slotCreate() {
     connect(ui->ID_BUTTON_FIND_NEXT_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindNext()));
     connect(ui->ID_BUTTON_COUNT_FIND, SIGNAL(clicked()), this, SLOT(slotFindCount()));
     connect(ui->ID_BUTTON_CLOSE_FIND, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui->ID_BUTTON_FA_IN_CUR_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllCurrent()), Qt::QueuedConnection);
+    connect(ui->ID_BUTTON_FA_IN_CUR_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllCurrent()));
+    connect(ui->ID_BUTTON_FA_IN_ALL_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllinOpen()));
 
     connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
 
@@ -211,56 +265,33 @@ void QPadFindReplaceDialog::slotFindFindAllCurrent() {
     if (!ptrMainWin) return;
     QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
     if (!ptrSubWin) return;
-    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
-    if (!ptrEdit) return;
 
     emit sigOnCreateFindReslutWidget();
 
-    int nCurPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
-
-    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
-                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
-                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
-                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
-                       true, 0, 0, false, false);
-
-    if (!bResult) {
-        return;
-    }
-
-    int nLine=-1, nIndex=-1;
-    ptrEdit->getCursorPosition(&nLine, &nIndex);
     QTreeWidgetItem *ptrRoot=emit sigOnCreateRootItemInResultWin(ui->ID_COMBO_FIND->currentText());
     _DEBUG_MSG("ptrRoot: 0x%x", ptrRoot);
-    if (!ptrRoot) return;
 
-    QTreeWidgetItem* pFile=new QTreeWidgetItem(ptrRoot, QStringList(ptrSubWin->m_qstrFileName));
-    pFile->setTextColor(0, QColor(0, 150, 0));
-    pFile->setBackgroundColor(0, QColor(210, 250, 210));
-    ptrRoot->addChild(pFile);
+    findAllinSubWin(ptrRoot, ptrSubWin);
+}
 
-    while (bResult) {
-        int nNextLine, nNextIndex;
-        ptrEdit->getCursorPosition(&nNextLine, &nNextIndex);
+void QPadFindReplaceDialog::slotFindFindAllinOpen() {
+    getFindTabValue();
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
 
-        int nPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
+    QMdiArea *ptrArea=ptrMainWin->getMdiArea();
+    if (!ptrArea) return;
 
-        QTreeWidgetItem *pItem=new QTreeWidgetItem(pFile,
-                                   QStringList(QString("Line %1: %2")
-                                            .arg(nNextLine)
-                                            .arg(ptrEdit->text(nNextLine).replace("\r","").replace("\n", ""))));
-        pItem->setData(0, EROLE_SUB_WIN, reinterpret_cast<qlonglong>(ptrSubWin));
-        pItem->setData(0, EROLE_FIND_POS, nPos);
-        pFile->addChild(pItem);
+    emit sigOnCreateFindReslutWidget();
 
-        bResult=ptrEdit->findNext();
-        ptrEdit->getCursorPosition(&nNextLine, &nNextIndex);
-        if (nNextLine == nLine && nNextIndex == nIndex)
-            break;
+    QTreeWidgetItem *ptrRoot=emit sigOnCreateRootItemInResultWin(ui->ID_COMBO_FIND->currentText());
+    _DEBUG_MSG("ptrRoot: 0x%x", ptrRoot);
+
+    QList<QMdiSubWindow*> subList=ptrArea->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pSubWin=subList.begin(); pSubWin != subList.end(); ++pSubWin) {
+        findAllinSubWin(ptrRoot, *pSubWin);
     }
 
-    emit sigInsertRootInResultWin(ptrRoot);
-    ptrEdit->SendScintilla(SCI_GOTOPOS, nCurPos);
 }
 
 void QPadFindReplaceDialog::slotInitTab() {

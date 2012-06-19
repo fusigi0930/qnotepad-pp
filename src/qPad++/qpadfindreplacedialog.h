@@ -3,6 +3,7 @@
 
 #include "basedialog.h"
 #include <QTreeWidgetItem>
+#include <QMdiSubWindow>
 
 namespace Ui {
 class QPadFindReplaceDialog;
@@ -65,6 +66,7 @@ protected:
 private:
     void getCommonUiValue();
     void getFindTabValue();
+    void findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin);
 
 signals:
     void sigOnCloseDlg();
@@ -79,6 +81,7 @@ private slots:
     void slotFindFindNext();
     void slotFindCount();
     void slotFindFindAllCurrent();
+    void slotFindFindAllinOpen();
 
     void slotOnTransparentSlider(int nValue);
 
