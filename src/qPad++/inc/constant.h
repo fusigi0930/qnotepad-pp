@@ -1,5 +1,6 @@
 #ifndef CONSTANT_H
 #define CONSTANT_H
+#include <qnamespace.h>
 
 enum EWINDOW_STATUS {
     ESTATUS_CREATING,
@@ -10,8 +11,12 @@ enum EWINDOW_STATUS {
 };
 
 enum EUSER_DATA {
-    EUSERDATA_SCINTILLA_TEXT_EDITOR = 1001,
-    EUSERDATA_PATHNAME
+    EUSERDATA_SCINTILLA_TEXT_EDITOR = 1001
+};
+
+enum EROLE_DATA {
+    EROLE_SUB_WIN       = Qt::UserRole+100,
+    EROLE_FIND_POS
 
 };
 

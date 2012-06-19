@@ -2,6 +2,7 @@
 #define QPADFINDREPLACEDIALOG_H
 
 #include "basedialog.h"
+#include <QTreeWidgetItem>
 
 namespace Ui {
 class QPadFindReplaceDialog;
@@ -67,12 +68,18 @@ private:
 
 signals:
     void sigOnCloseDlg();
+    void sigOnCreateFindReslutWidget();
+    QTreeWidgetItem* sigOnCreateRootItemInResultWin(QString itemName);
+    void sigInsertRootInResultWin(QTreeWidgetItem *root);
 
 private slots:
     void slotChangeTab(int nIndex);
     void slotInitTab();
+
     void slotFindFindNext();
     void slotFindCount();
+    void slotFindFindAllCurrent();
+
     void slotOnTransparentSlider(int nValue);
 
 protected slots:

@@ -16,6 +16,7 @@
 #include <QMap>
 #include <QShortcut>
 #include <QDockWidget>
+#include "qpaddockfindresultwidget.h"
 #include "qpadfindreplacedialog.h"
 
 namespace Ui {
@@ -134,6 +135,10 @@ public slots:
     void slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin);
     void slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin);
     void slotOnCloseFindDialog();
+
+    void slotOnCreateFindResultWidget();
+    void slotOnCloseFindResultWidget();
+    void slotOnActivateSubWindow(QMdiSubWindow *ptrSubWin);
     
 private:
     Ui::QNewMainWindow *ui;

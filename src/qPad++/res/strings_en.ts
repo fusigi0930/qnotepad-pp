@@ -1822,6 +1822,16 @@
         <source>IDS_TITLE_FIND_RESULT</source>
         <translation>Find result</translation>
     </message>
+    <message>
+        <location filename="strings.h" line="11"/>
+        <source>IDS_TITLE_FIND_COUNT</source>
+        <translation>Count</translation>
+    </message>
+    <message>
+        <location filename="strings.h" line="12"/>
+        <source>IDS_FIND_COUNT</source>
+        <translation>%1 match(es) to occurrence(s)</translation>
+    </message>
 </context>
 <context>
     <name>QPadFindReplaceDialog</name>
@@ -1837,124 +1847,124 @@
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="42"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="177"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="247"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="304"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="188"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="266"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="328"/>
         <source>IDS_LABEL_FIND_WHAT</source>
         <translation>Find what:</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="68"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="203"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="273"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="330"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="73"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="219"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="297"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="359"/>
         <source>IDS_CHECK_MATCH_WHOLE_WORD</source>
         <translation>Match &amp;whole word only</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="81"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="229"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="286"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="356"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="86"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="248"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="310"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="388"/>
         <source>IDS_CHECK_MATCH_CASE</source>
         <translation>Match &amp;case</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="94"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="216"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="343"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="99"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="232"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="372"/>
         <source>IDS_CHECK_WARP</source>
         <translation>War&amp;p around</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="107"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="118"/>
         <source>IDS_BUTTON_FA_IN_ALL</source>
         <translation>Find All in All Opened 
 Documents</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="120"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="131"/>
         <source>IDS_BUTTON_FIND_NEXT</source>
         <translation>Find Next</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="133"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="144"/>
         <source>IDS_BUTTON_FA_IN_CUR</source>
         <translation>Find All in Current 
 Document</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="146"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="157"/>
         <source>IDS_BUTTON_COUNT</source>
         <translation>Coun&amp;t</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="159"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="170"/>
         <source>ID_BUTTON_CLOSE</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="165"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="176"/>
         <source>IDS_TAB_REPLACE</source>
         <translation>Replace</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="235"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="254"/>
         <source>IDS_TAB_FIND_IN_FILES</source>
         <translation>Find in Files</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="292"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="316"/>
         <source>IDS_TAB_MARK</source>
         <translation>Mark</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="371"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="403"/>
         <source>IDS_GROUP_SEARCH_MODE</source>
         <translation>Search Mode</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="383"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="415"/>
         <source>IDS_RADIO_NORMAL</source>
         <translation>&amp;Normal</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="396"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="431"/>
         <source>IDS_RADIO_EXTEND</source>
         <translation>E&amp;xtended (\n, \t, \0, \x...)</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="409"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="444"/>
         <source>IDS_RADIO_REGEX</source>
         <translation>Re&amp;gular expression</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="423"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="458"/>
         <source>IDS_GROUP_TRANSPARENT</source>
         <translation>Transparenc&amp;y</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="441"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="476"/>
         <source>IDS_RADIO_ON_LOST_FOCUS</source>
         <translation>On losing fouces</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="454"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="492"/>
         <source>IDS_RADIO_ALWAYS</source>
         <translation>Always</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="481"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="522"/>
         <source>IDS_GROUP_DIRECTION</source>
         <translation>Direction</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="493"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="534"/>
         <source>IDS_RADIO_UP</source>
         <translation>&amp;Up</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="506"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="547"/>
         <source>IDS_RADIO_DOWN</source>
         <translation>&amp;Down</translation>
     </message>

@@ -1199,6 +1199,7 @@ void QNewMainWindow::actionSearchGotoLine() {
             ptrEdit->SendScintilla(SCI_GOTOPOS, 0 <= dlg.m_nCurrentOffset ? dlg.m_nCurrentOffset: nPos);
         }
     }
+    ptrEdit->setFocus();
 }
 
 void QNewMainWindow::actionSearchFind() {
@@ -1207,6 +1208,13 @@ void QNewMainWindow::actionSearchFind() {
         m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_FIND;
 
         connect(m_pFindDlg, SIGNAL(sigOnCloseDlg()), this, SLOT(slotOnCloseFindDialog()));
+        connect(m_pFindDlg, SIGNAL(sigOnCreateFindReslutWidget()), this, SLOT(slotOnCreateFindResultWidget()));
+        if (m_pDockFindResult) {
+            connect(m_pFindDlg, SIGNAL(sigOnCreateRootItemInResultWin(QString)),
+                    reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddRootItem(QString)));
+            connect(m_pFindDlg, SIGNAL(sigInsertRootInResultWin(QTreeWidgetItem*)),
+                    reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddItem(QTreeWidgetItem*)));
+        }
     }
 
     m_pFindDlg->show();
@@ -1421,11 +1429,6 @@ void QNewMainWindow::slotCreate() {
     if (!ptrEdit) return;
     slotDocWasModified();
 
-    // Dock widget test
-    m_pDockFindResult=new QPadDockFindResultWidget(this);
-
-    addDockWidget(Qt::BottomDockWidgetArea, m_pDockFindResult);
-
     this->show();
 }
 
@@ -1454,6 +1457,11 @@ void QNewMainWindow::slotOnChangedSubWindow(QMdiSubWindow *ptrSubWin) {
     setUiMenuItem(ptrSubWin);
 }
 
+void QNewMainWindow::slotOnActivateSubWindow(QMdiSubWindow *ptrSubWin) {
+    if (!ptrSubWin) return;
+    m_pMdiArea->setActiveSubWindow(ptrSubWin);
+}
+
 void QNewMainWindow::slotOnCloseSubWindow(QMdiSubWindow *ptrSubWin) {
     if (!ptrSubWin) return;
 }
@@ -1462,4 +1470,27 @@ void QNewMainWindow::slotOnCloseFindDialog() {
     _DEL_MEM(m_pFindDlg);
 }
 
+void QNewMainWindow::slotOnCloseFindResultWidget() {
+    _DEL_MEM(m_pDockFindResult);
+}
 
+void QNewMainWindow::slotOnCreateFindResultWidget() {
+    // Dock widget test
+    if (m_pDockFindResult)
+        return;
+    m_pDockFindResult=new QPadDockFindResultWidget(this);
+    addDockWidget(Qt::BottomDockWidgetArea, m_pDockFindResult);
+    connect(reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult),
+            SIGNAL(sigOnClose()), this, SLOT(slotOnCloseFindResultWidget()));
+
+    connect(reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult),
+            SIGNAL(sigSetSubWinActivate(QMdiSubWindow*)), this, SLOT(slotOnActivateSubWindow(QMdiSubWindow*)));
+
+    if (m_pFindDlg) {
+        connect(m_pFindDlg, SIGNAL(sigOnCreateRootItemInResultWin(QString)),
+                reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddRootItem(QString)));
+        connect(m_pFindDlg, SIGNAL(sigInsertRootInResultWin(QTreeWidgetItem*)),
+                reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddItem(QTreeWidgetItem*)));
+    }
+
+}
