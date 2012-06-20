@@ -1670,6 +1670,22 @@ bool QsciScintilla::findNext()
     return doFind();
 }
 
+bool QsciScintilla::findPrev()
+{
+    if (!findState.inProgress)
+        return false;
+
+    SendScintilla(SCI_SETSEARCHFLAGS, findState.flags);
+    int nPos=0;
+    do {
+        nPos=SendScintilla(SCI_SEARCHPREV, static_cast<unsigned long>(findState.flags),
+                  ScintillaStringData(convertTextQ2S(findState.expr)));
+
+        SendScintilla(SCI_SETTARGETSTART, 0 > nPos - 1 ? SendScintilla(SCI_GETLENGTH) : nPos-1);
+    } while (-1 == nPos);
+
+    return true;
+}
 
 // Do the hard work of findFirst() and findNext().
 bool QsciScintilla::doFind()

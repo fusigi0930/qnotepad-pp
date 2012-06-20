@@ -1245,7 +1245,21 @@ void QNewMainWindow::actionSearchFindPrev() {
     QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
     if (!ptrEdit) return;
 
+    if (!ptrEdit->findPrev())
+        return;
 
+    int nLine, nIndex;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+
+    int nLineFrom, nLineEnd, nIndexFrom, nIndexEnd;
+    ptrEdit->getSelection(&nLineFrom, &nIndexFrom, &nLineEnd, &nIndexEnd);
+
+    ptrEdit->SendScintilla(SCI_GOTOLINE, nLine);
+
+    int nFromPos=ptrEdit->positionFromLineIndex(nLineFrom, nIndexFrom);
+    int nEndPos=ptrEdit->positionFromLineIndex(nLineEnd, nIndexEnd);
+
+    ptrEdit->SendScintilla(SCI_SETSEL, nFromPos, nEndPos);
 }
 
 void QNewMainWindow::actionEncoding() {

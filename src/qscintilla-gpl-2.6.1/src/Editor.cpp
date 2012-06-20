@@ -5758,7 +5758,7 @@ long Editor::SearchText(
 		        &lengthFound,
 				pcf.get());
 	} else {
-		pos = pdoc->FindText(searchAnchor, 0, txt,
+        pos = pdoc->FindText(targetStart, 0, txt,
 		        (wParam & SCFIND_MATCHCASE) != 0,
 		        (wParam & SCFIND_WHOLEWORD) != 0,
 		        (wParam & SCFIND_WORDSTART) != 0,

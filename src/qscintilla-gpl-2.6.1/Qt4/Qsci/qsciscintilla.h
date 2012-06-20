@@ -715,6 +715,7 @@ public:
     //!
     //! \sa findFirst(), replace()
     virtual bool findNext();
+    virtual bool findPrev();
 
     //! Returns the number of the first visible line.
     //!
