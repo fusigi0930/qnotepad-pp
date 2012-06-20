@@ -62,6 +62,7 @@ public:
 protected:
     virtual void showEvent(QShowEvent *event);
     virtual void closeEvent(QCloseEvent *event);
+    virtual bool event(QEvent *event);
 
 private:
     void getCommonUiValue();
@@ -84,6 +85,9 @@ private slots:
     void slotFindFindAllinOpen();
 
     void slotOnTransparentSlider(int nValue);
+    void slotOnAlwaysTransparent(bool bChecked);
+    void slotOnFocusTransparent(bool bChecked);
+    void slotOnClickTransparentGroup(bool bChecked);
 
 protected slots:
     virtual void slotCreate();

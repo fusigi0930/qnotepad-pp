@@ -165,6 +165,30 @@ void QPadFindReplaceDialog::closeEvent(QCloseEvent *event) {
     emit sigOnCloseDlg();
 }
 
+bool QPadFindReplaceDialog::event(QEvent *event) {
+    _DEBUG_MSG("event: %d", event->type());
+
+    switch (event->type()) {
+        default: break;
+    case QEvent::WindowActivate:
+        if (!m_bIsCreated || ui->ID_RADIO_ALWAYS->isChecked()) {
+            break;
+        }
+        disconnect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
+        setWindowOpacity(1.0);
+        break;
+    case QEvent::WindowDeactivate:
+        if (!m_bIsCreated || !ui->ID_GROUP_TRANSPARENT->isChecked()) {
+            break;
+        }
+        connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
+        slotOnTransparentSlider(ui->ID_SLIDER_TRANSPARENT->value());
+        break;
+    }
+
+    return BaseDialog::event(event);
+}
+
 void QPadFindReplaceDialog::slotCreate() {
     _DEBUG_MSG("+++");
     ui->setupUi(this);
@@ -177,7 +201,9 @@ void QPadFindReplaceDialog::slotCreate() {
     connect(ui->ID_BUTTON_FA_IN_CUR_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllCurrent()));
     connect(ui->ID_BUTTON_FA_IN_ALL_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllinOpen()));
 
-    connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
+    connect(ui->ID_RADIO_ALWAYS, SIGNAL(clicked(bool)), this, SLOT(slotOnAlwaysTransparent(bool)));
+    connect(ui->ID_RADIO_ON_LOST_FOCUS, SIGNAL(clicked(bool)), this, SLOT(slotOnFocusTransparent(bool)));
+    connect(ui->ID_GROUP_TRANSPARENT, SIGNAL(clicked(bool)), this, SLOT(slotOnClickTransparentGroup(bool)));
 
     QTimer::singleShot(0, this, SLOT(slotInitTab()));
 
@@ -322,4 +348,29 @@ void QPadFindReplaceDialog::slotChangeTab(int nIndex) {
 void QPadFindReplaceDialog::slotOnTransparentSlider(int nValue) {
     float fValue=static_cast<float>(nValue)/100.0 * 0.7 + 0.3;
     setWindowOpacity(fValue);
+}
+
+void QPadFindReplaceDialog::slotOnAlwaysTransparent(bool bChecked) {
+    if (!bChecked) return;
+
+    connect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
+    slotOnTransparentSlider(ui->ID_SLIDER_TRANSPARENT->value());
+
+}
+
+void QPadFindReplaceDialog::slotOnFocusTransparent(bool bChecked) {
+    if (!bChecked) return;
+
+    setWindowOpacity(1.0);
+}
+
+void QPadFindReplaceDialog::slotOnClickTransparentGroup(bool bChecked) {
+    if (bChecked) {
+        slotOnFocusTransparent(ui->ID_RADIO_ON_LOST_FOCUS->isChecked());
+        slotOnAlwaysTransparent(ui->ID_RADIO_ALWAYS->isChecked());
+    }
+    else {
+        disconnect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
+        setWindowOpacity(1.0);
+    }
 }
