@@ -208,9 +208,17 @@ void QNewMainWindow::setSearchMenuActions() {
     list.clear();
     connect(ui->actionSEARCH_FIND, SIGNAL(triggered()), this, SLOT(actionSearchFind()));
 
+    list.push_back(QKeySequence("F3"));
+    ui->actionSEARCH_FIND_NEXT->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_FIND_NEXT, SIGNAL(triggered()), this, SLOT(actionSearchFindNext()));
+
+    list.push_back(QKeySequence("Shift+F3"));
+    ui->actionSEARCH_FIND_PREV->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_FIND_PREV, SIGNAL(triggered()), this, SLOT(actionSearchFindPrev()));
+
     ui->actionSEARCH_FINDINFILES->setEnabled(false);
-    ui->actionSEARCH_FIND_NEXT->setEnabled(false);
-    ui->actionSEARCH_FIND_PREV->setEnabled(false);
     ui->actionSEARCH_FIND_SET_NEXt->setEnabled(false);
     ui->actionSEARCH_FIND_SET_PREV->setEnabled(false);
     ui->actionSEARCH_FIND_VOLITALE_NEXT->setEnabled(false);
@@ -1220,6 +1228,24 @@ void QNewMainWindow::actionSearchFind() {
     m_pFindDlg->show();
     m_pFindDlg->raise();
     m_pFindDlg->activateWindow();
+}
+
+void QNewMainWindow::actionSearchFindNext() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    ptrEdit->findNext();
+}
+
+void QNewMainWindow::actionSearchFindPrev() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+
 }
 
 void QNewMainWindow::actionEncoding() {

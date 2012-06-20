@@ -1848,31 +1848,31 @@
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="42"/>
         <location filename="../ui/qpadfindreplacedialog.ui" line="188"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="266"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="328"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="375"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="621"/>
         <source>IDS_LABEL_FIND_WHAT</source>
         <translation>Find what:</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="73"/>
         <location filename="../ui/qpadfindreplacedialog.ui" line="219"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="297"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="359"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="406"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="652"/>
         <source>IDS_CHECK_MATCH_WHOLE_WORD</source>
         <translation>Match &amp;whole word only</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="86"/>
         <location filename="../ui/qpadfindreplacedialog.ui" line="248"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="310"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="388"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="419"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="681"/>
         <source>IDS_CHECK_MATCH_CASE</source>
         <translation>Match &amp;case</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="99"/>
         <location filename="../ui/qpadfindreplacedialog.ui" line="232"/>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="372"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="665"/>
         <source>IDS_CHECK_WARP</source>
         <translation>War&amp;p around</translation>
     </message>
@@ -1884,6 +1884,7 @@ Documents</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="131"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="292"/>
         <source>IDS_BUTTON_FIND_NEXT</source>
         <translation>Find Next</translation>
     </message>
@@ -1900,6 +1901,9 @@ Document</translation>
     </message>
     <message>
         <location filename="../ui/qpadfindreplacedialog.ui" line="170"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="357"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="489"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="720"/>
         <source>ID_BUTTON_CLOSE</source>
         <translation>Close</translation>
     </message>
@@ -1909,62 +1913,150 @@ Document</translation>
         <translation>Replace</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="254"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="261"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="445"/>
+        <source>IDS_LABEL_REPLACE_WITH</source>
+        <translation>Replace with:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="305"/>
+        <source>IDS_BUTTON_REPLACE</source>
+        <translation>Replace</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="318"/>
+        <source>IDS_BUTTON_REPLACE_ALL</source>
+        <translation>Replace All</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="331"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="733"/>
+        <source>IDS_CHECK_IN_SCLECT</source>
+        <translation>In selection</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="344"/>
+        <source>IDS_BUTTON_REPLACE_ALL_IN_ALL</source>
+        <translation>Replace All in All
+Opened Documents</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="363"/>
         <source>IDS_TAB_FIND_IN_FILES</source>
         <translation>Find in Files</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="316"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="432"/>
+        <source>IDS_BUTTON_FIND_ALL</source>
+        <translation>Find All</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="476"/>
+        <source>IDS_BUTTON_REPLACE_IN_FILES</source>
+        <translation>Replace in Files</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="502"/>
+        <source>IDS_LABEL_FILTERS</source>
+        <translation>Filters:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="533"/>
+        <source>IDS_LABEL_DIRECTORY</source>
+        <translation>Directory:</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="564"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="577"/>
+        <source>IDS_CHECK_CURRENT_DOC</source>
+        <translation>Follow current doc.</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="590"/>
+        <source>IDS_CHECK_IN_SUBDIR</source>
+        <translation>In all sub-folders</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="603"/>
+        <source>IDS_CHECK_IN_HIDE_DIR</source>
+        <translation>In hidden folders</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="609"/>
         <source>IDS_TAB_MARK</source>
         <translation>Mark</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="403"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="694"/>
+        <source>IDS_BUTTON_MARK_ALL</source>
+        <translation>Mark All</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="707"/>
+        <source>IDS_BUTTON_CLEAN_ALL_MARK</source>
+        <translation>Clear all marks</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="746"/>
+        <source>IDS_CHECK_BOOKMARK</source>
+        <translation>Bookmark line</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="759"/>
+        <source>IDS_CHECK_EACH_SEARCH</source>
+        <translation>Purge for each search</translation>
+    </message>
+    <message>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="774"/>
         <source>IDS_GROUP_SEARCH_MODE</source>
         <translation>Search Mode</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="415"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="786"/>
         <source>IDS_RADIO_NORMAL</source>
         <translation>&amp;Normal</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="431"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="802"/>
         <source>IDS_RADIO_EXTEND</source>
         <translation>E&amp;xtended (\n, \t, \0, \x...)</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="444"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="815"/>
         <source>IDS_RADIO_REGEX</source>
         <translation>Re&amp;gular expression</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="458"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="829"/>
         <source>IDS_GROUP_TRANSPARENT</source>
         <translation>Transparenc&amp;y</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="476"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="847"/>
         <source>IDS_RADIO_ON_LOST_FOCUS</source>
         <translation>On losing fouces</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="492"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="863"/>
         <source>IDS_RADIO_ALWAYS</source>
         <translation>Always</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="522"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="893"/>
         <source>IDS_GROUP_DIRECTION</source>
         <translation>Direction</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="534"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="905"/>
         <source>IDS_RADIO_UP</source>
         <translation>&amp;Up</translation>
     </message>
     <message>
-        <location filename="../ui/qpadfindreplacedialog.ui" line="547"/>
+        <location filename="../ui/qpadfindreplacedialog.ui" line="918"/>
         <source>IDS_RADIO_DOWN</source>
         <translation>&amp;Down</translation>
     </message>

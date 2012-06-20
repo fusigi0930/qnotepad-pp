@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="ID_TAB_FIND">
     <attribute name="title">
@@ -248,6 +248,115 @@
       <string>IDS_CHECK_MATCH_CASE</string>
      </property>
     </widget>
+    <widget class="QLabel" name="ID_LABEL_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_REPLACE_WITH</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_R_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>40</y>
+       <width>261</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_FIND_NEXT_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>10</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_FIND_NEXT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_REPLACE_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>40</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_REPLACE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_REPLACE_ALL_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>70</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_REPLACE_ALL</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_IN_SELECTION_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>70</y>
+       <width>141</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_IN_SCLECT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_REPLACE_ALL_IN_ALL_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>100</y>
+       <width>141</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_REPLACE_ALL_IN_ALL</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_CLOSE_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>160</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID_BUTTON_CLOSE</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="ID_TAB_FIND_IN_FILES">
     <attribute name="title">
@@ -308,6 +417,190 @@
      </property>
      <property name="text">
       <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_FIND_ALL_FILES">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>10</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_FIND_ALL</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ID_LABEL_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_REPLACE_WITH</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_FILE_REPLACE">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>40</y>
+       <width>271</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_REPLACE_FILES">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>40</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_REPLACE_IN_FILES</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_CLOSE_FILES">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>70</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID_BUTTON_CLOSE</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ID_LABEL_7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_FILTERS</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_FILE_FILTERS">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>70</y>
+       <width>291</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ID_LABEL_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_LABEL_DIRECTORY</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="ID_COMBO_FILE_DIR">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>100</y>
+       <width>211</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_BROWSE_FILE">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>100</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_FILES_CUR_DOC">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>100</y>
+       <width>161</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_CURRENT_DOC</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_FILES_IN_SUBDIR">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>130</y>
+       <width>161</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_IN_SUBDIR</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_FILES_IN_HIDE_DIR">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>160</y>
+       <width>161</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_IN_HIDE_DIR</string>
      </property>
     </widget>
    </widget>
@@ -386,6 +679,84 @@
      </property>
      <property name="text">
       <string>IDS_CHECK_MATCH_CASE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_MARK_ALL_MARK">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>10</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_MARK_ALL</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_CLEAN_ALL_MARK">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>40</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_BUTTON_CLEAN_ALL_MARK</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ID_BUTTON_CLOSE_MARK">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>70</y>
+       <width>141</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID_BUTTON_CLOSE</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_IN_SELECTION_MARK">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>70</y>
+       <width>141</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_IN_SCLECT</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_BOOKMARK_MARK">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_BOOKMARK</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ID_CHECK_EACH_SEARCH_MARK">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IDS_CHECK_EACH_SEARCH</string>
      </property>
     </widget>
    </widget>

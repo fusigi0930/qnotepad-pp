@@ -97,6 +97,33 @@ void QPadFindReplaceDialog::getFindTabValue() {
     getCommonUiValue();
 }
 
+void QPadFindReplaceDialog::getReplaceTabValue() {
+    // get the check box value
+    m_nSearchFeature=0;
+    QCheckBox *ptrFeatureBoxArray[] = {
+        ui->ID_CHECK_MATCH_WHOLE_WORD_REPLACE,
+        ui->ID_CHECK_MATCH_CASE_REPLACE,
+        ui->ID_CHECK_WARP_REPLACE,
+        NULL
+    };
+    int i=0;
+    while (ptrFeatureBoxArray[i]) {
+        if (Qt::Checked == ptrFeatureBoxArray[i]->checkState()) {
+            m_nSearchFeature |= (1 << i);
+        }
+        ++i;
+    }
+    getCommonUiValue();
+}
+
+void QPadFindReplaceDialog::getFFTabValue() {
+    getCommonUiValue();
+}
+
+void QPadFindReplaceDialog::getMarkTabValue() {
+    getCommonUiValue();
+}
+
 void QPadFindReplaceDialog::findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin) {
     QPadMdiSubWindow *ptrSubWin=dynamic_cast<QPadMdiSubWindow*>(ptrWin);
     if (!ptrSubWin) return;
@@ -166,8 +193,6 @@ void QPadFindReplaceDialog::closeEvent(QCloseEvent *event) {
 }
 
 bool QPadFindReplaceDialog::event(QEvent *event) {
-    _DEBUG_MSG("event: %d", event->type());
-
     switch (event->type()) {
         default: break;
     case QEvent::WindowActivate:
@@ -200,6 +225,13 @@ void QPadFindReplaceDialog::slotCreate() {
     connect(ui->ID_BUTTON_CLOSE_FIND, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->ID_BUTTON_FA_IN_CUR_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllCurrent()));
     connect(ui->ID_BUTTON_FA_IN_ALL_FIND, SIGNAL(clicked()), this, SLOT(slotFindFindAllinOpen()));
+
+    connect(ui->ID_BUTTON_CLOSE_REPLACE, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->ID_BUTTON_FIND_NEXT_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceFindNext()));
+
+    connect(ui->ID_BUTTON_CLOSE_FILES, SIGNAL(clicked()), this, SLOT(close()));
+
+    connect(ui->ID_BUTTON_CLOSE_MARK, SIGNAL(clicked()), this, SLOT(close()));
 
     connect(ui->ID_RADIO_ALWAYS, SIGNAL(clicked(bool)), this, SLOT(slotOnAlwaysTransparent(bool)));
     connect(ui->ID_RADIO_ON_LOST_FOCUS, SIGNAL(clicked(bool)), this, SLOT(slotOnFocusTransparent(bool)));
@@ -318,6 +350,37 @@ void QPadFindReplaceDialog::slotFindFindAllinOpen() {
         findAllinSubWin(ptrRoot, *pSubWin);
     }
 
+}
+
+void QPadFindReplaceDialog::slotReplaceFindNext() {
+    getReplaceTabValue();
+
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLine=-1, nIndex=-1;
+    ptrEdit->getCursorPosition(&nLine, &nIndex);
+    _DEBUG_MSG("line: %d, index: %d\n", nLine, nIndex);
+
+    if (m_nDirection == QPadFindReplaceDialog::EDIR_UP) {
+        int nBLine, nELine, nBIndex, nEIndex;
+        ptrEdit->getSelection(&nBLine, &nBIndex, &nELine, &nEIndex);
+        nIndex= (nIndex - (nEIndex - nBIndex) < 0 ? 0 : nIndex - (nEIndex - nBIndex));
+    }
+
+    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_R_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       m_nDirection == QPadFindReplaceDialog::EDIR_DOWN, nLine, nIndex, true, true);
+
+    if (bResult) {
+        ptrEdit->setFocus();
+    }
 }
 
 void QPadFindReplaceDialog::slotInitTab() {

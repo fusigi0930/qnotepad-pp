@@ -67,6 +67,9 @@ protected:
 private:
     void getCommonUiValue();
     void getFindTabValue();
+    void getReplaceTabValue();
+    void getFFTabValue();
+    void getMarkTabValue();
     void findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin);
 
 signals:
@@ -83,6 +86,8 @@ private slots:
     void slotFindCount();
     void slotFindFindAllCurrent();
     void slotFindFindAllinOpen();
+
+    void slotReplaceFindNext();
 
     void slotOnTransparentSlider(int nValue);
     void slotOnAlwaysTransparent(bool bChecked);
