@@ -50,6 +50,12 @@ QT_END_NAMESPACE
 
 class QsciScintillaQt;
 
+// add a column edit struct
+struct SColumnEdit {
+    int nStartPos;
+    int nEndPos;
+    int nLine;
+};
 
 //! \brief The QsciScintillaBase class implements the Scintilla editor widget
 //! and its low-level API.
@@ -3198,6 +3204,7 @@ private:
     QTimer triple_click;
 
     void acceptAction(QDropEvent *e);
+    void columnEdit(unsigned key, unsigned modified, QByteArray utf8);
 
     QsciScintillaBase(const QsciScintillaBase &);
     QsciScintillaBase &operator=(const QsciScintillaBase &);

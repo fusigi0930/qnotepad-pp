@@ -4,6 +4,7 @@
 QPadMdiArea::QPadMdiArea(QWidget *parent) :
     QMdiArea(parent)
 {
+
 }
 
 QPadMdiArea::~QPadMdiArea() {
