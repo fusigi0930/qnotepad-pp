@@ -41,8 +41,6 @@
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QPaintEvent>
-#include <vector>
-#include <QDebug>
 
 #include "ScintillaQt.h"
 
@@ -327,7 +325,6 @@ void QsciScintillaBase::keyPressEvent(QKeyEvent *e)
 {
     unsigned key, modifiers = 0;
     QByteArray utf8;
-    bool bRectSelectMove=false;
 
     if (e->modifiers() & Qt::ShiftModifier)
         modifiers |= SCMOD_SHIFT;
@@ -345,42 +342,34 @@ void QsciScintillaBase::keyPressEvent(QKeyEvent *e)
     {
     case Qt::Key_Down:
         key = SCK_DOWN;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_Up:
         key = SCK_UP;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_Left:
         key = SCK_LEFT;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_Right:
         key = SCK_RIGHT;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_Home:
         key = SCK_HOME;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_End:
         key = SCK_END;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_PageUp:
         key = SCK_PRIOR;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_PageDown:
         key = SCK_NEXT;
-        bRectSelectMove=true;
         break;
 
     case Qt::Key_Delete:
@@ -450,8 +439,7 @@ void QsciScintillaBase::keyPressEvent(QKeyEvent *e)
         }
     }
 
-    if ((key && !SendScintilla(SCI_SELECTIONISRECTANGLE)) ||
-            (SendScintilla(SCI_SELECTIONISRECTANGLE) && bRectSelectMove))
+    if (key)
     {
         bool consumed = false;
 
@@ -462,11 +450,6 @@ void QsciScintillaBase::keyPressEvent(QKeyEvent *e)
             e->accept();
             return;
         }
-    }
-    else if (key && SendScintilla(SCI_SELECTIONISRECTANGLE)) {
-        columnEdit(key, modifiers, utf8);
-        e->accept();
-        return;
     }
 
     // Add the text if it has a compatible size depending on what Unicode mode
@@ -727,50 +710,5 @@ QMimeData *QsciScintillaBase::toMimeData(const QByteArray &text, bool rectangula
     mime->setData(QLatin1String("text/plain"), data);
 
     return mime;
-}
-
-void QsciScintillaBase::columnEdit(unsigned key, unsigned modified, QByteArray utf8) {
-#if 1
-    int nBlockSelect=SendScintilla(SCI_GETSELECTIONS);
-
-    std::vector<SColumnEdit> vtColumn;
-
-    for (int i=0; i<nBlockSelect; ++i) {
-        SColumnEdit colEdit={0};
-        colEdit.nStartPos=SendScintilla(SCI_GETSELECTIONNANCHOR, i);
-        colEdit.nEndPos=SendScintilla(SCI_GETSELECTIONNCARET, i);
-        colEdit.nLine=i;
-
-        if (0 == vtColumn.size())
-            vtColumn.push_back(colEdit);
-        else {
-            if (colEdit.nStartPos < vtColumn[0].nStartPos)
-                vtColumn.insert(vtColumn.begin(), colEdit);
-            else
-                vtColumn.push_back(colEdit);
-        }
-    }
-
-    for (int i=vtColumn.size()-1; i>=0; --i) {
-        bool consumed = false;
-
-        sci->KeyDownWithModifiers(key, modified, &consumed);
-
-        if (consumed)
-            break;
-
-        SendScintilla(SCI_SETTARGETSTART, vtColumn[i].nStartPos);
-        SendScintilla(SCI_SETTARGETEND, vtColumn[i].nEndPos);
-
-        SendScintilla(SCI_REPLACETARGET, -1, utf8.data());
-    }
-
-    if (!(SCK_DELETE == key || SCK_BACK == key)) {
-
-        SendScintilla(SCI_CHARRIGHTEXTEND);
-    }
-#else
-    SendScintilla(SCI_SETSELECTIONMODE, SC_SEL_THIN);
-#endif
 }
 
