@@ -3946,7 +3946,7 @@ static bool cmpSelPtrs(const SelectionRange *a, const SelectionRange *b) {
 
 // AddCharUTF inserts an array of bytes which may or may not be in UTF-8.
 void Editor::AddCharUTF(char *s, unsigned int len, bool treatAsDBCS) {
-	FilterSelections();
+    //FilterSelections();
 	{
 		UndoGroup ug(pdoc, (sel.Count() > 1) || !sel.Empty() || inOverstrike);
 

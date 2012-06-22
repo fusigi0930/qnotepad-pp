@@ -16,6 +16,7 @@ message(version is: $${VERSION})
 #VERSION = 0.0.1.2
 TARGET = qpad
 TEMPLATE = app
+CONFIG += warn_off
 
 win32 {
     LIBS += ../../bin/libqscintilla2.a
