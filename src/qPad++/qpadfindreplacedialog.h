@@ -72,6 +72,9 @@ private:
     void getMarkTabValue();
     void findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin);
 
+public:
+    void chageTab(int nTab);
+
 signals:
     void sigOnCloseDlg();
     void sigOnCreateFindReslutWidget();
@@ -88,6 +91,7 @@ private slots:
     void slotFindFindAllinOpen();
 
     void slotReplaceFindNext();
+    void slotReplaceReplace();
 
     void slotOnTransparentSlider(int nValue);
     void slotOnAlwaysTransparent(bool bChecked);

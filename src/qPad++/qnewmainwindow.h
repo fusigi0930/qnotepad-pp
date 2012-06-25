@@ -126,6 +126,7 @@ private slots:
     void actionSearchFind();
     void actionSearchFindNext();
     void actionSearchFindPrev();
+    void actionSearchReplace();
 
     void actionEncoding();
 

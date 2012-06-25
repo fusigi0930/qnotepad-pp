@@ -214,6 +214,14 @@ bool QPadFindReplaceDialog::event(QEvent *event) {
     return BaseDialog::event(event);
 }
 
+void QPadFindReplaceDialog::chageTab(int nTab) {
+    if (nTab == m_nInitIndex)
+        return;
+    m_nInitIndex=nTab;
+
+    slotInitTab();
+}
+
 void QPadFindReplaceDialog::slotCreate() {
     _DEBUG_MSG("+++");
     ui->setupUi(this);
@@ -228,6 +236,7 @@ void QPadFindReplaceDialog::slotCreate() {
 
     connect(ui->ID_BUTTON_CLOSE_REPLACE, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->ID_BUTTON_FIND_NEXT_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceFindNext()));
+    connect(ui->ID_BUTTON_REPLACE_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceReplace()));
 
     connect(ui->ID_BUTTON_CLOSE_FILES, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -381,6 +390,26 @@ void QPadFindReplaceDialog::slotReplaceFindNext() {
     if (bResult) {
         ptrEdit->setFocus();
     }
+}
+
+void QPadFindReplaceDialog::slotReplaceReplace() {
+    getReplaceTabValue();
+
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
+    int nLineBegin, nLineEnd, nIndexBegin, nIndexEnd;
+    ptrEdit->getSelection(&nLineBegin, &nIndexBegin, &nLineEnd, &nIndexEnd);
+    if (nLineBegin == -1 && nLineEnd == -1) {
+        return;
+    }
+
+    ptrEdit->replaceSelectedText(ui->ID_COMBO_R_REPLACE->currentText());
+    ptrEdit->findNext();
 }
 
 void QPadFindReplaceDialog::slotInitTab() {

@@ -218,12 +218,16 @@ void QNewMainWindow::setSearchMenuActions() {
     list.clear();
     connect(ui->actionSEARCH_FIND_PREV, SIGNAL(triggered()), this, SLOT(actionSearchFindPrev()));
 
+    list.push_back(QKeySequence("Ctrl+H"));
+    ui->actionSEARCH_REPLACE->setShortcuts(list);
+    list.clear();
+    connect(ui->actionSEARCH_REPLACE, SIGNAL(triggered()), this, SLOT(actionSearchReplace()));
+
     ui->actionSEARCH_FINDINFILES->setEnabled(false);
     ui->actionSEARCH_FIND_SET_NEXt->setEnabled(false);
     ui->actionSEARCH_FIND_SET_PREV->setEnabled(false);
     ui->actionSEARCH_FIND_VOLITALE_NEXT->setEnabled(false);
     ui->actionSEARCH_FIND_VOLITALE_PREV->setEnabled(false);
-    ui->actionSEARCH_REPLACE->setEnabled(false);
     ui->actionSEARCH_FIND_INC->setEnabled(false);
     ui->actionSEARCH_FIND_RESULT->setEnabled(false);
     ui->actionSEARCH_GOTO_NEXT_FIND->setEnabled(false);
@@ -1225,6 +1229,28 @@ void QNewMainWindow::actionSearchFind() {
         }
     }
 
+    m_pFindDlg->chageTab(QPadFindReplaceDialog::EFUNC_FIND);
+    m_pFindDlg->show();
+    m_pFindDlg->raise();
+    m_pFindDlg->activateWindow();
+}
+
+void QNewMainWindow::actionSearchReplace() {
+    if (!m_pFindDlg) {
+        m_pFindDlg=new QPadFindReplaceDialog(this);
+        m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_REPLACE;
+
+        connect(m_pFindDlg, SIGNAL(sigOnCloseDlg()), this, SLOT(slotOnCloseFindDialog()));
+        connect(m_pFindDlg, SIGNAL(sigOnCreateFindReslutWidget()), this, SLOT(slotOnCreateFindResultWidget()));
+        if (m_pDockFindResult) {
+            connect(m_pFindDlg, SIGNAL(sigOnCreateRootItemInResultWin(QString)),
+                    reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddRootItem(QString)));
+            connect(m_pFindDlg, SIGNAL(sigInsertRootInResultWin(QTreeWidgetItem*)),
+                    reinterpret_cast<QPadDockFindResultWidget*>(m_pDockFindResult), SLOT(slotAddItem(QTreeWidgetItem*)));
+        }
+    }
+
+    m_pFindDlg->chageTab(QPadFindReplaceDialog::EFUNC_REPLACE);
     m_pFindDlg->show();
     m_pFindDlg->raise();
     m_pFindDlg->activateWindow();
