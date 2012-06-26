@@ -177,6 +177,29 @@ void QPadFindReplaceDialog::findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow
     ptrEdit->SendScintilla(SCI_GOTOPOS, nCurPos);
 }
 
+void QPadFindReplaceDialog::replaceAllinSubWin(QMdiSubWindow *ptrWin) {
+    if (!ptrWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrWin->widget());
+    if (!ptrEdit) return;
+
+    int nPos=ptrEdit->SendScintilla(SCI_GETCURRENTPOS);
+
+    bool bResult=ptrEdit->findFirst(ui->ID_COMBO_R_FIND->currentText(), m_nSearchMode == QPadFindReplaceDialog::EMODE_REGEX,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_CASE) == QPadFindReplaceDialog::EFEATURE_CASE,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WHOLE_WORD) == QPadFindReplaceDialog::EFEATURE_WHOLE_WORD,
+                       (m_nSearchFeature & QPadFindReplaceDialog::EFEATURE_WARP) == QPadFindReplaceDialog::EFEATURE_WARP,
+                       m_nDirection == QPadFindReplaceDialog::EDIR_DOWN, 0, 0, true, true);
+
+    if (!bResult) return;
+
+    do {
+        ptrEdit->replace(ui->ID_COMBO_R_REPLACE->currentText());
+        bResult=ptrEdit->findNext();
+    } while (bResult);
+
+    ptrEdit->SendScintilla(SCI_GOTOPOS, nPos > ptrEdit->length() ? 0 : nPos);
+}
+
 void QPadFindReplaceDialog::showEvent(QShowEvent *event) {
     _DEBUG_MSG("+++");
     if (!m_bIsCreated) {
@@ -237,6 +260,8 @@ void QPadFindReplaceDialog::slotCreate() {
     connect(ui->ID_BUTTON_CLOSE_REPLACE, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->ID_BUTTON_FIND_NEXT_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceFindNext()));
     connect(ui->ID_BUTTON_REPLACE_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceReplace()));
+    connect(ui->ID_BUTTON_REPLACE_ALL_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceReplaceAll()));
+    connect(ui->ID_BUTTON_REPLACE_ALL_IN_ALL_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceReplaceAllinAll()));
 
     connect(ui->ID_BUTTON_CLOSE_FILES, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -408,8 +433,29 @@ void QPadFindReplaceDialog::slotReplaceReplace() {
         return;
     }
 
-    ptrEdit->replaceSelectedText(ui->ID_COMBO_R_REPLACE->currentText());
+    ptrEdit->replace(ui->ID_COMBO_R_REPLACE->currentText());
     ptrEdit->findNext();
+}
+
+void QPadFindReplaceDialog::slotReplaceReplaceAll() {
+    getReplaceTabValue();
+
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(ptrMainWin->getMdiActiveWindow());
+    replaceAllinSubWin(ptrSubWin);
+}
+
+void QPadFindReplaceDialog::slotReplaceReplaceAllinAll() {
+    getReplaceTabValue();
+
+    QNewMainWindow *ptrMainWin=qobject_cast<QNewMainWindow*>(parent());
+    if (!ptrMainWin) return;
+
+    QList<QMdiSubWindow*> list=ptrMainWin->getMdiArea()->subWindowList();
+    for (QList<QMdiSubWindow*>::iterator pWin=list.begin(); pWin != list.end(); ++ pWin) {
+        replaceAllinSubWin(dynamic_cast<QPadMdiSubWindow*>(*pWin));
+    }
 }
 
 void QPadFindReplaceDialog::slotInitTab() {

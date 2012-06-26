@@ -70,7 +70,9 @@ private:
     void getReplaceTabValue();
     void getFFTabValue();
     void getMarkTabValue();
+
     void findAllinSubWin(QTreeWidgetItem *root, QMdiSubWindow *ptrWin);
+    void replaceAllinSubWin(QMdiSubWindow *ptrWin);
 
 public:
     void chageTab(int nTab);
@@ -92,6 +94,8 @@ private slots:
 
     void slotReplaceFindNext();
     void slotReplaceReplace();
+    void slotReplaceReplaceAll();
+    void slotReplaceReplaceAllinAll();
 
     void slotOnTransparentSlider(int nValue);
     void slotOnAlwaysTransparent(bool bChecked);
