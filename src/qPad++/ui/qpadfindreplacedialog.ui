@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="ID_TAB_FIND">
     <attribute name="title">
@@ -923,6 +923,61 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ID_COMBO_FIND</tabstop>
+  <tabstop>ID_CHECK_MATCH_WHOLE_WORD_FIND</tabstop>
+  <tabstop>ID_CHECK_MATCH_CASE_FIND</tabstop>
+  <tabstop>ID_CHECK_WARP_FIND</tabstop>
+  <tabstop>ID_BUTTON_FIND_NEXT_FIND</tabstop>
+  <tabstop>ID_BUTTON_COUNT_FIND</tabstop>
+  <tabstop>ID_BUTTON_FA_IN_ALL_FIND</tabstop>
+  <tabstop>ID_BUTTON_FA_IN_CUR_FIND</tabstop>
+  <tabstop>ID_BUTTON_CLOSE_FIND</tabstop>
+  <tabstop>ID_RADIO_SM_NORMAL</tabstop>
+  <tabstop>ID_RADIO_SM_EXTEND</tabstop>
+  <tabstop>ID_RADIO_SM_REGEX</tabstop>
+  <tabstop>ID_RADIO_UP</tabstop>
+  <tabstop>ID_RADIO_DOWN</tabstop>
+  <tabstop>ID_GROUP_TRANSPARENT</tabstop>
+  <tabstop>ID_BUTTON_REPLACE_ALL_IN_ALL_REPLACE</tabstop>
+  <tabstop>ID_RADIO_ALWAYS</tabstop>
+  <tabstop>ID_RADIO_ON_LOST_FOCUS</tabstop>
+  <tabstop>ID_SLIDER_TRANSPARENT</tabstop>
+  <tabstop>ID_CHECK_MATCH_WHOLE_WORD_REPLACE</tabstop>
+  <tabstop>ID_CHECK_WARP_REPLACE</tabstop>
+  <tabstop>ID_CHECK_MATCH_CASE_REPLACE</tabstop>
+  <tabstop>ID_CHECK_MATCH_CASE_FIND_FILES</tabstop>
+  <tabstop>ID_BUTTON_FIND_NEXT_REPLACE</tabstop>
+  <tabstop>ID_BUTTON_REPLACE_REPLACE</tabstop>
+  <tabstop>ID_BUTTON_REPLACE_ALL_REPLACE</tabstop>
+  <tabstop>ID_CHECK_IN_SELECTION_REPLACE</tabstop>
+  <tabstop>ID_COMBO_FIND_FILES</tabstop>
+  <tabstop>ID_BUTTON_CLOSE_REPLACE</tabstop>
+  <tabstop>ID_COMBO_FILE_REPLACE</tabstop>
+  <tabstop>ID_CHECK_MATCH_WHOLE_WORD_FIND_FILES</tabstop>
+  <tabstop>ID_COMBO_R_FIND</tabstop>
+  <tabstop>ID_BUTTON_FIND_ALL_FILES</tabstop>
+  <tabstop>ID_COMBO_R_REPLACE</tabstop>
+  <tabstop>ID_TAB</tabstop>
+  <tabstop>ID_BUTTON_REPLACE_FILES</tabstop>
+  <tabstop>ID_BUTTON_CLOSE_FILES</tabstop>
+  <tabstop>ID_COMBO_FILE_FILTERS</tabstop>
+  <tabstop>ID_COMBO_FILE_DIR</tabstop>
+  <tabstop>ID_BUTTON_BROWSE_FILE</tabstop>
+  <tabstop>ID_CHECK_FILES_CUR_DOC</tabstop>
+  <tabstop>ID_CHECK_FILES_IN_SUBDIR</tabstop>
+  <tabstop>ID_CHECK_FILES_IN_HIDE_DIR</tabstop>
+  <tabstop>ID_COMBO_MARK</tabstop>
+  <tabstop>ID_CHECK_MATCH_WHOLE_WORD_MARK</tabstop>
+  <tabstop>ID_CHECK_WARP_MARK</tabstop>
+  <tabstop>ID_CHECK_MATCH_CASE_MARK</tabstop>
+  <tabstop>ID_BUTTON_MARK_ALL_MARK</tabstop>
+  <tabstop>ID_BUTTON_CLEAN_ALL_MARK</tabstop>
+  <tabstop>ID_BUTTON_CLOSE_MARK</tabstop>
+  <tabstop>ID_CHECK_IN_SELECTION_MARK</tabstop>
+  <tabstop>ID_CHECK_BOOKMARK_MARK</tabstop>
+  <tabstop>ID_CHECK_EACH_SEARCH_MARK</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

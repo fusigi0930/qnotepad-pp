@@ -97,6 +97,10 @@ private slots:
     void slotReplaceReplaceAll();
     void slotReplaceReplaceAllinAll();
 
+    void slotFileBrowse();
+    void slotFileFindAll();
+
+
     void slotOnTransparentSlider(int nValue);
     void slotOnAlwaysTransparent(bool bChecked);
     void slotOnFocusTransparent(bool bChecked);
@@ -105,6 +109,8 @@ private slots:
 protected slots:
     virtual void slotCreate();
 
+private:
+    static void runFindinFile(QPadFindReplaceDialog *ptrDlg);
     
 private:
     Ui::QPadFindReplaceDialog *ui;

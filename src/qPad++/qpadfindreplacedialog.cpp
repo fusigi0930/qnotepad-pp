@@ -11,6 +11,10 @@
 #include <Scintilla.h>
 #include <QMessageBox>
 #include "strings.h"
+#include <QFileDialog>
+#include <QtCore>
+#include <QThread>
+#include <tr1/functional>
 
 QPadFindReplaceDialog::QPadFindReplaceDialog(QWidget *parent) :
     BaseDialog(parent),
@@ -264,6 +268,8 @@ void QPadFindReplaceDialog::slotCreate() {
     connect(ui->ID_BUTTON_REPLACE_ALL_IN_ALL_REPLACE, SIGNAL(clicked()), this, SLOT(slotReplaceReplaceAllinAll()));
 
     connect(ui->ID_BUTTON_CLOSE_FILES, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->ID_BUTTON_BROWSE_FILE, SIGNAL(clicked()), this, SLOT(slotFileBrowse()));
+    connect(ui->ID_BUTTON_FIND_ALL_FILES, SIGNAL(clicked()), this, SLOT(slotFileFindAll()));
 
     connect(ui->ID_BUTTON_CLOSE_MARK, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -458,6 +464,25 @@ void QPadFindReplaceDialog::slotReplaceReplaceAllinAll() {
     }
 }
 
+void QPadFindReplaceDialog::slotFileBrowse() {
+    QFileDialog dlg;
+    dlg.setFileMode(QFileDialog::AnyFile);
+    dlg.setFileMode(QFileDialog::DirectoryOnly);
+    dlg.setOption(QFileDialog::ShowDirsOnly, true);
+    if (dlg.exec()) {
+        QStringList list=dlg.selectedFiles();
+        ui->ID_COMBO_FILE_DIR->setEditText(*list.begin());
+    }
+}
+
+void QPadFindReplaceDialog::slotFileFindAll() {
+    QFuture<void> future=QtConcurrent::run(std::tr1::bind(QPadFindReplaceDialog::runFindinFile, this));
+
+    future.waitForFinished();
+
+}
+
+
 void QPadFindReplaceDialog::slotInitTab() {
     ui->ID_TAB->setCurrentIndex(m_nInitIndex);
     this->setWindowTitle(ui->ID_TAB->tabText(m_nInitIndex));
@@ -511,4 +536,10 @@ void QPadFindReplaceDialog::slotOnClickTransparentGroup(bool bChecked) {
         disconnect(ui->ID_SLIDER_TRANSPARENT, SIGNAL(valueChanged(int)), this, SLOT(slotOnTransparentSlider(int)));
         setWindowOpacity(1.0);
     }
+}
+
+void QPadFindReplaceDialog::runFindinFile(QPadFindReplaceDialog *ptrDlg) {
+    _DEBUG_MSG("tid: 0x%x", QThread::currentThreadId());
+    if (!ptrDlg) return;
+
 }
