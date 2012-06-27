@@ -25,6 +25,8 @@ public:
     int m_nTransparentMode;
     int m_nTransparentValue;
 
+    QString m_qstrFind;
+
 public:
     enum EInitFunc {
         EFUNC_FIND,

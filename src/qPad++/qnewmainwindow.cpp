@@ -1215,6 +1215,11 @@ void QNewMainWindow::actionSearchGotoLine() {
 }
 
 void QNewMainWindow::actionSearchFind() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
     if (!m_pFindDlg) {
         m_pFindDlg=new QPadFindReplaceDialog(this);
         m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_FIND;
@@ -1229,13 +1234,21 @@ void QNewMainWindow::actionSearchFind() {
         }
     }
 
+    m_pFindDlg->m_qstrFind=ptrEdit->selectedText();
+
     m_pFindDlg->chageTab(QPadFindReplaceDialog::EFUNC_FIND);
+    m_pFindDlg->hide();
     m_pFindDlg->show();
     m_pFindDlg->raise();
     m_pFindDlg->activateWindow();
 }
 
 void QNewMainWindow::actionSearchReplace() {
+    QPadMdiSubWindow *ptrSubWin=reinterpret_cast<QPadMdiSubWindow*>(this->getMdiActiveWindow());
+    if (!ptrSubWin) return;
+    QsciScintilla *ptrEdit=reinterpret_cast<QsciScintilla*>(ptrSubWin->widget());
+    if (!ptrEdit) return;
+
     if (!m_pFindDlg) {
         m_pFindDlg=new QPadFindReplaceDialog(this);
         m_pFindDlg->m_nInitIndex=QPadFindReplaceDialog::EFUNC_REPLACE;
@@ -1250,7 +1263,10 @@ void QNewMainWindow::actionSearchReplace() {
         }
     }
 
+    m_pFindDlg->m_qstrFind=ptrEdit->selectedText();
+
     m_pFindDlg->chageTab(QPadFindReplaceDialog::EFUNC_REPLACE);
+    m_pFindDlg->hide();
     m_pFindDlg->show();
     m_pFindDlg->raise();
     m_pFindDlg->activateWindow();

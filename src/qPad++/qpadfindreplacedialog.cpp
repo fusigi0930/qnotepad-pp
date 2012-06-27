@@ -490,15 +490,19 @@ void QPadFindReplaceDialog::slotInitTab() {
     switch (m_nInitIndex) {
         default: break;
         case EFUNC_FIND:
+            ui->ID_COMBO_FIND->setEditText(m_qstrFind);
             ui->ID_COMBO_FIND->setFocus();
             break;
         case EFUNC_REPLACE:
+            ui->ID_COMBO_R_FIND->setEditText(m_qstrFind);
             ui->ID_COMBO_R_FIND->setFocus();
             break;
         case EFUNC_FIND_IN_FILES:
+            ui->ID_COMBO_FIND_FILES->setEditText(m_qstrFind);
             ui->ID_COMBO_FIND_FILES->setFocus();
             break;
         case EFUNC_MARK:
+            ui->ID_COMBO_MARK->setEditText(m_qstrFind);
             ui->ID_COMBO_MARK->setFocus();
             break;
     }
