@@ -1,0 +1,1 @@
+Porting the notepad++ 5.9.x version to the QT framework, and make a cross platform build environment.
